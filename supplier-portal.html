@@ -227,17 +227,39 @@
 
   .chem-row {
     display: grid;
-    grid-template-columns: 80px 1fr 110px 110px;
-    gap: 8px;
+    grid-template-columns: 80px 1fr 120px 120px;
+    gap: 16px;
     padding: 7px 0;
     align-items: center;
     border-bottom: 1px solid var(--ice-soft);
   }
+  .chem-row > * { min-width: 0; }
   .chem-row:last-child { border-bottom: none; }
   .chem-row .elem { font-weight: 700; color: var(--navy); font-size: 13px; }
-  .chem-row .spec { color: var(--slate); font-size: 12px; font-family: "SF Mono", Menlo, monospace; }
-  .chem-row input { padding: 5px 8px; font-size: 12px; font-family: "SF Mono", Menlo, monospace; text-align: right; }
-  .chem-row .pass { color: var(--forest); font-weight: 700; font-size: 11px; }
+  .chem-row .spec {
+    color: var(--slate);
+    font-size: 12px;
+    font-family: "SF Mono", Menlo, monospace;
+    text-align: center;
+  }
+  .chem-row input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-family: "SF Mono", Menlo, monospace;
+    text-align: center;
+    border: 1px solid var(--ice);
+    border-radius: 4px;
+    background: var(--white);
+    color: var(--navy);
+  }
+  .chem-row input:focus {
+    outline: none;
+    border-color: var(--copper);
+    box-shadow: 0 0 0 3px var(--copper-soft);
+  }
+  .chem-row .pass { color: var(--forest); font-weight: 700; font-size: 12px; }
 
   .actions-bar {
     background: var(--bg);
