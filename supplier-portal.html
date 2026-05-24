@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>portal.trueheat.io · Longda Precision Materials</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --navy-dim: #1B3866;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --copper-soft: #FCE8E0;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --slate-soft: #7B8AA0;
+    --ice: #D8DEE9;
+    --ice-soft: #EEF1F5;
+    --forest: #2C5F2D;
+    --rust: #8B2E15;
+    --bg: #F7F4EE;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(10,31,68,0.08), 0 1px 2px rgba(10,31,68,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar .brand {
+    padding: 0 22px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    border-bottom: 1px solid var(--navy-dim);
+  }
+  .sidebar .brand span { color: var(--gold); }
+  .sidebar .org {
+    padding: 16px 22px;
+    font-size: 11px;
+    color: var(--ice);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 1px solid var(--navy-dim);
+  }
+  .sidebar .org .name {
+    text-transform: none;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  .sidebar .org .did {
+    font-family: "SF Mono", Menlo, monospace;
+    color: var(--slate-soft);
+    font-size: 10px;
+  }
+  .nav {
+    padding: 12px 0;
+    flex: 1;
+  }
+  .nav a {
+    display: block;
+    padding: 9px 22px;
+    color: var(--ice);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+  }
+  .nav a:hover { background: var(--navy-dim); }
+  .nav a.active {
+    background: var(--navy-dim);
+    color: var(--gold);
+    border-left-color: var(--copper);
+    font-weight: 600;
+  }
+  .nav .heading {
+    padding: 14px 22px 6px;
+    font-size: 10px;
+    color: var(--slate-soft);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .sidebar .user {
+    padding: 16px 22px;
+    border-top: 1px solid var(--navy-dim);
+    font-size: 12px;
+    color: var(--ice);
+  }
+  .sidebar .user strong { color: var(--cream); display: block; }
+
+  /* MAIN */
+  .main {
+    padding: 0;
+    overflow-y: auto;
+  }
+  .topbar {
+    background: var(--white);
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--ice);
+  }
+  .topbar .breadcrumb {
+    color: var(--slate);
+    font-size: 13px;
+  }
+  .topbar .breadcrumb strong { color: var(--navy); }
+  .topbar .actions { display: flex; gap: 10px; align-items: center; }
+  .topbar .actions .stat {
+    font-size: 12px;
+    color: var(--slate);
+  }
+  .topbar .actions .stat strong { color: var(--forest); font-size: 14px; }
+
+  .content {
+    padding: 24px 28px 40px;
+    max-width: 1100px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    color: var(--slate);
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  /* FORM */
+  .form-card {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .form-card-header {
+    padding: 14px 22px;
+    background: linear-gradient(to right, var(--copper-soft), var(--white));
+    border-bottom: 1px solid var(--ice);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .form-card-header .h {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .form-card-header .step {
+    color: var(--copper);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .form-body {
+    padding: 20px 22px;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .field-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+  .field label {
+    font-size: 11px;
+    color: var(--slate);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  .field input, .field select {
+    border: 1px solid var(--ice);
+    border-radius: 5px;
+    padding: 9px 11px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--navy);
+    background: var(--white);
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--copper);
+    box-shadow: 0 0 0 3px var(--copper-soft);
+  }
+  .field input.mono { font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
+  .field-hint { font-size: 11px; color: var(--slate); margin-top: 4px; }
+  .field-link {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--forest);
+    font-weight: 600;
+  }
+  .field-link::before { content: "✓ "; }
+
+  .chem-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 110px 110px;
+    gap: 8px;
+    padding: 7px 0;
+    align-items: center;
+    border-bottom: 1px solid var(--ice-soft);
+  }
+  .chem-row:last-child { border-bottom: none; }
+  .chem-row .elem { font-weight: 700; color: var(--navy); font-size: 13px; }
+  .chem-row .spec { color: var(--slate); font-size: 12px; font-family: "SF Mono", Menlo, monospace; }
+  .chem-row input { padding: 5px 8px; font-size: 12px; font-family: "SF Mono", Menlo, monospace; text-align: right; }
+  .chem-row .pass { color: var(--forest); font-weight: 700; font-size: 11px; }
+
+  .actions-bar {
+    background: var(--bg);
+    padding: 16px 22px;
+    border-top: 1px solid var(--ice);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .actions-bar .left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--slate);
+  }
+  .actions-bar .right {
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--copper);
+    color: var(--white);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--slate);
+    border: 1px solid var(--ice);
+  }
+
+  /* PREVIEW SIDEBAR */
+  .split {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 20px;
+  }
+  .preview {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    align-self: start;
+    position: sticky;
+    top: 20px;
+  }
+  .preview .ph {
+    padding: 14px 18px;
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+  .preview .pdf-frame {
+    background: var(--white);
+    padding: 22px 24px;
+    font-size: 11px;
+    color: var(--navy);
+    border-bottom: 1px solid var(--ice);
+  }
+  .preview .pdf-frame .pdf-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--copper);
+    margin-bottom: 4px;
+  }
+  .preview .pdf-frame .pdf-org {
+    text-align: center;
+    font-size: 11px;
+    color: var(--slate);
+    margin-bottom: 14px;
+  }
+  .preview .pdf-frame .pdf-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    padding: 3px 0;
+    font-size: 10px;
+  }
+  .preview .pdf-frame .pdf-row .l { color: var(--slate); }
+  .preview .pdf-frame .pdf-row .v { font-weight: 600; }
+  .preview .pdf-frame .pdf-table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 9px;
+    border-collapse: collapse;
+  }
+  .preview .pdf-frame .pdf-table th,
+  .preview .pdf-frame .pdf-table td {
+    border: 1px solid var(--ice);
+    padding: 3px 5px;
+    text-align: center;
+  }
+  .preview .pdf-frame .pdf-table th { background: var(--ice-soft); color: var(--slate); font-weight: 700; }
+  .preview .pdf-frame .chop {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .preview .pdf-frame .chop-stamp {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--copper);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--copper);
+    font-size: 9px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.1;
+    transform: rotate(-12deg);
+  }
+  .preview .pdf-frame .qr {
+    width: 56px;
+    height: 56px;
+    background:
+      repeating-linear-gradient(0deg, var(--navy) 0 3px, transparent 3px 6px),
+      repeating-linear-gradient(90deg, var(--navy) 0 3px, transparent 3px 6px);
+    background-color: white;
+    border: 1px solid var(--navy);
+    position: relative;
+  }
+  .preview .pdf-frame .qr::after,
+  .preview .pdf-frame .qr::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 3px solid var(--navy);
+  }
+  .preview .pdf-frame .qr::before { top: 4px; left: 4px; }
+  .preview .pdf-frame .qr::after { bottom: 4px; right: 4px; }
+  .preview .pinfo {
+    padding: 14px 18px;
+    font-size: 11px;
+    color: var(--slate);
+    background: var(--ice-soft);
+  }
+  .preview .pinfo strong { color: var(--navy); }
+
+  /* Recent credentials list */
+  .recent {
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+    overflow: hidden;
+  }
+  .recent .h {
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--ice);
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .recent .h a { color: var(--copper); font-size: 12px; font-weight: 600; text-decoration: none; }
+  .recent-row {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 90px 70px;
+    padding: 12px 22px;
+    align-items: center;
+    border-bottom: 1px solid var(--ice-soft);
+    font-size: 13px;
+  }
+  .recent-row:last-child { border-bottom: none; }
+  .recent-row .id { font-family: "SF Mono", Menlo, monospace; font-size: 12px; color: var(--navy); font-weight: 600; }
+  .recent-row .buyer { color: var(--slate); }
+  .recent-row .when { color: var(--slate); font-size: 12px; }
+  .recent-row .views { color: var(--forest); font-weight: 700; font-size: 13px; text-align: right; }
+  .recent-row .views .lbl { font-weight: 500; color: var(--slate); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-left: 3px; }
+  .recent-row .status {
+    text-align: right;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-green { background: #E0F0DC; color: var(--forest); }
+  .badge-amber { background: #FFF3D6; color: #8B6914; }
+  .badge-grey { background: var(--ice-soft); color: var(--slate); }
+
+  .mock-banner {
+    background: var(--copper);
+    color: var(--white);
+    text-align: center;
+    padding: 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+
+<div class="mock-banner">Mockup · not a real portal</div>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand">TRUE<span>HEAT</span></div>
+    <div class="org">
+      <div>Organization</div>
+      <div class="name">Longda Precision Materials</div>
+      <div class="did">did:ethr:0x8a14...c9f3</div>
+    </div>
+    <nav class="nav">
+      <div class="heading">Issuing</div>
+      <a href="#" class="active">Issue Credential</a>
+      <a href="#">Recent Credentials</a>
+      <a href="#">Pending Drafts <span style="float:right;background:var(--copper);color:white;padding:1px 6px;border-radius:8px;font-size:10px;">3</span></a>
+      <div class="heading">Customers</div>
+      <a href="#">Buyers</a>
+      <a href="#">Purchase Orders</a>
+      <div class="heading">Operations</div>
+      <a href="#">Operators &amp; Keys</a>
+      <a href="#">Lab Tests</a>
+      <a href="#">Audit Exports</a>
+      <div class="heading">Account</div>
+      <a href="#">Settings</a>
+      <a href="#">Billing — Pilot (free)</a>
+    </nav>
+    <div class="user">
+      <strong>Mrs. Liu (QA Manager)</strong>
+      liu@longda-precision.cn
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="topbar">
+      <div class="breadcrumb">Issue Credential / <strong>New Mill Test Report</strong></div>
+      <div class="actions">
+        <div class="stat"><strong>247</strong> credentials issued this month</div>
+        <div class="stat">·</div>
+        <div class="stat"><strong>89%</strong> verified by buyer</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="page-title">Issue Mill Test Report Credential</div>
+      <div class="page-sub">Heat-level signed credential for one Inconel 718 melt. Will be linked to any downstream billet/forging credentials.</div>
+
+      <div class="split">
+
+        <div>
+
+          <div class="form-card">
+            <div class="form-card-header">
+              <div class="h">Material &amp; Heat</div>
+              <div class="step">Step 1 of 4</div>
+            </div>
+            <div class="form-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label>Material</label>
+                  <select>
+                    <option>Inconel 718 (AMS 5662)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label>Heat ID</label>
+                  <input class="mono" type="text" value="LD-2026-0847">
+                </div>
+                <div class="field">
+                  <label>Batch weight (kg)</label>
+                  <input class="mono" type="text" value="5,000">
+                </div>
+                <div class="field">
+                  <label>Melt date</label>
+                  <input type="text" value="2026-04-21">
+                </div>
+                <div class="field">
+                  <label>Melt furnace</label>
+                  <input type="text" value="VIM-3 + VAR-2">
+                </div>
+                <div class="field">
+                  <label>Customer PO</label>
+                  <input class="mono" type="text" value="4500128741">
+                  <div class="field-link">PO linked · GE9X program</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-card-header">
+              <div class="h">Chemistry — measured vs spec</div>
+              <div class="step">Step 2 of 4</div>
+            </div>
+            <div class="form-body">
+              <div class="chem-row" style="font-weight:700;color:var(--slate);font-size:11px;text-transform:uppercase;letter-spacing:1px;border-bottom:2px solid var(--ice);">
+                <div>Element</div>
+                <div></div>
+                <div style="text-align:center">Measured %</div>
+                <div style="text-align:center">Spec %</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Ni</div>
+                <div></div>
+                <div><input value="53.1"></div>
+                <div class="spec">50–55</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Cr</div>
+                <div></div>
+                <div><input value="18.7"></div>
+                <div class="spec">17–21</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Fe</div>
+                <div></div>
+                <div><input value="17.4"></div>
+                <div class="spec">balance</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Nb</div>
+                <div></div>
+                <div><input value="5.2"></div>
+                <div class="spec">4.75–5.5</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Mo</div>
+                <div></div>
+                <div><input value="3.1"></div>
+                <div class="spec">2.8–3.3</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Ti</div>
+                <div></div>
+                <div><input value="1.0"></div>
+                <div class="spec">0.65–1.15</div>
+              </div>
+              <div class="chem-row" style="border-top:2px solid var(--ice);font-weight:700;padding-top:10px;">
+                <div></div>
+                <div></div>
+                <div class="pass" style="text-align:center;">✓ All within AMS 5662</div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-card-header">
+              <div class="h">Mechanicals — post heat-treat coupon</div>
+              <div class="step">Step 3 of 4</div>
+            </div>
+            <div class="form-body">
+              <div class="field-grid cols-2">
+                <div class="field">
+                  <label>Ultimate Tensile (MPa)</label>
+                  <input class="mono" value="1,389">
+                  <div class="field-link">≥ 1,276 spec</div>
+                </div>
+                <div class="field">
+                  <label>0.2% Yield (MPa)</label>
+                  <input class="mono" value="1,158">
+                  <div class="field-link">≥ 1,034 spec</div>
+                </div>
+                <div class="field">
+                  <label>Elongation (%)</label>
+                  <input class="mono" value="18.2">
+                  <div class="field-link">≥ 12 spec</div>
+                </div>
+                <div class="field">
+                  <label>Hardness (HRC)</label>
+                  <input class="mono" value="42">
+                  <div class="field-link">36–46 spec</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-card-header">
+              <div class="h">Signature &amp; lab tech</div>
+              <div class="step">Step 4 of 4</div>
+            </div>
+            <div class="form-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label>Lab tech</label>
+                  <select>
+                    <option>Wang Jing</option>
+                  </select>
+                  <div class="field-hint">Their personal DID will be embedded</div>
+                </div>
+                <div class="field">
+                  <label>Spectrometer ID</label>
+                  <input class="mono" value="SPEC-LD-04">
+                </div>
+                <div class="field">
+                  <label>Test report attach</label>
+                  <input type="text" value="📎 spec-report-0847.pdf">
+                </div>
+              </div>
+            </div>
+            <div class="actions-bar">
+              <div class="left">
+                <span>Signing key:</span>
+                <strong style="color:var(--navy);font-family:'SF Mono',monospace;font-size:11px;">did:ethr:0x8a14...c9f3</strong>
+                <span>· stored in HSM</span>
+              </div>
+              <div class="right">
+                <button class="btn btn-secondary">Save draft</button>
+                <button class="btn btn-primary">Issue &amp; Sign Credential →</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="preview">
+          <div class="ph">Live preview · Mill Test Report PDF</div>
+          <div class="pdf-frame">
+            <div class="pdf-title">MILL TEST REPORT</div>
+            <div class="pdf-org">Longda Precision Materials Co., Ltd. · Wuxi, China</div>
+
+            <div class="pdf-row"><div class="l">Heat ID</div><div class="v">LD-2026-0847</div></div>
+            <div class="pdf-row"><div class="l">Material</div><div class="v">Inconel 718 (AMS 5662)</div></div>
+            <div class="pdf-row"><div class="l">Batch</div><div class="v">5,000 kg · 2026-04-21</div></div>
+            <div class="pdf-row"><div class="l">Customer PO</div><div class="v">4500128741</div></div>
+
+            <table class="pdf-table">
+              <tr><th>Ni</th><th>Cr</th><th>Fe</th><th>Nb</th><th>Mo</th><th>Ti</th></tr>
+              <tr><td>53.1</td><td>18.7</td><td>17.4</td><td>5.2</td><td>3.1</td><td>1.0</td></tr>
+            </table>
+
+            <div style="margin-top:8px;font-size:9px;color:var(--slate);">UTS 1,389 MPa · YS 1,158 MPa · Elong 18.2% · HRC 42 — all within spec.</div>
+
+            <div class="chop">
+              <div class="chop-stamp">LONGDA<br>QA<br>2026</div>
+              <div class="qr"></div>
+            </div>
+            <div style="font-size:8px;color:var(--slate);margin-top:6px;text-align:right;font-family:'SF Mono',monospace;">verify.trueheat.io/cert/LD-2026-0847</div>
+          </div>
+          <div class="pinfo">
+            <strong>What the buyer sees</strong><br>
+            Scans QR → verify page loads in 1 sec. Sees signed chemistry, mechanicals, your DID badge. Compares paper hash to live record.
+          </div>
+        </div>
+
+      </div>
+
+      <div class="recent">
+        <div class="h">
+          Recent credentials this week
+          <a href="#">View all 247 →</a>
+        </div>
+        <div class="recent-row">
+          <div class="id">LD-2026-0846</div>
+          <div class="buyer">Spirit AeroSystems · Wichita</div>
+          <div class="when">2 hours ago</div>
+          <div class="views">14 <span class="lbl">scans</span></div>
+          <div class="status"><span class="badge badge-green">Verified</span></div>
+        </div>
+        <div class="recent-row">
+          <div class="id">LD-2026-0845</div>
+          <div class="buyer">Future Forge (downstream)</div>
+          <div class="when">Yesterday</div>
+          <div class="views">3 <span class="lbl">scans</span></div>
+          <div class="status"><span class="badge badge-green">Verified</span></div>
+        </div>
+        <div class="recent-row">
+          <div class="id">LD-2026-0844</div>
+          <div class="buyer">RTX · Pratt &amp; Whitney</div>
+          <div class="when">Yesterday</div>
+          <div class="views">22 <span class="lbl">scans</span></div>
+          <div class="status"><span class="badge badge-green">Verified</span></div>
+        </div>
+        <div class="recent-row">
+          <div class="id">LD-2026-0843</div>
+          <div class="buyer">Honeywell · Phoenix</div>
+          <div class="when">Apr 24</div>
+          <div class="views">8 <span class="lbl">scans</span></div>
+          <div class="status"><span class="badge badge-amber">Pending lab</span></div>
+        </div>
+        <div class="recent-row">
+          <div class="id">LD-2026-0842</div>
+          <div class="buyer">Future Forge (downstream)</div>
+          <div class="when">Apr 23</div>
+          <div class="views">5 <span class="lbl">scans</span></div>
+          <div class="status"><span class="badge badge-green">Verified</span></div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>

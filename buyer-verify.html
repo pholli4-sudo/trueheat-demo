@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>verify.trueheat.io · LD-2026-0847-B3-FF-D2941</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --ice: #D8DEE9;
+    --forest: #2C5F2D;
+    --rust: #8B2E15;
+    --shadow: 0 2px 8px rgba(10,31,68,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    line-height: 1.5;
+    padding-bottom: 40px;
+  }
+  .top-bar {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 10px 24px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--copper);
+  }
+  .top-bar .brand {
+    font-weight: 700;
+    letter-spacing: 4px;
+  }
+  .top-bar .brand span {
+    color: var(--gold);
+  }
+  .top-bar .url {
+    font-family: "SF Mono", Menlo, monospace;
+    color: var(--ice);
+    font-size: 11px;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .verdict-card {
+    background: white;
+    margin-top: 24px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 8px solid var(--forest);
+    overflow: hidden;
+  }
+  .verdict-header {
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--ice);
+    background: linear-gradient(to right, #F0F7EE, white);
+  }
+  .verdict-check {
+    width: 56px;
+    height: 56px;
+    background: var(--forest);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .verdict-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .verdict-sub {
+    color: var(--slate);
+    font-size: 14px;
+    margin-top: 2px;
+  }
+  .verdict-body {
+    padding: 0;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    padding: 14px 28px;
+    border-bottom: 1px solid #F0EAE0;
+    font-size: 14px;
+    align-items: baseline;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .k {
+    color: var(--slate);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+  .row .v {
+    color: var(--navy);
+  }
+  .row .v.mono {
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-green { background: #E0F0DC; color: var(--forest); }
+  .badge-amber { background: #FFF3D6; color: #8B6914; }
+  .badge-copper { background: #FCE8E0; color: var(--copper); }
+
+  .section-title {
+    margin-top: 28px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--copper);
+  }
+
+  .chemistry {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 20px 28px;
+  }
+  .chem-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: var(--ice);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .chem-cell {
+    background: white;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .chem-cell .elem {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .chem-cell .pct {
+    font-size: 12px;
+    color: var(--slate);
+    font-family: "SF Mono", Menlo, monospace;
+    margin-top: 2px;
+  }
+  .chem-cell.spec {
+    background: #FAF6F0;
+  }
+  .chem-cell.spec .elem { color: var(--slate); font-weight: 500; }
+
+  .mech {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 20px 28px;
+  }
+  .mech-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 80px;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0EAE0;
+    font-size: 14px;
+    align-items: center;
+  }
+  .mech-row:last-child { border-bottom: none; }
+  .mech-row .label { color: var(--navy); font-weight: 600; }
+  .mech-row .value { color: var(--navy); font-family: "SF Mono", Menlo, monospace; }
+  .mech-row .req { color: var(--slate); font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
+  .mech-row .pass { color: var(--forest); font-weight: 700; text-align: right; }
+
+  /* Chain of custody */
+  .chain {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 8px 0;
+  }
+  .chain-step {
+    display: grid;
+    grid-template-columns: 80px 1fr 200px;
+    padding: 16px 28px;
+    gap: 16px;
+    border-bottom: 1px solid #F0EAE0;
+    align-items: center;
+    position: relative;
+  }
+  .chain-step:last-child { border-bottom: none; }
+  .chain-step .num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--copper);
+    color: white;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .chain-step .step-title {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .chain-step .step-sub {
+    color: var(--slate);
+    font-size: 12px;
+    margin-top: 3px;
+  }
+  .chain-step .step-meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--slate);
+    font-family: "SF Mono", Menlo, monospace;
+  }
+  .chain-step .signed {
+    color: var(--forest);
+    font-weight: 600;
+  }
+
+  .compare {
+    background: var(--navy);
+    color: var(--cream);
+    margin-top: 28px;
+    border-radius: 12px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .compare .desc {
+    font-size: 14px;
+  }
+  .compare .desc strong {
+    color: var(--gold);
+  }
+  .compare button {
+    background: var(--copper);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  .compare button:hover {
+    background: #B03E26;
+  }
+
+  .anchor-block {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 16px 28px;
+    margin-top: 28px;
+    font-size: 12px;
+    color: var(--slate);
+    font-family: "SF Mono", Menlo, monospace;
+    border-left: 4px solid var(--gold);
+  }
+  .anchor-block .label {
+    display: inline-block;
+    width: 130px;
+    color: var(--copper);
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+  }
+
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    color: var(--slate);
+    font-size: 12px;
+    font-style: italic;
+  }
+  .footer .mock {
+    color: var(--copper);
+    font-weight: 700;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10px;
+  }
+
+  /* State toggle bar — mockup only; removed in production build */
+  .state-bar {
+    background: #2a1a05;
+    color: var(--cream);
+    padding: 10px 24px;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+  }
+  .state-bar .lbl {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 10px;
+    margin-right: 8px;
+    font-weight: 700;
+  }
+  .state-bar a {
+    color: var(--cream);
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.08);
+    font-weight: 600;
+  }
+  .state-bar a:hover { background: rgba(255,255,255,0.15); }
+  .state-bar a.active {
+    background: var(--copper);
+    color: white;
+  }
+  .state-bar .demo {
+    margin-left: auto;
+    color: var(--gold);
+    font-style: italic;
+    font-size: 11px;
+  }
+
+  /* FRAUD STATES */
+  .verdict-card.state-mismatch { border-left-color: #B8860B; }
+  .verdict-card.state-mismatch .verdict-header {
+    background: linear-gradient(to right, #FFF7E0, white);
+  }
+  .verdict-card.state-mismatch .verdict-check {
+    background: #B8860B;
+    font-size: 36px;
+  }
+
+  .verdict-card.state-unknown { border-left-color: var(--rust); }
+  .verdict-card.state-unknown .verdict-header {
+    background: linear-gradient(to right, #FFE4DC, white);
+  }
+  .verdict-card.state-unknown .verdict-check {
+    background: var(--rust);
+    color: white;
+    font-size: 36px;
+  }
+
+  .verdict-card.state-lapsed { border-left-color: #B8860B; }
+  .verdict-card.state-lapsed .verdict-header {
+    background: linear-gradient(to right, #FFF7E0, white);
+  }
+  .verdict-card.state-lapsed .verdict-check {
+    background: #B8860B;
+    font-size: 36px;
+  }
+
+  /* Fraud alert panel */
+  .fraud-alert {
+    background: var(--rust);
+    color: white;
+    border-radius: 8px;
+    padding: 18px 24px;
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: start;
+  }
+  .fraud-alert.warn {
+    background: #B8860B;
+  }
+  .fraud-alert .icon {
+    font-size: 30px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .fraud-alert .body {
+    font-size: 14px;
+  }
+  .fraud-alert .body h3 {
+    margin-bottom: 4px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .fraud-alert .body code {
+    background: rgba(0,0,0,0.25);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+  }
+
+  /* Hide / show based on state */
+  body[data-state="verified"] .only-mismatch,
+  body[data-state="verified"] .only-unknown,
+  body[data-state="verified"] .only-lapsed { display: none !important; }
+
+  body[data-state="mismatch"] .only-verified,
+  body[data-state="mismatch"] .only-unknown,
+  body[data-state="mismatch"] .only-lapsed { display: none !important; }
+
+  body[data-state="mismatch"] .verdict-card { /* swap class via JS */ }
+  body[data-state="mismatch"] .verdict-title::after {
+    content: " — Paper Mismatch";
+    color: #B8860B;
+    font-weight: 700;
+  }
+
+  body[data-state="unknown"] .only-verified,
+  body[data-state="unknown"] .only-mismatch,
+  body[data-state="unknown"] .only-lapsed,
+  body[data-state="unknown"] .chain,
+  body[data-state="unknown"] .chemistry,
+  body[data-state="unknown"] .mech,
+  body[data-state="unknown"] .compare,
+  body[data-state="unknown"] .anchor-block,
+  body[data-state="unknown"] .section-title { display: none !important; }
+
+  body[data-state="lapsed"] .only-verified,
+  body[data-state="lapsed"] .only-mismatch,
+  body[data-state="lapsed"] .only-unknown { display: none !important; }
+
+  body[data-state="lapsed"] .chain-step.htstep .badge {
+    background: #F8E0E0;
+    color: var(--rust);
+  }
+
+</style>
+</head>
+<body data-state="verified">
+
+<!-- MOCKUP-ONLY state toggle. Remove this <div> for production. -->
+<div class="state-bar">
+  <span class="lbl">DEMO STATE</span>
+  <a href="?state=verified" data-state-link="verified" class="active">✓ Verified</a>
+  <a href="?state=mismatch" data-state-link="mismatch">⚠ Paper Mismatch</a>
+  <a href="?state=unknown" data-state-link="unknown">✗ Unknown Issuer</a>
+  <a href="?state=lapsed" data-state-link="lapsed">⚠ Sub-tier Lapsed</a>
+  <span class="demo">Click to compare what the inspector sees in each scenario</span>
+</div>
+
+<div class="top-bar">
+  <div class="brand">TRUE<span>HEAT</span></div>
+  <div class="url">verify.trueheat.io / cert / LD-2026-0847-B3-FF-D2941</div>
+</div>
+
+<div class="container">
+
+  <!-- VERIFIED card -->
+  <div class="verdict-card only-verified">
+    <div class="verdict-header">
+      <div class="verdict-check">✓</div>
+      <div>
+        <div class="verdict-title">Verified Credential</div>
+        <div class="verdict-sub">Future Forge composite shipping credential · all chain links valid</div>
+      </div>
+    </div>
+    <div class="verdict-body">
+      <div class="row">
+        <div class="k">Product</div>
+        <div class="v"><strong>24" IN718 Turbine Disk Forging</strong> · Disk ID FF-2026-D2941 · 47.3 kg</div>
+      </div>
+      <div class="row">
+        <div class="k">Issued by</div>
+        <div class="v">
+          <strong>Future Forge Wuxi Co., Ltd.</strong>
+          &nbsp;<span class="badge badge-green">Verified Supplier · Aug 2026</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">For customer</div>
+        <div class="v">[Tier-1 Connecticut] · PO 4500128741 · GE9X engine program</div>
+      </div>
+      <div class="row">
+        <div class="k">Issued</div>
+        <div class="v">2026-04-25 16:42 China Standard Time</div>
+      </div>
+      <div class="row">
+        <div class="k">Credential ID</div>
+        <div class="v mono">LD-2026-0847-B3-FF-D2941</div>
+      </div>
+      <div class="row">
+        <div class="k">Spec</div>
+        <div class="v">AMS 5662 (Inconel 718) · forging per AMS 5663 · HT per AMS 5664</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISMATCH card -->
+  <div class="verdict-card state-mismatch only-mismatch">
+    <div class="verdict-header">
+      <div class="verdict-check">⚠</div>
+      <div>
+        <div class="verdict-title" style="color:#8B6914;">Paper does NOT match the signed credential</div>
+        <div class="verdict-sub">The QR points to a real, signed credential — but the PDF you scanned has been altered after signing.</div>
+      </div>
+    </div>
+    <div class="verdict-body">
+      <div class="row">
+        <div class="k">Credential ID</div>
+        <div class="v mono">LD-2026-0847-B3-FF-D2941 — exists ✓</div>
+      </div>
+      <div class="row">
+        <div class="k">Signed by</div>
+        <div class="v">Future Forge Wuxi Co., Ltd. — registered supplier ✓</div>
+      </div>
+      <div class="row">
+        <div class="k">Mismatch found</div>
+        <div class="v" style="color:#8B6914;font-weight:600;">
+          Field <code style="background:#FFF3D6;padding:1px 5px;border-radius:3px;font-family:'SF Mono',monospace;">UTS</code> on paper = <strong>1,389 MPa</strong> · field on signed credential = <strong>1,289 MPa</strong>
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Hash check</div>
+        <div class="v mono" style="color:var(--rust);">paper SHA-256: <strong>0x9f2c...</strong> ≠ credential SHA-256: <strong>0x4a7b...</strong></div>
+      </div>
+    </div>
+    <div class="fraud-alert warn">
+      <div class="icon">⚠</div>
+      <div class="body">
+        <h3>What to do</h3>
+        Trust the credential, not the paper. Cross-reference the figures on the credential page with the paper in your hand. If they differ, the paper has been edited after the supplier signed.<br><br>
+        Likely scenarios: (1) honest copy-paste error when the cert was reprinted, (2) deliberate alteration of a property to make a marginal heat appear in-spec. Either way — escalate to supplier quality and do not release the material.
+      </div>
+    </div>
+  </div>
+
+  <!-- UNKNOWN card -->
+  <div class="verdict-card state-unknown only-unknown">
+    <div class="verdict-header">
+      <div class="verdict-check">✗</div>
+      <div>
+        <div class="verdict-title" style="color:var(--rust);">No credential found for this QR</div>
+        <div class="verdict-sub">The QR code points to a credential ID that does not exist in our registry.</div>
+      </div>
+    </div>
+    <div class="verdict-body">
+      <div class="row">
+        <div class="k">Scanned ID</div>
+        <div class="v mono">LD-2026-0847-B3-FF-D2941</div>
+      </div>
+      <div class="row">
+        <div class="k">Search result</div>
+        <div class="v" style="color:var(--rust);font-weight:600;">No matching credential. No signature found anchored on Ethereum.</div>
+      </div>
+      <div class="row">
+        <div class="k">Possible causes</div>
+        <div class="v">
+          <ol style="padding-left:20px;margin:0;">
+            <li>The QR was photoshopped onto a counterfeit paper cert. Most common pattern.</li>
+            <li>The supplier issued the cert under a different ID. Ask them to re-send.</li>
+            <li>The supplier is not yet a registered TrueHeat issuer. Confirm with them directly.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="fraud-alert">
+      <div class="icon">✗</div>
+      <div class="body">
+        <h3>Do not release the material</h3>
+        Treat this as suspect material until you can verify with the supplier through a separate channel (phone, not email — email can be spoofed). If the supplier confirms they did not issue this credential, file an FAA SUP report (AC 21-29D) and notify your counterfeit-prevention lead.<br><br>
+        If you are the supplier and this is your shipment, log in to your portal and check whether the credential was issued under a different reference. Contact <a href="mailto:support@trueheat.io" style="color:var(--gold);">support@trueheat.io</a>.
+      </div>
+    </div>
+  </div>
+
+  <!-- LAPSED card -->
+  <div class="verdict-card state-lapsed only-lapsed">
+    <div class="verdict-header">
+      <div class="verdict-check">⚠</div>
+      <div>
+        <div class="verdict-title" style="color:#8B6914;">Verified — but sub-tier accreditation lapsed</div>
+        <div class="verdict-sub">The credential is authentic. One sub-tier supplier in the chain has an expired accreditation that may affect downstream qualification.</div>
+      </div>
+    </div>
+    <div class="verdict-body">
+      <div class="row">
+        <div class="k">Credential</div>
+        <div class="v"><strong>24" IN718 Turbine Disk Forging</strong> · Disk FF-2026-D2941 · 47.3 kg</div>
+      </div>
+      <div class="row">
+        <div class="k">Lapsed sub-tier</div>
+        <div class="v" style="color:#8B6914;font-weight:600;">
+          Wuxi Precision Heat Treatment Co. — Nadcap MTL #1234 expired <strong>2026-03-15</strong> (heat treat performed 2026-04-24)
+        </div>
+      </div>
+      <div class="row">
+        <div class="k">Other chain links</div>
+        <div class="v">Melt, billet, forge press, NDT, final dim — all signed by valid issuers ✓</div>
+      </div>
+    </div>
+    <div class="fraud-alert warn">
+      <div class="icon">⚠</div>
+      <div class="body">
+        <h3>Decision required</h3>
+        The material itself may still be in spec — the heat treat cycle data is recorded and inspectable. The question is whether your engineering and supplier quality groups will accept material processed at a shop whose Nadcap accreditation had lapsed at the time of work.<br><br>
+        Some primes accept lapsed-by-N-days within a tolerance window if the shop's renewal is pending and the cycle data is conforming. Others reject. Check your supplier-quality policy and the receiving spec.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Chain of Custody</div>
+
+  <div class="chain">
+
+    <div class="chain-step">
+      <div class="num">1</div>
+      <div>
+        <div class="step-title">Melt · Longda Heat LD-2026-0847</div>
+        <div class="step-sub">Longda Precision Materials · Wuxi · Inconel 718 · 5,000 kg batch</div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-21 09:14<br>
+        Operator Wang Jing
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="num">2</div>
+      <div>
+        <div class="step-title">Billet · Cut and inspected</div>
+        <div class="step-sub">Future Forge incoming inspection · billet B3 of heat LD-2026-0847 · 52 kg</div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-22 08:30<br>
+        Operator Wei Liu
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="num">3</div>
+      <div>
+        <div class="step-title">Forge press · 4000-ton hydraulic</div>
+        <div class="step-sub">1,050 °C · 12 sec hold · ram speed 25 mm/s · die TF-D2 · near-net forging to D2941</div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-22 14:18<br>
+        Operator Chen Bao
+      </div>
+    </div>
+
+    <div class="chain-step htstep">
+      <div class="num">4</div>
+      <div>
+        <div class="step-title">Heat treat · Sub-contracted</div>
+        <div class="step-sub">
+          Wuxi Precision Heat Treatment Co. &nbsp;<span class="badge badge-green">Nadcap MTL #1234 · current</span><br>
+          Solution 980 °C / 1 hr · Age 720 °C / 8 hr + 620 °C / 8 hr per AMS 5664
+        </div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-24 11:00<br>
+        Operator Sun Hai
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="num">5</div>
+      <div>
+        <div class="step-title">NDT inspection · FPI + UT</div>
+        <div class="step-sub">FPI per AMS 2647 (no rejectable indications) · UT per AMS 2154 (Class A) · pass</div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-25 09:30<br>
+        Operator Lin Mei
+      </div>
+    </div>
+
+    <div class="chain-step">
+      <div class="num">6</div>
+      <div>
+        <div class="step-title">Final dimensional inspection</div>
+        <div class="step-sub">All envelope dimensions within drawing tolerance · weight 47.3 kg (target 47±1) · pass</div>
+      </div>
+      <div class="step-meta">
+        <span class="signed">✓ signed</span><br>
+        2026-04-25 15:55<br>
+        Sun Mei (QA Mgr)
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Inconel 718 Chemistry — Heat LD-2026-0847</div>
+  <div class="chemistry">
+    <div class="chem-grid">
+      <div class="chem-cell"><div class="elem">Ni</div><div class="pct">53.1%</div></div>
+      <div class="chem-cell"><div class="elem">Cr</div><div class="pct">18.7%</div></div>
+      <div class="chem-cell"><div class="elem">Fe</div><div class="pct">17.4%</div></div>
+      <div class="chem-cell"><div class="elem">Nb</div><div class="pct">5.2%</div></div>
+      <div class="chem-cell"><div class="elem">Mo</div><div class="pct">3.1%</div></div>
+      <div class="chem-cell"><div class="elem">Ti</div><div class="pct">1.0%</div></div>
+      <div class="chem-cell spec"><div class="elem">50–55</div><div class="pct">spec</div></div>
+      <div class="chem-cell spec"><div class="elem">17–21</div><div class="pct">spec</div></div>
+      <div class="chem-cell spec"><div class="elem">bal</div><div class="pct">spec</div></div>
+      <div class="chem-cell spec"><div class="elem">4.75–5.5</div><div class="pct">spec</div></div>
+      <div class="chem-cell spec"><div class="elem">2.8–3.3</div><div class="pct">spec</div></div>
+      <div class="chem-cell spec"><div class="elem">0.65–1.15</div><div class="pct">spec</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Mechanical Properties — Post Heat-Treat</div>
+  <div class="mech">
+    <div class="mech-row">
+      <div class="label">Ultimate Tensile Strength (UTS)</div>
+      <div class="value">1,389 MPa</div>
+      <div class="req">min 1,276</div>
+      <div class="pass">PASS</div>
+    </div>
+    <div class="mech-row">
+      <div class="label">0.2% Yield Strength</div>
+      <div class="value">1,158 MPa</div>
+      <div class="req">min 1,034</div>
+      <div class="pass">PASS</div>
+    </div>
+    <div class="mech-row">
+      <div class="label">Elongation</div>
+      <div class="value">18.2%</div>
+      <div class="req">min 12</div>
+      <div class="pass">PASS</div>
+    </div>
+    <div class="mech-row">
+      <div class="label">Hardness (Rockwell C)</div>
+      <div class="value">42 HRC</div>
+      <div class="req">36–46</div>
+      <div class="pass">PASS</div>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="desc">
+      <strong>Holding the paper cert?</strong><br>
+      Compare its hash to the credential to confirm the PDF wasn't edited.
+    </div>
+    <button>Compare to Paper</button>
+  </div>
+
+  <div class="anchor-block">
+    <div><span class="label">Anchored on</span>Ethereum Mainnet · Block 22,931,847 · 2026-04-25 17:00 HKT</div>
+    <div><span class="label">Merkle root</span>0x4a7b9c1e2f6a8b4d3c5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c</div>
+    <div><span class="label">Signing key</span>did:ethr:0x73c8a...f291 · Future Forge Wuxi Co., Ltd.</div>
+    <div><span class="label">Schema</span>SAE AS6174 · v1.2 · W3C Verifiable Credential</div>
+  </div>
+
+  <div class="footer">
+    <div class="mock">Mockup · not a real credential</div>
+    <br>
+    verify.trueheat.io · Free for buyers · Always
+  </div>
+
+</div>
+
+<script>
+  // Mockup state switcher — reads ?state= from URL and applies it.
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var state = params.get('state') || 'verified';
+    var valid = ['verified', 'mismatch', 'unknown', 'lapsed'];
+    if (valid.indexOf(state) === -1) state = 'verified';
+    document.body.setAttribute('data-state', state);
+
+    // Highlight active toggle
+    var links = document.querySelectorAll('.state-bar a[data-state-link]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].classList.toggle('active', links[i].getAttribute('data-state-link') === state);
+    }
+  })();
+</script>
+
+</body>
+</html>

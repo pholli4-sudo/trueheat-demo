@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueHeat — Live Mocks</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --ice: #D8DEE9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  .stripe-l, .stripe-r {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+  }
+  .stripe-l { left: 0; background: var(--copper); }
+  .stripe-r { right: 0; background: var(--gold); }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 80px 32px 60px;
+  }
+  .brand {
+    font-weight: 700;
+    letter-spacing: 12px;
+    font-size: 48px;
+    color: var(--cream);
+  }
+  .brand span { color: var(--gold); }
+  .tagline {
+    color: var(--gold);
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 8px;
+  }
+  .lede {
+    margin-top: 36px;
+    font-size: 18px;
+    color: var(--ice);
+    max-width: 680px;
+  }
+  .lede strong { color: var(--cream); }
+
+  .grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .card {
+    background: var(--navy-soft);
+    border-radius: 12px;
+    padding: 28px 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 4px solid var(--copper);
+    transition: transform 0.15s, border-color 0.15s;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-top-color: var(--gold);
+  }
+  .card .eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .card .title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .card .body {
+    color: var(--ice);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .card .url {
+    color: var(--gold);
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card .url::after { content: "→"; transition: transform 0.15s; }
+  .card:hover .url::after { transform: translateX(4px); }
+
+  .who {
+    margin-top: 60px;
+    background: rgba(212,162,76,0.08);
+    border-left: 3px solid var(--gold);
+    padding: 20px 24px;
+    border-radius: 4px;
+  }
+  .who h3 {
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+  .who p {
+    color: var(--ice);
+    font-size: 14px;
+  }
+
+  .footer {
+    margin-top: 64px;
+    color: var(--slate);
+    font-size: 12px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    font-style: italic;
+  }
+  .footer strong { color: var(--gold); font-style: normal; }
+
+  @media (max-width: 640px) {
+    .container { padding: 48px 20px; }
+    .brand { font-size: 32px; letter-spacing: 6px; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stripe-l"></div>
+<div class="stripe-r"></div>
+
+<div class="container">
+
+  <div class="brand">TRUE<span>HEAT</span></div>
+  <div class="tagline">Verifiable provenance for aerospace raw material</div>
+
+  <div class="lede">
+    Live mockups of the two surfaces. Click through both. <strong>The buyer page is the moneyshot</strong> — it's what a Tier-1 receiving inspector sees in 8 seconds after scanning a QR on a Chinese supplier's Mill Test Report.
+  </div>
+
+  <div class="grid">
+
+    <a href="buyer-verify.html" class="card">
+      <div class="eyebrow">For Western OEMs · Free forever</div>
+      <div class="title">Buyer verification page</div>
+      <div class="body">
+        What an inspector at Spirit, Boeing, RTX, Honeywell or a Tier-1 sees when they scan the QR on an incoming shipment. Includes <strong>4 state toggles</strong> — verified, paper mismatch, unknown issuer, sub-tier lapsed — to show what fraud detection looks like in practice.
+      </div>
+      <div class="url">verify.trueheat.io / cert / LD-2026-0847-B3-FF-D2941</div>
+    </a>
+
+    <a href="supplier-portal.html" class="card">
+      <div class="eyebrow">For Chinese suppliers · Paid product</div>
+      <div class="title">Supplier issuing portal</div>
+      <div class="body">
+        What Mrs. Liu at Longda Precision Materials sees when issuing a credential for a fresh heat of Inconel 718. <strong>Live preview pane</strong> on the right showing the generated PDF — designed to look identical to the paper MTR her team produces today, except for the QR.
+      </div>
+      <div class="url">portal.trueheat.io / issue</div>
+    </a>
+
+  </div>
+
+  <div class="who">
+    <h3>Who this is for</h3>
+    <p>
+      Aerospace OEM quality leaders, Tier-1 supply-chain risk managers, Chinese raw-material suppliers, investors evaluating the wedge. Spend 60 seconds on each page. Everything is mockup — no real credentials, no real keys.
+    </p>
+  </div>
+
+  <div class="footer">
+    <strong>TrueHeat</strong> · Pilot pitch · 2026 · Built for Longda + Future Forge pilot · Hong Kong Limited (in formation)
+  </div>
+
+</div>
+
+</body>
+</html>
