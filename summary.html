@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is TrueHeat? — Summary</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --copper-soft: #FCE8E0;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --ice: #D8DEE9;
+    --forest: #2C5F2D;
+    --rust: #8B2E15;
+    --bg: #F7F4EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.7;
+    font-size: 17px;
+  }
+
+  /* Top bar — matches buyer/supplier mocks */
+  .top-bar {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 12px 24px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--copper);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .top-bar .brand {
+    font-weight: 700;
+    letter-spacing: 4px;
+  }
+  .top-bar .brand span { color: var(--gold); }
+  .top-bar .back {
+    color: var(--ice);
+    text-decoration: none;
+    font-size: 12px;
+  }
+  .top-bar .back:hover { color: var(--gold); }
+  .top-bar .back::before { content: "← "; }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 70px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 4px;
+  }
+  .hero::before { left: 0; background: var(--copper); }
+  .hero::after { right: 0; background: var(--gold); }
+  .hero h1 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+  }
+  .hero .lede {
+    color: var(--gold);
+    font-style: italic;
+    font-size: 22px;
+    max-width: 760px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  .hero .meta {
+    margin-top: 28px;
+    color: var(--ice);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .hero .meta span { color: var(--copper); }
+
+  /* Article */
+  .article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
+  .article p {
+    margin-bottom: 18px;
+    color: var(--navy);
+  }
+  .article p.lede {
+    font-size: 19px;
+    color: var(--slate);
+    font-style: italic;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .article strong { color: var(--navy); }
+  .article a {
+    color: var(--copper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper-soft);
+  }
+  .article a:hover {
+    border-bottom-color: var(--copper);
+  }
+
+  .section-eyebrow {
+    margin-top: 48px;
+    margin-bottom: 14px;
+    color: var(--copper);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .section-eyebrow::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: var(--copper);
+    margin-top: 6px;
+  }
+  .article h2 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 22px;
+    line-height: 1.3;
+  }
+
+  /* Anchor incident cards */
+  .incidents {
+    margin: 24px 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .incident {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 24px;
+    border-top: 4px solid var(--rust);
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+  }
+  .incident .tag {
+    color: var(--rust);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    margin-bottom: 8px;
+  }
+  .incident .headline {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .incident .summary {
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  /* Numbered story steps */
+  .steps {
+    margin: 14px 0 8px;
+    counter-reset: step;
+    padding: 0;
+    list-style: none;
+  }
+  .steps li {
+    position: relative;
+    padding-left: 56px;
+    padding-bottom: 22px;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 38px;
+    height: 38px;
+    background: var(--copper);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .steps li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 42px;
+    bottom: 0;
+    width: 2px;
+    background: var(--copper-soft);
+  }
+
+  /* "What we are not" list */
+  .not-list {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 28px;
+    border-left: 4px solid var(--copper);
+    margin: 18px 0;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+  }
+  .not-list ul { list-style: none; padding: 0; }
+  .not-list li {
+    padding: 8px 0;
+    color: var(--navy);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .not-list li::before {
+    content: "✕ ";
+    color: var(--rust);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .not-list li strong { color: var(--navy); }
+
+  /* Wedge: numbered bold list */
+  .wedge {
+    counter-reset: wedge;
+    list-style: none;
+    padding: 0;
+    margin-top: 14px;
+  }
+  .wedge li {
+    position: relative;
+    padding-left: 50px;
+    padding-bottom: 20px;
+    counter-increment: wedge;
+  }
+  .wedge li::before {
+    content: counter(wedge, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--copper);
+  }
+
+  /* Status block */
+  .status {
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 24px 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .status h3 {
+    font-family: "Trebuchet MS", sans-serif;
+    color: var(--gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+  .status ul {
+    list-style: none;
+    padding: 0;
+  }
+  .status li {
+    padding: 6px 0;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ice);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .status li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+  }
+  .status li strong { color: var(--cream); }
+
+  /* CTA cards at end */
+  .test-cards {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .test-card {
+    background: white;
+    padding: 24px 24px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--navy);
+    border: 2px solid var(--ice);
+    box-shadow: 0 1px 3px rgba(10,31,68,0.06);
+    display: block;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .test-card:hover {
+    border-color: var(--copper);
+    transform: translateY(-2px);
+  }
+  .test-card .audience {
+    color: var(--copper);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .test-card .ask {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .test-card .url {
+    color: var(--copper);
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    border: none;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    color: var(--ice);
+    padding: 40px 24px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .footer .name {
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .footer .email {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 14px;
+    display: block;
+    margin: 8px 0 16px;
+  }
+  .footer .small {
+    color: var(--slate);
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 50px 20px 36px; }
+    .hero h1 { font-size: 28px; }
+    .hero .lede { font-size: 17px; }
+    .article { padding: 40px 20px 60px; }
+    .article h2 { font-size: 22px; }
+    .incidents, .test-cards { grid-template-columns: 1fr; }
+    .steps li { padding-left: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">TRUE<span>HEAT</span></div>
+  <a href="./" class="back">Back to mocks</a>
+</div>
+
+<div class="hero">
+  <h1>What is TrueHeat?</h1>
+  <div class="lede">
+    Verifiable provenance for aerospace raw material — so a Western buyer can trust a Chinese supplier's certificate in eight seconds, not hope it's real.
+  </div>
+  <div class="meta">Confidential pilot pitch <span>·</span> 2026</div>
+</div>
+
+<div class="article">
+
+  <p class="lede">
+    TrueHeat lets a Chinese aerospace supplier prove the authenticity of their mill test reports to a Western buyer — by replacing (or augmenting) the easy-to-forge paper PDF with a cryptographically signed digital credential the buyer can verify in eight seconds with their phone.
+  </p>
+
+  <div class="section-eyebrow">The Problem</div>
+  <h2>Counterfeit material is reaching primary aircraft structures</h2>
+
+  <p>
+    Every shipment of aerospace-grade raw material — a slab of Inconel, a titanium billet, a forged turbine disk — travels with paper certificates. A Mill Test Report (chemistry, mechanicals), a Certificate of Conformance, sometimes a chain of inspection records. These certificates are PDFs with corporate letterheads and JPG-of-a-stamp graphics. <strong>They are trivial to forge on any laptop.</strong>
+  </p>
+
+  <p>Two recent cases tell the story.</p>
+
+  <div class="incidents">
+    <div class="incident">
+      <div class="tag">2024 · AOG Technics</div>
+      <div class="headline">$53M · 180+ engines</div>
+      <div class="summary">A UK distributor sold ~60,000 CFM56 parts with forged FAA 8130-3 airworthiness tags. American, Delta, United, Southwest, and Ryanair were all affected. Founder jailed in 2026.</div>
+    </div>
+    <div class="incident">
+      <div class="tag">2024 · Spirit / Boeing / Airbus</div>
+      <div class="headline">787 · 737 MAX · A220</div>
+      <div class="summary">An unnamed Chinese supplier forged Certificates of Conformity falsely claiming Baoji Titanium as mill of origin. Counterfeit titanium reached primary aircraft structures. FAA investigation open.</div>
+    </div>
+  </div>
+
+  <p>
+    After Spirit, every major Western OEM (Boeing, Airbus, RTX, Honeywell) ran a top-to-bottom risk review of their Chinese suppliers. <strong>Honest Chinese suppliers — who make most of the world's aerospace-grade raw material — now have a trust problem they can't solve with paper.</strong>
+  </p>
+
+  <div class="section-eyebrow">What We Built</div>
+  <h2>Two surfaces: a supplier portal and a buyer verifier</h2>
+
+  <p>
+    <strong>A supplier portal.</strong> A Chinese QA manager logs in, fills in the same chemistry and mechanical data she fills in today (in Excel or paper). She clicks "Issue Credential." The portal generates a PDF that looks identical to her old paper cert — same letterhead, same red company stamp, same chemistry table — plus a small QR code in the corner.
+  </p>
+
+  <p>
+    <strong>A buyer verifier page.</strong> A Western receiving inspector scans the QR with his phone. In one second a webpage loads showing: ✓ Verified, the supplier's identity, the chemistry he's holding in his hand, and a tamper-check.
+  </p>
+
+  <p>
+    The supplier pays a subscription. The buyer pays nothing, ever. <strong>There is no app to install, no account to create, no integration to negotiate.</strong>
+  </p>
+
+  <div class="section-eyebrow">How It Works</div>
+  <h2>One shipment, end to end</h2>
+
+  <p>
+    Follow a single batch of Inconel 718 from Longda Precision Materials in Wuxi to Spirit Aerosystems in Wichita.
+  </p>
+
+  <ol class="steps">
+    <li><strong>At Longda</strong>, Mrs. Liu's lab tech runs chemistry on a fresh heat (LD-2026-0847). Instead of typing the result into Excel and printing a paper cert, the tech enters the same numbers into the TrueHeat portal and clicks <em>Issue</em>.</li>
+    <li><strong>The portal signs the data</strong> with Longda's cryptographic key (stored in Longda's office, not ours). It generates a PDF that looks just like the old paper one — with a QR code added.</li>
+    <li><strong>Once a day</strong>, our service in Hong Kong batches every credential issued that day into a single cryptographic fingerprint and publishes it on the public Ethereum blockchain. This costs us $5–20 in network fees. Nothing identifiable goes on the chain.</li>
+    <li><strong>The shipment leaves Wuxi</strong> with the PDF emailed to Spirit and a printed copy stapled to the dock receipt — the same workflow Mrs. Liu has used for years.</li>
+    <li><strong>Six weeks later in Wichita</strong>, receiving inspector Greg pulls the box, sees the QR on the printed cert, and scans it. In one second his phone shows: ✓ Verified, the supplier identity, the exact chemistry he is holding, and the Ethereum block where it was anchored.</li>
+    <li><strong>If the cert had been forged</strong> — somebody edited the PDF, somebody photoshopped a fake QR onto a counterfeit, somebody made up a fake supplier — the page turns red and tells Greg exactly what's wrong. He rejects the material at the dock, not after it gets bolted to an airplane.</li>
+  </ol>
+
+  <p>That's the entire product, from both sides.</p>
+
+  <div class="section-eyebrow">Why Us</div>
+  <h2>Four choices that separate us from every prior attempt</h2>
+
+  <p>
+    Most prior attempts (TradeLens, IBM Food Trust, B3i) died for the same reason: a single big company tried to host a "consortium" that suppliers were supposed to join. Nobody trusts a network controlled by their biggest customer or competitor.
+  </p>
+
+  <ol class="wedge">
+    <li><strong>Suppliers pay, buyers verify free.</strong> Reverses the broken consortium model. The party that benefits from proving authenticity is the party that funds the system.</li>
+    <li><strong>Documentation fraud first, physical tagging later.</strong> Forged paperwork is the tractable Year-1 problem. Molecular taggants and RFID can come in Year 2 once the data backbone exists.</li>
+    <li><strong>Neutral hosting — explicitly NOT a Chinese state chain.</strong> Ant Chain, FISCO BCOS, JD Chain, VeChain are all PRC-government-adjacent and Western OEMs will not trust them. We use public Ethereum (whose neutrality is the <em>point</em>) and a Hong Kong corporate entity (English common law, neutral arbitration).</li>
+    <li><strong>We never lead with the word "blockchain."</strong> Enterprise aerospace buyers have moved past crypto-bro pitches. We talk about "verifiable credentials" — the W3C standard the EU and US DHS already use for digital identity. Same cryptography, sane marketing.</li>
+  </ol>
+
+  <div class="section-eyebrow">Boundaries</div>
+  <h2>What we are not</h2>
+
+  <div class="not-list">
+    <ul>
+      <li><strong>Not a chain-of-custody logistics company.</strong> We don't touch the metal. We don't ship anything. We don't move atoms.</li>
+      <li><strong>Not a testing lab.</strong> We co-fund independent labs to spot-check suppliers in our pilot, but we're not the ones running the chemistry tests.</li>
+      <li><strong>Not a cryptocurrency.</strong> No token, no ICO, no "TrueHeat coin." Ethereum is just the neutral substrate we anchor signatures to — plumbing, not product.</li>
+      <li><strong>Not an OEM tool.</strong> We're a neutral utility any OEM, prime, or Tier-1 can recognize. Explicitly not building Boeing's or Airbus's in-house system for them.</li>
+    </ul>
+  </div>
+
+  <div class="section-eyebrow">Status</div>
+  <h2>Where we are right now</h2>
+
+  <div class="status">
+    <h3>Pilot pitch · April 2026</h3>
+    <ul>
+      <li><strong>Three co-founders, equal owners.</strong> Chan (US, frequent China travel, aerospace engineer). Michael (Shanghai, MBA, commercial). Patrick (US, aerospace supply-chain executive). Hong Kong Limited in formation.</li>
+      <li><strong>Two friendly pilot suppliers.</strong> Longda Precision Materials (Inconel) and Future Forge (forgings) have agreed to share data and operational access for a free Year-1 pilot.</li>
+      <li><strong>Validation phase, 90 days in.</strong> 15 buyer interviews + 15 supplier interviews. Hard go/no-go at the end of Month 3.</li>
+      <li><strong>Year-1 budget: $50–70k, self-funded.</strong> No outside capital this year. If validation lands, MVP through Months 4–9, first paid supplier by Month 15.</li>
+    </ul>
+  </div>
+
+  <div class="section-eyebrow">Test It Yourself</div>
+  <h2>Two pages, one question each</h2>
+
+  <div class="test-cards">
+    <a class="test-card" href="buyer-verify.html">
+      <div class="audience">If you are a Western OEM</div>
+      <div class="ask">Would you trust this credential more than a stapled PDF?</div>
+      <div class="url">verify.trueheat.io/cert/…</div>
+    </a>
+    <a class="test-card" href="supplier-portal.html">
+      <div class="audience">If you are a Chinese supplier</div>
+      <div class="ask">Would your QA team use this without retraining?</div>
+      <div class="url">portal.trueheat.io/issue</div>
+    </a>
+  </div>
+
+  <p style="margin-top: 28px; color: var(--slate); font-style: italic; text-align: center;">
+    Those two questions, answered yes by enough people, are the entire business.
+  </p>
+
+</div>
+
+<div class="footer">
+  <div class="name">Patrick Hollis</div>
+  <a class="email" href="mailto:phollis@gmail.com">phollis@gmail.com</a>
+  <div class="small">Pilot launch target: Q3 2026 · TrueHeat (Hong Kong Limited, in formation)</div>
+</div>
+
+</body>
+</html>
