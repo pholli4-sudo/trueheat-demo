@@ -312,6 +312,234 @@
   }
   .status li strong { color: var(--cream); }
 
+  /* ============================================
+     Storage architecture section
+     ============================================ */
+  .arch-intro {
+    background: var(--copper-soft);
+    border-left: 4px solid var(--copper);
+    padding: 18px 24px;
+    margin: 18px 0 26px;
+    border-radius: 4px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+  .arch-intro strong { color: var(--copper); }
+
+  /* Three-column jurisdiction diagram */
+  .jurisdictions {
+    margin: 24px 0;
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr 28px 1fr;
+    gap: 0;
+    align-items: stretch;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .juris {
+    border-radius: 8px;
+    padding: 18px 16px;
+    background: white;
+    border: 2px solid;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .juris.china { border-color: var(--copper); background: #FFF6F0; }
+  .juris.hk { border-color: #1C7293; background: #EAF2F8; }
+  .juris.public { border-color: var(--gold); background: #F4ECE0; }
+
+  .juris .juris-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .juris.china .juris-tag { color: var(--copper); }
+  .juris.hk .juris-tag { color: #1C7293; }
+  .juris.public .juris-tag { color: #8B6914; }
+
+  .juris .layer {
+    background: white;
+    border-radius: 5px;
+    padding: 10px 12px;
+    border: 1px solid var(--ice);
+  }
+  .juris .layer .ltag {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--copper);
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+  }
+  .juris .layer .lname {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .juris .layer .ldetail {
+    color: var(--slate);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  /* Connector arrows */
+  .arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--copper);
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  /* Single-credential walkthrough table */
+  .trace-table {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    overflow: hidden;
+    margin: 14px 0 26px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+  }
+  .trace-table th, .trace-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--ice);
+    vertical-align: top;
+  }
+  .trace-table th {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .trace-table tr:last-child td { border-bottom: none; }
+  .trace-table td .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .trace-table .pill.cn { background: var(--copper-soft); color: var(--copper); }
+  .trace-table .pill.hk { background: #DCE9F1; color: #1C7293; }
+  .trace-table .pill.pub { background: #F0E0BD; color: #8B6914; }
+  .trace-table .step-n {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: var(--copper);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 22px;
+    font-weight: 700;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  /* Border-crossing diagram */
+  .borders {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 18px 0;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+  }
+  .borders h4 {
+    color: var(--copper);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .borders .b-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    padding: 8px 0;
+    gap: 16px;
+    border-bottom: 1px solid var(--ice);
+    align-items: baseline;
+  }
+  .borders .b-row:last-child { border-bottom: none; }
+  .borders .b-row .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .borders .crosses .label { color: var(--copper); }
+  .borders .stays .label { color: var(--forest); }
+  .borders .b-row .body {
+    color: var(--navy);
+    line-height: 1.5;
+  }
+  .borders .b-row .body code {
+    background: var(--copper-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    color: var(--copper);
+  }
+
+  /* Failure-mode block */
+  .failures {
+    background: var(--navy);
+    color: var(--ice);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 18px 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+  }
+  .failures h4 {
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .failures .f-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .failures .f-row:last-child { border-bottom: none; }
+  .failures .f-row .scenario {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .failures .f-row .outcome {
+    color: var(--ice);
+  }
+  .failures .f-row .outcome strong { color: var(--cream); }
+
+  @media (max-width: 720px) {
+    .jurisdictions { grid-template-columns: 1fr; }
+    .arrow { transform: rotate(90deg); padding: 6px 0; }
+    .borders .b-row, .failures .f-row { grid-template-columns: 1fr; gap: 4px; }
+  }
+
   /* CTA cards at end */
   .test-cards {
     margin-top: 36px;
@@ -475,6 +703,182 @@
   </ol>
 
   <p>That's the entire product, from both sides.</p>
+
+  <div class="section-eyebrow">Where the Data Lives</div>
+  <h2>Four storage layers across three jurisdictions</h2>
+
+  <div class="arch-intro">
+    A signed credential is not one thing in one place. <strong>It's four kinds of data, each living in the jurisdiction that's legally and practically right for it.</strong> A buyer scanning a QR is hitting some of these layers and never touching others — that's the whole compliance story.
+  </div>
+
+  <div class="jurisdictions">
+
+    <div class="juris china">
+      <div class="juris-tag">China · L1</div>
+      <div class="layer">
+        <div class="ltag">RAW SOURCE</div>
+        <div class="lname">Full mill data + original PDFs</div>
+        <div class="ldetail">Chemistry, mechanicals, customer POs, pricing, the lab tech's full report. Stored on Alibaba or Tencent Cloud in a Shanghai Free Trade Zone region. Encrypted at rest. <strong>Never leaves China by default.</strong></div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="juris hk">
+      <div class="juris-tag">Hong Kong · L2 + L3</div>
+      <div class="layer">
+        <div class="ltag">QUERYABLE METADATA · L2</div>
+        <div class="lname">Signed credential payload</div>
+        <div class="ldetail">The structured JSON of the credential: alloy, heat ID, chemistry values, supplier DID, parent links, signature. AWS Hong Kong Postgres. Drives the verifier page.</div>
+      </div>
+      <div class="layer">
+        <div class="ltag">REDACTED PDFS · L3</div>
+        <div class="lname">What the buyer actually sees</div>
+        <div class="ldetail">Same MTR as L1, but export-controlled fields blacked out. AWS Hong Kong or IPFS. Hash of both full and redacted versions on-chain so buyer can verify the redaction is faithful.</div>
+      </div>
+    </div>
+
+    <div class="arrow">→</div>
+
+    <div class="juris public">
+      <div class="juris-tag">Public · L4</div>
+      <div class="layer">
+        <div class="ltag">TAMPER-PROOF ANCHOR</div>
+        <div class="lname">Cryptographic fingerprints</div>
+        <div class="ldetail">One 32-byte Merkle root per day on Ethereum mainnet + per-credential revocation status on Polygon. <strong>Nothing identifiable on-chain — just bytes.</strong> Permissionless, neutral, outlives the company.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size: 15px; color: var(--slate); font-style: italic; margin-top: 18px;">Plus, separately: <strong style="color: var(--navy);">the supplier's signing key</strong> lives in an HSM in the supplier's own office. We do not hold it. If we vanish tomorrow, every credential they've ever issued is still verifiable from public Ethereum — only new issuance stops.</p>
+
+  <div class="section-eyebrow" style="margin-top:36px;">Follow one number</div>
+  <h2>Tracing "Ni = 53.1%" through the system</h2>
+
+  <p>Wang Jing, a lab tech at Longda, runs chemistry on heat <strong>LD-2026-0847</strong>. The first number she types is <code style="background:var(--copper-soft);padding:2px 7px;border-radius:3px;font-family:'SF Mono',monospace;font-size:14px;color:var(--copper);">Ni = 53.1%</code>. Here is everywhere that number ends up.</p>
+
+  <table class="trace-table">
+    <thead>
+      <tr>
+        <th style="width:60px;">Step</th>
+        <th>What happens</th>
+        <th style="width:110px;">Where</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="step-n">1</span></td>
+        <td>Wang Jing types <code>53.1</code> into the TrueHeat portal in her browser. Browser sends it to our PRC-side server.</td>
+        <td><span class="pill cn">China L1</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">2</span></td>
+        <td>Server saves the full structured credential — chemistry, mechanicals, PO, pricing — and the original PDF rendering.</td>
+        <td><span class="pill cn">China L1</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">3</span></td>
+        <td>Server asks Longda's HSM (in their own server room) to sign the credential. The signature is just bytes — not data.</td>
+        <td><span class="pill cn">China (HSM)</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">4</span></td>
+        <td>Signed credential payload — including <code>Ni: 53.1</code> as a field — is transmitted to AWS Hong Kong. The PRC-side full PDF stays put.</td>
+        <td><span class="pill cn">→</span> <span class="pill hk">HK L2</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">5</span></td>
+        <td>Hong Kong generates a redacted PDF (pricing and customer PO blacked out for export controls, chemistry retained). Stored on IPFS / S3.</td>
+        <td><span class="pill hk">HK L3</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">6</span></td>
+        <td>At midnight HK time, our service batches every credential issued today into one Merkle root and publishes it to Ethereum mainnet. Cost: $5–20.</td>
+        <td><span class="pill hk">HK</span> → <span class="pill pub">Ethereum L4</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">7</span></td>
+        <td>Greg at Spirit scans the QR. His phone hits the verifier page, which queries L2 (metadata + signed value <code>53.1</code>), fetches the redacted PDF from L3, and verifies the anchor on L4.</td>
+        <td><span class="pill hk">HK L2+L3</span> + <span class="pill pub">L4</span></td>
+      </tr>
+      <tr>
+        <td><span class="step-n">8</span></td>
+        <td>If Greg wants the full original (unredacted) PDF, he requests it from Longda directly. We do not push raw PRC data across the border by default.</td>
+        <td><span class="pill cn">stays L1</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>So <code>Ni = 53.1</code> lives in <strong>three</strong> places: as a raw value in PRC (L1), as a signed field in the credential payload in Hong Kong (L2), and as a tiny contribution to a daily hash on Ethereum (L4). Each copy serves a different purpose.</p>
+
+  <div class="section-eyebrow" style="margin-top:36px;">What crosses each border</div>
+  <h2>The compliance map</h2>
+
+  <div class="borders">
+    <h4 style="color: var(--copper);">Crosses the China border (CAC cross-border data flow)</h4>
+    <div class="b-row crosses">
+      <div class="label">Goes out</div>
+      <div class="body">Signed credential payload (structured JSON: alloy, heat ID, chemistry numbers, mechanicals, mill of origin, lab tech ID, timestamp, signature). Per the 2024 CAC <em>Provisions on Promoting Cross-Border Data Flows</em>, mill chemistry is non-personal, non-"important" data — exempt from security assessment.</div>
+    </div>
+    <div class="b-row stays">
+      <div class="label">Stays in China</div>
+      <div class="body">The original unredacted PDF with letterhead and stamp. Customer pricing. Customer PO. Internal lab notes. Anything the supplier doesn't want visible to non-customers. <code>verify.trueheat.io</code> never reads from L1.</div>
+    </div>
+  </div>
+
+  <div class="borders">
+    <h4 style="color: var(--copper);">Crosses to the public chain (Ethereum)</h4>
+    <div class="b-row crosses">
+      <div class="label">Goes on-chain</div>
+      <div class="body">A 32-byte hash. That's it. One per day for the Merkle root of all credentials issued. Plus per-credential revocation flags on Polygon (also hashes only, no readable data). To anyone watching the chain, this looks like noise — useless without our L2 database.</div>
+    </div>
+    <div class="b-row stays">
+      <div class="label">Stays off-chain</div>
+      <div class="body">Everything humans care about. The supplier's identity, the chemistry values, the PDFs, the heat ID, the parent links. The on-chain hash only <em>proves the off-chain data was published</em> — it doesn't store the data itself.</div>
+    </div>
+  </div>
+
+  <div class="borders">
+    <h4 style="color: var(--copper);">Crosses to the US / EU (export-controlled material)</h4>
+    <div class="b-row crosses">
+      <div class="label">Goes to buyer</div>
+      <div class="body">The L3 redacted PDF and the L2 metadata via the verifier page. Inconel chemistry stays visible because it's already disclosed in the AMS spec the buyer purchased to. Pricing, customer PO, and internal process parameters are blacked out for EAR ECCN 1C002 hygiene.</div>
+    </div>
+    <div class="b-row stays">
+      <div class="label">Buyer never sees</div>
+      <div class="body">Anything role-gated. The full raw PDF (unless the supplier explicitly grants it). Other shipments. Other customers. Buyer can verify <em>their</em> credential and nothing else.</div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow" style="margin-top:36px;">Resilience</div>
+  <h2>What survives when something breaks</h2>
+
+  <p>The four-layer split isn't elegance for its own sake. It's resilience to specific failure modes that have killed prior projects.</p>
+
+  <div class="failures">
+    <h4>If this happens…</h4>
+    <div class="f-row">
+      <div class="scenario">…every PRC server is seized tomorrow.</div>
+      <div class="outcome"><strong>The buyer chain of trust survives.</strong> All previously issued credentials remain verifiable from L2 + L4. Only new issuance from Longda stops until they rebuild.</div>
+    </div>
+    <div class="f-row">
+      <div class="scenario">…China bans all cross-border anchoring overnight.</div>
+      <div class="outcome"><strong>The Hong Kong service keeps anchoring.</strong> Suppliers keep signing locally with HSM keys. Their signed credentials cross the border as data attachments — same legal posture as emailing a signed PDF today.</div>
+    </div>
+    <div class="f-row">
+      <div class="scenario">…TrueHeat the company shuts down.</div>
+      <div class="outcome"><strong>Every credential ever issued remains verifiable forever.</strong> The signatures are valid, the anchors are on public Ethereum, the supplier keys are in supplier HSMs. The verifier page would need to be re-hosted by anyone — code is open source — but trust does not die with us.</div>
+    </div>
+    <div class="f-row">
+      <div class="scenario">…Ethereum has a 100-block reorg.</div>
+      <div class="outcome"><strong>No data loss.</strong> Daily Merkle root is re-anchored on the next confirmed block. We finalize after 32 blocks (~6 minutes) for the daily roots; per-credential revocation on Polygon is more forgiving since it's not the trust root.</div>
+    </div>
+    <div class="f-row">
+      <div class="scenario">…a US OEM demands a permissioned chain for their internal use.</div>
+      <div class="outcome"><strong>Same credentials, multi-anchored.</strong> The W3C VC is the trust root — it can be anchored to Ethereum, Hyperledger Fabric, and the OEM's private chain at the same time. They get their network, we keep ours.</div>
+    </div>
+  </div>
 
   <div class="section-eyebrow">Why Us</div>
   <h2>Four choices that separate us from every prior attempt</h2>
