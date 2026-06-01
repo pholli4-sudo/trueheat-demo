@@ -272,9 +272,74 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
+    font-family: inherit;
   }
   .compare button:hover {
     background: #B03E26;
+  }
+  .compare button:disabled {
+    background: #8a3320;
+    cursor: wait;
+  }
+
+  /* Overlay for the simulated compare */
+  .scan-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 31, 68, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .scan-overlay.on { opacity: 1; pointer-events: auto; }
+  .scan-box {
+    background: white;
+    border-radius: 12px;
+    padding: 36px 44px;
+    text-align: center;
+    max-width: 440px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border-top: 4px solid var(--copper);
+  }
+  .scan-spinner {
+    width: 44px;
+    height: 44px;
+    border: 4px solid var(--ice);
+    border-top-color: var(--copper);
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .scan-title {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .scan-step {
+    color: var(--slate);
+    font-size: 13px;
+    min-height: 18px;
+    font-family: "SF Mono", Menlo, monospace;
+  }
+
+  /* Reset link shown in mismatch state */
+  .reset-link {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--copper);
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 4px 8px;
   }
 
   .anchor-block {
@@ -549,7 +614,8 @@
       <div class="body">
         <h3>What to do</h3>
         Trust the credential, not the paper. Cross-reference the figures on the credential page with the paper in your hand. If they differ, the paper has been edited after the supplier signed.<br><br>
-        Likely scenarios: (1) honest copy-paste error when the cert was reprinted, (2) deliberate alteration of a property to make a marginal heat appear in-spec. Either way — escalate to supplier quality and do not release the material.
+        Likely scenarios: (1) honest copy-paste error when the cert was reprinted, (2) deliberate alteration of a property to make a marginal heat appear in-spec. Either way — escalate to supplier quality and do not release the material.<br>
+        <button class="reset-link" onclick="window.location.href='?state=verified'">← Reset demo to clean credential</button>
       </div>
     </div>
   </div>
@@ -766,7 +832,7 @@
       <strong>Holding the paper cert?</strong><br>
       Compare its hash to the credential to confirm the PDF wasn't edited.
     </div>
-    <button>Compare to Paper</button>
+    <button id="compare-btn" type="button">Compare to Paper</button>
   </div>
 
   <div class="anchor-block">
@@ -784,6 +850,15 @@
 
 </div>
 
+<!-- Scan overlay shown when user clicks Compare to Paper -->
+<div class="scan-overlay" id="scan-overlay">
+  <div class="scan-box">
+    <div class="scan-spinner"></div>
+    <div class="scan-title">Comparing paper to signed credential</div>
+    <div class="scan-step" id="scan-step">Reading PDF…</div>
+  </div>
+</div>
+
 <script>
   // Mockup state switcher — reads ?state= from URL and applies it.
   (function () {
@@ -793,11 +868,37 @@
     if (valid.indexOf(state) === -1) state = 'verified';
     document.body.setAttribute('data-state', state);
 
-    // Highlight active toggle
     var links = document.querySelectorAll('.state-bar a[data-state-link]');
     for (var i = 0; i < links.length; i++) {
       links[i].classList.toggle('active', links[i].getAttribute('data-state-link') === state);
     }
+  })();
+
+  // Compare-to-paper simulated scan.
+  // Sequence the user sees: PDF read → OCR → hash → diff → result page.
+  (function () {
+    var btn = document.getElementById('compare-btn');
+    if (!btn) return;
+    var overlay = document.getElementById('scan-overlay');
+    var step = document.getElementById('scan-step');
+    var sequence = [
+      { at: 0,    msg: 'Reading PDF…' },
+      { at: 400,  msg: 'Extracting chemistry and mechanicals (OCR)…' },
+      { at: 850,  msg: 'Computing SHA-256 of normalized fields…' },
+      { at: 1200, msg: 'Comparing to signed credential payload…' },
+      { at: 1600, msg: 'Mismatch detected — field UTS differs by 100 MPa.' }
+    ];
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
+      btn.textContent = 'Comparing…';
+      overlay.classList.add('on');
+      sequence.forEach(function (s) {
+        setTimeout(function () { step.textContent = s.msg; }, s.at);
+      });
+      setTimeout(function () {
+        window.location.href = '?state=mismatch';
+      }, 2100);
+    });
   })();
 </script>
 
