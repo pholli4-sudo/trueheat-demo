@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueHeat — 90-Day Plan</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --navy-dim: #1B3866;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --copper-soft: #FCE8E0;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --slate-soft: #7B8AA0;
+    --ice: #D8DEE9;
+    --ice-soft: #EEF1F5;
+    --forest: #2C5F2D;
+    --rust: #8B2E15;
+    --bg: #F7F4EE;
+
+    /* Founder colors */
+    --chan: #1C7293;     /* teal */
+    --michael: #C84B31;  /* copper */
+    --patrick: #B88A2E;  /* dark gold */
+    --all: var(--navy);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+
+  /* Top bar */
+  .top-bar {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 12px 24px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--copper);
+  }
+  .top-bar .brand { font-weight: 700; letter-spacing: 4px; }
+  .top-bar .brand span { color: var(--gold); }
+  .top-bar .back { color: var(--ice); text-decoration: none; font-size: 12px; }
+  .top-bar .back:hover { color: var(--gold); }
+  .top-bar .back::before { content: "← "; }
+  .top-bar .conf {
+    color: var(--copper);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 50px 28px 38px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 4px;
+  }
+  .hero::before { left: 0; background: var(--copper); }
+  .hero::after { right: 0; background: var(--gold); }
+  .hero-inner { max-width: 1080px; margin: 0 auto; }
+  .hero .eyebrow {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .hero .lede {
+    color: var(--ice);
+    font-size: 17px;
+    max-width: 760px;
+    line-height: 1.5;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    color: var(--ice);
+    font-size: 13px;
+  }
+  .hero-meta div strong { color: var(--gold); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 36px 28px 70px;
+  }
+
+  /* Section eyebrow + h2 */
+  .eyebrow {
+    color: var(--copper);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+    margin-top: 42px;
+  }
+  .eyebrow::after {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 2px;
+    background: var(--copper);
+    margin-top: 5px;
+  }
+  h2 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+    line-height: 1.3;
+  }
+
+  p { margin-bottom: 12px; }
+
+  /* Gate panel — pinned to top of body */
+  .gate {
+    background: var(--copper);
+    color: white;
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(200,75,49,0.25);
+  }
+  .gate .gate-tag {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .gate h3 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 22px;
+    margin-bottom: 14px;
+    color: white;
+  }
+  .gate-rules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .gate-rule {
+    background: rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .gate-rule .rule-num {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    color: white;
+  }
+  .gate-rule .rule-label { font-size: 12px; color: rgba(255,255,255,0.85); margin-top: 2px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  .gate-rule .rule-body { font-size: 14px; color: white; line-height: 1.45; margin-top: 8px; }
+  .gate-and {
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  /* Already done card */
+  .done-card {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 26px;
+    border-left: 4px solid var(--forest);
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    margin-bottom: 14px;
+  }
+  .done-card h4 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .done-card ul { list-style: none; padding: 0; }
+  .done-card li {
+    padding: 5px 0 5px 24px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--navy);
+  }
+  .done-card li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--forest);
+    font-weight: 700;
+  }
+  .done-card a { color: var(--copper); text-decoration: none; }
+  .done-card a:hover { text-decoration: underline; }
+
+  /* Timeline strip — overview of all 12 weeks */
+  .timeline-strip {
+    background: white;
+    border-radius: 8px;
+    padding: 18px 14px;
+    margin: 16px 0;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    overflow-x: auto;
+  }
+  .timeline-bar {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    min-width: 720px;
+  }
+  .tl-week {
+    background: var(--ice-soft);
+    border-radius: 4px;
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 3px solid var(--ice);
+  }
+  .tl-week .tl-num { font-weight: 700; font-size: 11px; color: var(--slate); letter-spacing: 1px; }
+  .tl-week .tl-label { font-size: 10px; color: var(--slate); margin-top: 2px; line-height: 1.3; }
+  .tl-week.theme-foundation { border-bottom-color: var(--copper); background: var(--copper-soft); }
+  .tl-week.theme-foundation .tl-num { color: var(--copper); }
+  .tl-week.theme-interview { border-bottom-color: var(--chan); background: #E0EEF4; }
+  .tl-week.theme-interview .tl-num { color: var(--chan); }
+  .tl-week.theme-decision { border-bottom-color: var(--navy); background: #D4DCEA; }
+  .tl-week.theme-decision .tl-num { color: var(--navy); }
+
+  /* Week cards */
+  .week-card {
+    background: white;
+    border-radius: 10px;
+    margin: 16px 0;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    overflow: hidden;
+    border-left: 6px solid var(--copper);
+  }
+  .week-card.interview { border-left-color: var(--chan); }
+  .week-card.decision { border-left-color: var(--navy); }
+  .week-head {
+    padding: 18px 26px 14px;
+    border-bottom: 1px solid var(--ice-soft);
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .week-pill {
+    background: var(--copper);
+    color: white;
+    border-radius: 18px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .week-card.interview .week-pill { background: var(--chan); }
+  .week-card.decision .week-pill { background: var(--navy); }
+  .week-theme {
+    font-family: "Trebuchet MS", sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 18px;
+  }
+  .week-body { padding: 16px 26px 4px; }
+
+  /* Founder task list */
+  .founder-section {
+    margin: 10px 0 18px;
+  }
+  .founder-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: white;
+    margin-bottom: 8px;
+  }
+  .founder-tag.chan { background: var(--chan); }
+  .founder-tag.michael { background: var(--michael); }
+  .founder-tag.patrick { background: var(--patrick); }
+  .founder-tag.all { background: var(--navy); }
+  .task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 6px;
+  }
+  .task-list li {
+    padding: 4px 0 4px 22px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--navy);
+  }
+  .task-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--copper);
+    font-weight: 700;
+  }
+  .task-list li .day {
+    display: inline-block;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--slate);
+    background: var(--ice-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+  .task-list li strong { color: var(--navy); }
+
+  .deliverable {
+    background: var(--ice-soft);
+    padding: 12px 18px;
+    margin: 8px 26px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--navy);
+    border-left: 3px solid var(--gold);
+  }
+  .deliverable .lbl {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-right: 8px;
+  }
+
+  /* Budget table */
+  .budget {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    margin: 14px 0;
+  }
+  .budget th, .budget td {
+    padding: 12px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--ice-soft);
+    font-size: 14px;
+  }
+  .budget th {
+    background: var(--navy);
+    color: var(--cream);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .budget tr:last-child td { border-bottom: none; }
+  .budget td:last-child { text-align: right; font-family: "SF Mono", Menlo, monospace; font-weight: 600; color: var(--copper); }
+  .budget tr.total td { font-weight: 700; background: var(--copper-soft); color: var(--copper); border-top: 2px solid var(--copper); }
+  .budget tr.total td:first-child { color: var(--copper); text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; }
+
+  /* Cadence + red flags */
+  .cadence, .flags {
+    background: white;
+    border-radius: 8px;
+    padding: 22px 26px;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    margin: 12px 0;
+  }
+  .cadence h4, .flags h4 {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .cadence-item, .flag-item {
+    padding: 8px 0 8px 26px;
+    position: relative;
+    font-size: 14px;
+    color: var(--navy);
+    line-height: 1.55;
+  }
+  .cadence-item::before {
+    content: "⏱";
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+  }
+  .flags {
+    background: #FFF4F0;
+    border-left: 4px solid var(--rust);
+  }
+  .flag-item::before {
+    content: "⚠";
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-weight: 700;
+  }
+  .flag-item strong { color: var(--rust); }
+
+  /* Pin-to-wall summary */
+  .wall-summary {
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-top: 24px;
+    box-shadow: 0 4px 14px rgba(10,31,68,0.2);
+  }
+  .wall-summary h3 {
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+    font-family: "Trebuchet MS", sans-serif;
+  }
+  .wall-summary .wall-headline {
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 18px;
+    line-height: 1.35;
+  }
+  .wall-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .wall-tile {
+    background: var(--navy-soft);
+    border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .wall-tile .wt-label {
+    color: var(--gold);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .wall-tile ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .wall-tile li {
+    color: var(--ice);
+    font-size: 13px;
+    padding: 4px 0 4px 16px;
+    position: relative;
+    line-height: 1.45;
+  }
+  .wall-tile li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+  }
+  .wall-tile.gate { border: 2px solid var(--copper); background: rgba(200,75,49,0.12); }
+  .wall-tile.gate li::before { color: var(--gold); }
+  .wall-tile p {
+    color: var(--cream);
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.5;
+  }
+  .wall-tile p strong { color: var(--gold); }
+
+  /* Footer */
+  .footer {
+    background: var(--navy);
+    color: var(--ice);
+    padding: 36px 28px;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .footer .name { color: var(--cream); font-weight: 700; font-size: 14px; }
+  .footer .small { color: var(--slate-soft); font-style: italic; font-size: 12px; margin-top: 8px; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 28px; }
+    .hero .lede { font-size: 15px; }
+    .gate-rules { grid-template-columns: 1fr; }
+    .wall-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">TRUE<span>HEAT</span></div>
+  <div class="conf">Internal · Phase 1 Plan</div>
+  <a href="./" class="back">Back to mocks</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Phase 1 · Validation</div>
+    <h1>90-Day Execution Plan</h1>
+    <div class="lede">Twelve weeks. Three founders, part-time. One question to answer: <em>is the wedge real enough that Western buyers will demand it and Chinese suppliers will pay for it?</em></div>
+    <div class="hero-meta">
+      <div><strong>Window</strong>Day 0 → Day 90</div>
+      <div><strong>Budget</strong>$11–22k</div>
+      <div><strong>Hours</strong>~10/week per founder</div>
+      <div><strong>Gate</strong>≥5 buyers score 4+ AND ≥8 suppliers willing-to-pay</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- GATE -->
+  <div class="gate">
+    <div class="gate-tag">The Gate · Day 90</div>
+    <h3>What "Go" looks like</h3>
+    <div class="gate-rules">
+      <div class="gate-rule">
+        <div class="rule-num">5 / 15</div>
+        <div class="rule-label">Buyer endorsement</div>
+        <div class="rule-body">At least five Western buyer interviewees score 4 or 5 on the endorsement rubric — "would push internally" or "would recognize publicly."</div>
+      </div>
+      <div class="gate-rule">
+        <div class="rule-num">8 / 15</div>
+        <div class="rule-label">Supplier willingness</div>
+        <div class="rule-body">At least eight Chinese supplier interviewees say "I'd pay something meaningful" for a verified-supplier credential.</div>
+      </div>
+    </div>
+    <div class="gate-and" style="margin-top: 18px;">AND · plus</div>
+    <ul class="task-list" style="color: white;">
+      <li style="color: rgba(255,255,255,0.95);">HK Limited incorporated, bank account open, founders' agreement signed</li>
+      <li style="color: rgba(255,255,255,0.95);">Signed data-sharing MOUs with Longda and Future Forge</li>
+      <li style="color: rgba(255,255,255,0.95);">Export-controls + China data counsel consults complete, written compliance posture in hand</li>
+      <li style="color: rgba(255,255,255,0.95);">One named Western buyer agrees in principle to receive a "reference shipment" in Phase 2</li>
+      <li style="color: rgba(255,255,255,0.95);">Written Go/No-Go memo signed by all three founders</li>
+    </ul>
+  </div>
+
+  <p style="font-style: italic; color: var(--slate); margin: 0 0 10px;">If fewer than 5/15 buyers and 8/15 suppliers reach the threshold: <strong style="color: var(--rust);">pivot or stop</strong>. Don't push through on hope. That's a successful Phase 1, not a failed company.</p>
+
+  <!-- ALREADY DONE -->
+  <div class="eyebrow">What's already done</div>
+  <h2>Don't redo — start from here</h2>
+
+  <div class="done-card">
+    <h4>Strategy &amp; positioning · locked</h4>
+    <ul>
+      <li>Wedge locked: supplier-paid, doc-fraud first, neutral hosting, no PRC chain, no "blockchain" branding</li>
+      <li>Architecture: 4-layer jurisdictional split. Public Ethereum only (Polygon dropped)</li>
+      <li>Equity: 30 / 30 / 30 + 10% option pool. HK Limited chosen as topco</li>
+    </ul>
+  </div>
+
+  <div class="done-card">
+    <h4>Public artifacts · shipped</h4>
+    <ul>
+      <li><a href="summary.html">/summary.html</a> — written summary, 4-layer storage architecture, open source business model, glossary</li>
+      <li><a href="buyer-verify.html">/buyer-verify.html</a> — buyer verifier mockup with 4 fraud states + functional Compare-to-Paper button</li>
+      <li><a href="supplier-portal.html">/supplier-portal.html</a> — supplier issuing portal mockup with live PDF preview</li>
+    </ul>
+  </div>
+
+  <div class="done-card">
+    <h4>Internal docs · saved to <code style="font-family:'SF Mono',monospace;font-size:13px;background:var(--ice-soft);padding:1px 6px;border-radius:3px;">/Users/paddy/dead-letter/</code></h4>
+    <ul>
+      <li>TrueHeat-pitch.pptx — 12-slide pitch deck</li>
+      <li>TrueHeat-use-cases.md — 6 use case scenarios</li>
+      <li>TrueHeat-forging-walkthrough.md — Future Forge end-to-end story</li>
+      <li>TrueHeat-one-pager.md — printable</li>
+      <li>TrueHeat-buyer-interview-script.md — 30-min interview script with endorsement rubric</li>
+    </ul>
+  </div>
+
+  <p style="font-size: 14px; color: var(--slate); margin-top: 12px;">The next 90 days converts all that into <strong style="color: var(--navy);">signed founders' docs, two MOUs, 30 interviews, and a Go/No-Go memo.</strong></p>
+
+  <!-- TIMELINE STRIP -->
+  <div class="eyebrow">Twelve weeks at a glance</div>
+  <h2>The shape of the next 90 days</h2>
+
+  <div class="timeline-strip">
+    <div class="timeline-bar">
+      <div class="tl-week theme-foundation"><div class="tl-num">W1</div><div class="tl-label">Founders' hygiene</div></div>
+      <div class="tl-week theme-foundation"><div class="tl-num">W2</div><div class="tl-label">Legal posture</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W3</div><div class="tl-label">Interviews start</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W4</div><div class="tl-label">MOUs signed</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W5</div><div class="tl-label">10 buyers</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W6</div><div class="tl-label">Mid-debrief</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W7</div><div class="tl-label">15 buyers</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W8</div><div class="tl-label">10 suppliers</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W9</div><div class="tl-label">15 suppliers</div></div>
+      <div class="tl-week theme-interview"><div class="tl-num">W10</div><div class="tl-label">Synthesis</div></div>
+      <div class="tl-week theme-decision"><div class="tl-num">W11</div><div class="tl-label">Score &amp; vote</div></div>
+      <div class="tl-week theme-decision"><div class="tl-num">W12</div><div class="tl-label">Go/No-Go memo</div></div>
+    </div>
+  </div>
+
+  <!-- WEEK CARDS -->
+
+  <div class="eyebrow" style="margin-top: 36px;">Week-by-week plan</div>
+  <h2>What ships each week</h2>
+
+  <!-- WEEK 1 -->
+  <div class="week-card">
+    <div class="week-head">
+      <div class="week-pill">Week 1 · Days 1–7</div>
+      <div class="week-theme">Founders' hygiene + entity kickoff</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag all">All three</div>
+        <ul class="task-list">
+          <li><span class="day">Day 1</span>60-min founders' meeting. Read this plan together. Lock equity split <strong>in writing</strong> (email is enough).</li>
+          <li><span class="day">Day 1</span>Pick the real company name. Search USPTO + IAQG OASIS + SAIC trademark DB. If "TrueHeat" clears, keep it.</li>
+          <li><span class="day">Day 1</span>Patrick signs NDA with Chan and Michael covering pre-formation work.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li><span class="day">Days 2–3</span>Pull employment agreement, identify non-compete / non-solicit / IP-assignment clauses.</li>
+          <li><span class="day">Day 5</span>30-min consult with employment lawyer (~$300–500). Goal: written opinion on holding founder equity in TrueHeat while employed.</li>
+          <li><span class="day">Day 4</span>Draft 30-name warm-intro list of Western OEM quality / supply-chain leaders. Target: 15 ready-to-introduce.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael</div>
+        <ul class="task-list">
+          <li><span class="day">Day 2</span>Contact 2 HK corporate-services firms (recommend Sleek HK and Osome HK). Pick by Day 5.</li>
+          <li><span class="day">Day 5</span>Kick off HK Limited formation. ~$2–5k, 3–5 weeks. Start bank account application in parallel (HSBC HK or DBS HK).</li>
+          <li><span class="day">Day 6</span>Draft Longda and Future Forge MOU scoping notes — what we want, what they want, what's non-exclusive.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li><span class="day">Days 2–5</span>Read AS6174 cover-to-cover. Sketch credential JSON schema for an Inconel 718 MTR — chemistry, mechanicals, heat ID, lot ID, customer PO, parent reference.</li>
+          <li><span class="day">Day 6</span>30-min call with contractor shortlist (Upwork / Toptal / Malt). Not hiring yet — gathering candidates.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>Founders' equity confirmed in writing. HK entity in progress. Patrick's non-compete status known. AS6174 schema v0 drafted.</div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-card">
+    <div class="week-head">
+      <div class="week-pill">Week 2 · Days 8–14</div>
+      <div class="week-theme">Legal posture + first interviews booked</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael</div>
+        <ul class="task-list">
+          <li><span class="day">Day 8</span>Book 2-hour US export-controls consult (~$1.5–2k). Akin Gump, Crowell &amp; Moring, or Torres Trade Law. Ask for written compliance posture memo covering EAR ECCN 1C002 technical data.</li>
+          <li><span class="day">Day 9</span>Book 2-hour China cybersecurity / cross-border data counsel consult (~$3–5k). Han Kun, KWM, or Zhong Lun. Ask: is mill chemistry "important data"? Do we need Shanghai FTZ node?</li>
+          <li><span class="day">Days 10–12</span>Longda meeting (on-site if possible). Walk through supplier portal mockup. Ask: Would your team use this as-is? What fields are we missing? Sign 12-month non-exclusive data-sharing MOU? Public reference once we have buyer testimonial?</li>
+          <li><span class="day">Days 13–14</span>Same conversation with Future Forge.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li><span class="day">Day 8</span>Send first 5 warm-intro emails. Template: <em>"Two friends are validating something interesting — would you give them 30 minutes?"</em> Forward one-pager + live /summary URL.</li>
+          <li><span class="day">Day 11</span>Send next 5 intros.</li>
+          <li><span class="day">Day 14</span>Send final 5 intros (15 outreaches by end of week).</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li><span class="day">Days 8–10</span>Pressure-test AS6174 schema with an independent metallurgist contact (not Longda).</li>
+          <li><span class="day">Days 11–14</span>Sketch supplier portal data flow in detail — what does Longda's lab tech actually click? How does HSM signing work? Document well enough that a contractor in Phase 2 can build it.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>Legal consults booked. Longda + Future Forge MOU conversations underway. 15 buyer-intro emails out.</div>
+  </div>
+
+  <!-- WEEKS 3-4 -->
+  <div class="week-card interview">
+    <div class="week-head">
+      <div class="week-pill">Weeks 3–4 · Days 15–28</div>
+      <div class="week-theme">First 5 buyer interviews + MOUs signed</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael <span style="color: var(--slate); font-weight: 400; text-transform: none; letter-spacing: 0; margin-left: 8px;">(Chan note-taking on first 3)</span></div>
+        <ul class="task-list">
+          <li>Run <strong>5 buyer interviews</strong> using the script. Fill in endorsement rubric within 1 hour of each. Add to shared spreadsheet.</li>
+          <li>Calibration debrief after interview #3: do questions land? Anyone reacting to mockup? What objection don't we have a good answer for?</li>
+          <li>Counter-sign data-sharing MOUs with Longda and Future Forge. Simple 2-page, non-binding, 12-month, non-exclusive. $500–1k for HK lawyer cleanup.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li>Send 10 more buyer-intro emails (running total: 25 outreaches → expect ~15 to convert).</li>
+          <li>Send 5 supplier-side intros (Chinese aerospace contacts via Michael's network).</li>
+          <li>Review the first 5 interview rubrics weekly. Pattern-match what's working.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li>Receive export-controls + China data memos. Update architecture diagram on /summary to reflect specific guidance (e.g., Shanghai FTZ requirement, redaction rules).</li>
+          <li>Scope MVP build for Phase 2: stack pick (TypeScript + Next.js + Supabase + Spruce didkit + Alchemy), issuer-service API spec, database schema sketch.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>HK entity incorporated. Both supplier MOUs signed. 5 buyer interviews done. Legal posture documented.</div>
+  </div>
+
+  <!-- WEEKS 5-6 -->
+  <div class="week-card interview">
+    <div class="week-head">
+      <div class="week-pill">Weeks 5–6 · Days 29–42</div>
+      <div class="week-theme">Push the buyer pipeline to 10</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael</div>
+        <ul class="task-list">
+          <li>5 more buyer interviews (running total: <strong>10</strong>).</li>
+          <li>5 supplier interviews (Chinese suppliers other than Longda / Future Forge).</li>
+          <li>After interview #10, written <strong>mid-Phase debrief</strong> with Chan and Patrick. Are we on track for ≥5 scoring 4+? If not, what changes?</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li>Send 10 more intros (running total: 35 outreaches).</li>
+          <li>Start informal conversations with 2 contacts in defense materials and medical device. Adjacent verticals share AS6174-like standards. Don't pitch — listen.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li>Begin technical due diligence on Phase 2 contractor shortlist. Identify 2–3 senior engineers with W3C VC experience.</li>
+          <li>Draft public technical whitepaper — 8–10 pages — to complement /summary. Audience: a CISO or security architect at Boeing.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>10/15 buyer interviews complete. 5/15 supplier interviews complete. Technical whitepaper v0 drafted.</div>
+  </div>
+
+  <!-- WEEKS 7-8 -->
+  <div class="week-card interview">
+    <div class="week-head">
+      <div class="week-pill">Weeks 7–8 · Days 43–56</div>
+      <div class="week-theme">Buyer pipeline to 15 · Supplier pipeline to 10</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael</div>
+        <ul class="task-list">
+          <li>Final 5 buyer interviews. By end of Week 8: all <strong>15</strong> done.</li>
+          <li>5 more supplier interviews (running total: 10).</li>
+          <li>Begin lab spot-check vendor evaluations — SGS, Element, RJ Lee. Get pricing for spot-testing a coupon from an Inconel 718 heat.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li>Spot-check interview rubrics — is scoring being applied consistently?</li>
+          <li>For any interviewee who scored 4 or 5: send personal follow-up. <em>"Mind if I check back in 60 days?"</em></li>
+          <li>Identify the most likely Phase 2 "named reference" buyer.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li>Lock AS6174 schema v1. Get written sign-off from one metallurgist outside Longda.</li>
+          <li>Finalize contractor selection. Negotiate 2-week paid trial scope ($2–4k) for Phase 2 startup. Have contract draft ready.</li>
+          <li>Push technical whitepaper through 2 review rounds. Investor-ready, CISO-ready, developer-ready by Day 60.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>All 15 buyer interviews done. 10/15 supplier interviews done. Lab vendor selected. Contractor selected.</div>
+  </div>
+
+  <!-- WEEKS 9-10 -->
+  <div class="week-card interview">
+    <div class="week-head">
+      <div class="week-pill">Weeks 9–10 · Days 57–70</div>
+      <div class="week-theme">Last supplier interviews · Synthesis</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag michael">Michael</div>
+        <ul class="task-list">
+          <li>Final 5 supplier interviews. Total: <strong>15</strong>.</li>
+          <li>Synthesize supplier pricing reactions into a written pricing recommendation. Did our $1.5–6k/mo tier hold? Adjust.</li>
+          <li>Confirm both pilot suppliers still excited. Schedule Phase 2 kickoff date contingent on Go.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag patrick">Patrick</div>
+        <ul class="task-list">
+          <li>Write 1-page "what we heard" summary of all 15 buyer interviews (anonymized). Send to every participant as a thank-you. First piece of social proof for Phase 2.</li>
+          <li>Begin recruiting <strong>advisory board</strong> — 2–3 retired or semi-retired aerospace quality executives. 0.25–0.5%, 2-year vest. Target: anyone who held SVP or VP Supplier Quality at a Tier-1 prime in the last 10 years.</li>
+        </ul>
+      </div>
+      <div class="founder-section">
+        <div class="founder-tag chan">Chan</div>
+        <ul class="task-list">
+          <li>Polish all public artifacts for the Go-decision conversation. Pitch deck, /summary, mocks all reflect any pivots from interview learnings.</li>
+          <li>Draft 30-day post-Go plan for Phase 2 Week 1 (contractor onboarding, first feature scope, first integration test).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>All 30 interviews complete. Pricing recommendation written. Phase 2 prep started.</div>
+  </div>
+
+  <!-- WEEKS 11-12 -->
+  <div class="week-card decision">
+    <div class="week-head">
+      <div class="week-pill">Weeks 11–12 · Days 71–84</div>
+      <div class="week-theme">Scoring, Go/No-Go memo, founders' decision</div>
+    </div>
+    <div class="week-body">
+      <div class="founder-section">
+        <div class="founder-tag all">All three</div>
+        <ul class="task-list">
+          <li><span class="day">Day 71</span>Score every interview against the rubric. Tally: buyer endorsements, supplier willingness-to-pay, demand patterns, consistent objections.</li>
+          <li><span class="day">Day 75</span>Each founder writes their <strong>individual</strong> Go / No-Go recommendation in &lt;500 words. <em>Don't share before writing</em> — independence matters.</li>
+          <li><span class="day">Day 78</span>Founders' meeting. Read each other's recommendations. Decide.</li>
+          <li><span class="day">Days 79–84</span>If Go: write formal Go memo. Includes gate results, what we learned, what changes for Phase 2, the 30-day Phase 2 launch plan.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deliverable"><span class="lbl">Deliverable</span>Signed Go/No-Go memo. If Go, contractor's start date set.</div>
+  </div>
+
+  <!-- WEEK 13 cushion -->
+  <div class="week-card">
+    <div class="week-head">
+      <div class="week-pill" style="background: var(--gold); color: var(--navy);">Days 85–90 · Cushion</div>
+      <div class="week-theme">Overflow buffer</div>
+    </div>
+    <div class="week-body" style="padding-bottom: 20px;">
+      <p style="font-size: 14px; color: var(--slate); margin: 0;">Use for: any interview that slipped, MOU follow-ups, founder paperwork last items, Week-1-of-Phase-2 prep. Better to have it and not need it.</p>
+    </div>
+  </div>
+
+  <!-- BUDGET -->
+  <div class="eyebrow" style="margin-top: 42px;">Budget</div>
+  <h2>Where the $11–22k goes</h2>
+
+  <table class="budget">
+    <thead>
+      <tr><th>Item</th><th>Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>HK Limited setup (Sleek HK or Osome HK)</td><td>$2–5k</td></tr>
+      <tr><td>Bank account opening fees</td><td>$200–500</td></tr>
+      <tr><td>Founders' agreement + IP assignment + advisor templates (HK counsel)</td><td>$1.5–3k</td></tr>
+      <tr><td>Patrick's employment-counsel consult</td><td>$300–500</td></tr>
+      <tr><td>US export-controls consult (2 hr)</td><td>$1.5–2k</td></tr>
+      <tr><td>China cross-border data counsel (2 hr)</td><td>$3–5k</td></tr>
+      <tr><td>Supplier MOU template + review</td><td>$500–1k</td></tr>
+      <tr><td>Lab pricing recon (no testing yet, just quotes)</td><td>$0</td></tr>
+      <tr><td>Cloud / SaaS for interview scheduling, transcript storage</td><td>$50–100</td></tr>
+      <tr><td>Travel — Michael to Longda + Future Forge</td><td>$1–3k</td></tr>
+      <tr><td>Reserve</td><td>$1–2k</td></tr>
+      <tr class="total"><td>Phase 1 total</td><td>$11–22k</td></tr>
+    </tbody>
+  </table>
+
+  <p style="color: var(--slate); font-size: 14px;">Split three ways: <strong style="color: var(--navy);">~$4–7k per founder</strong>. Patrick can match cash contribution or take less and contribute time-equivalent — a founders' agreement decision. Leaves $30–50k of the Year-1 budget for <strong style="color: var(--navy);">Phase 2 build</strong> (Months 4–9). Don't spend it in Phase 1.</p>
+
+  <!-- WEEKLY CADENCE -->
+  <div class="eyebrow" style="margin-top: 36px;">Operating system</div>
+  <h2>The weekly cadence</h2>
+
+  <div class="cadence">
+    <div class="cadence-item"><strong>Every Monday · 30 min</strong> — Founders' standup. Each person: what I shipped last week, what I'm shipping this week, what I'm blocked on. Async over Slack if calendars don't align.</div>
+    <div class="cadence-item"><strong>Every Friday · 1 hour</strong> — Interview debrief + rubric review. What we heard, what's working, what to change.</div>
+    <div class="cadence-item"><strong>Every other Sunday · 1 hour solo</strong> — Patrick's strategic check-in. Macro picture, are we still building the right thing? Writes a short memo to share Monday.</div>
+  </div>
+
+  <!-- RED FLAGS -->
+  <div class="eyebrow" style="margin-top: 36px;">Kill triggers</div>
+  <h2>Red flags that mean stop sooner than Day 90</h2>
+
+  <div class="flags">
+    <div class="flag-item"><strong>By Day 30 · </strong>if Patrick's employment counsel says he can't legally hold founder equity in TrueHeat while at his current job — restructure or pause until he leaves.</div>
+    <div class="flag-item"><strong>By Day 45 · </strong>if 10 buyer interviews have happened and <em>zero</em> are scoring 4 or 5 — the wedge is wrong. Pivot or stop.</div>
+    <div class="flag-item"><strong>By Day 60 · </strong>if Longda OR Future Forge has gone cold on the MOU, replace them with a Plan B supplier <em>before</em> spending Phase 2 budget.</div>
+    <div class="flag-item"><strong>At any time · </strong>if export-controls or China data counsel raises a structural compliance issue we can't engineer around — that may be the real go/no-go.</div>
+  </div>
+
+  <p style="color: var(--slate); font-size: 14px; margin-top: 14px; font-style: italic;">The whole point of stage gates is to spend cheap in Phase 1 so the expensive Phase 2 commits are well-grounded. If we get to Day 90 and the data says No, that's a successful Phase 1 — not a failed company.</p>
+
+  <!-- WALL SUMMARY -->
+  <div class="eyebrow" style="margin-top: 42px;">Pin to wall</div>
+  <h2>The single-page summary</h2>
+
+  <div class="wall-summary">
+    <h3>By Day 90 we will have</h3>
+    <div class="wall-headline">A signed Go/No-Go memo on whether to build TrueHeat.</div>
+
+    <div class="wall-grid">
+
+      <div class="wall-tile">
+        <div class="wt-label">Tangible outputs</div>
+        <ul>
+          <li>HK Limited incorporated, founders' docs signed</li>
+          <li>2 supplier MOUs — Longda, Future Forge</li>
+          <li>15 buyer + 15 supplier interviews, scored</li>
+          <li>Written legal posture — EAR + China data</li>
+          <li>Signed Go/No-Go memo</li>
+        </ul>
+      </div>
+
+      <div class="wall-tile">
+        <div class="wt-label">Resources</div>
+        <ul>
+          <li>$11–22k total spend, split three ways</li>
+          <li>~10 hours per week per founder</li>
+          <li>Day jobs intact through Day 90</li>
+          <li>No outside capital this phase</li>
+        </ul>
+      </div>
+
+      <div class="wall-tile gate" style="grid-column: 1 / -1;">
+        <div class="wt-label">The gate</div>
+        <p>≥<strong>5 of 15 buyers</strong> score "would push internally" <strong>AND</strong> ≥<strong>8 of 15 suppliers</strong> say "I'd pay something."</p>
+        <p style="margin-top: 10px;"><strong>If yes:</strong> Phase 2 build starts Day 91 with a contractor onboard.<br>
+        <strong>If no:</strong> we have a clean dataset for the pivot, and the team is intact.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <p style="text-align: center; color: var(--slate); font-style: italic; margin-top: 28px; font-size: 14px;">This plan is alive — edit it as we learn. The only thing that doesn't move is the gate criterion at Day 90.</p>
+
+</div>
+
+<div class="footer">
+  <div class="name">TrueHeat · Phase 1 Plan</div>
+  <div class="small">Internal · 90-day execution · 2026</div>
+</div>
+
+</body>
+</html>
