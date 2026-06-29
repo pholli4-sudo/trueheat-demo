@@ -540,6 +540,134 @@
     .borders .b-row, .failures .f-row { grid-template-columns: 1fr; gap: 4px; }
   }
 
+  /* Open source split card */
+  .os-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 18px 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .os-col {
+    background: white;
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 1px 3px rgba(10,31,68,0.08);
+    border-top: 4px solid;
+  }
+  .os-col.open { border-top-color: var(--forest); }
+  .os-col.closed { border-top-color: var(--copper); }
+  .os-col .tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .os-col.open .tag { color: var(--forest); }
+  .os-col.closed .tag { color: var(--copper); }
+  .os-col h4 {
+    font-family: "Trebuchet MS", sans-serif;
+    color: var(--navy);
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .os-col ul { list-style: none; padding: 0; }
+  .os-col li {
+    padding: 6px 0;
+    padding-left: 22px;
+    position: relative;
+    color: var(--navy);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .os-col.open li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--forest);
+    font-weight: 700;
+  }
+  .os-col.closed li::before {
+    content: "$";
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+    font-weight: 700;
+  }
+  .os-why {
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 18px 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+  }
+  .os-why h4 {
+    color: var(--gold);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-family: "Trebuchet MS", sans-serif;
+  }
+  .os-why ol {
+    padding-left: 22px;
+  }
+  .os-why li {
+    margin-bottom: 6px;
+    line-height: 1.55;
+  }
+  .os-why strong { color: var(--cream); }
+  .os-analogy {
+    font-style: italic;
+    color: var(--slate);
+    font-size: 15px;
+    text-align: center;
+    margin: 18px 0 8px;
+    font-family: Georgia, serif;
+  }
+  .os-analogy strong { color: var(--navy); font-style: normal; }
+
+  /* Glossary grid */
+  .glossary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 18px 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  .gloss-item {
+    background: white;
+    border-radius: 6px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--copper);
+    box-shadow: 0 1px 2px rgba(10,31,68,0.05);
+  }
+  .gloss-item .term {
+    font-weight: 700;
+    color: var(--copper);
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .gloss-item .full {
+    font-size: 11px;
+    color: var(--slate);
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+  .gloss-item .def {
+    color: var(--navy);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 720px) {
+    .os-split, .glossary { grid-template-columns: 1fr; }
+  }
+
   /* CTA cards at end */
   .test-cards {
     margin-top: 36px;
@@ -745,7 +873,7 @@
       <div class="layer">
         <div class="ltag">TAMPER-PROOF ANCHOR</div>
         <div class="lname">Cryptographic fingerprints</div>
-        <div class="ldetail">One 32-byte Merkle root per day on Ethereum mainnet + per-credential revocation status on Polygon. <strong>Nothing identifiable on-chain — just bytes.</strong> Permissionless, neutral, outlives the company.</div>
+        <div class="ldetail">One 32-byte Merkle root per day on Ethereum mainnet, summarizing every credential issued that day. <strong>Nothing identifiable on-chain — just bytes.</strong> Permissionless, neutral, outlives the company.</div>
       </div>
     </div>
 
@@ -831,7 +959,7 @@
     <h4 style="color: var(--copper);">Crosses to the public chain (Ethereum)</h4>
     <div class="b-row crosses">
       <div class="label">Goes on-chain</div>
-      <div class="body">A 32-byte hash. That's it. One per day for the Merkle root of all credentials issued. Plus per-credential revocation flags on Polygon (also hashes only, no readable data). To anyone watching the chain, this looks like noise — useless without our L2 database.</div>
+      <div class="body">A 32-byte hash. That's it. One per day for the Merkle root of all credentials issued — plus a small revocation registry whenever a supplier needs to invalidate a credential. To anyone watching the chain, this looks like noise — useless without our L2 database to match it against.</div>
     </div>
     <div class="b-row stays">
       <div class="label">Stays off-chain</div>
@@ -872,7 +1000,7 @@
     </div>
     <div class="f-row">
       <div class="scenario">…Ethereum has a 100-block reorg.</div>
-      <div class="outcome"><strong>No data loss.</strong> Daily Merkle root is re-anchored on the next confirmed block. We finalize after 32 blocks (~6 minutes) for the daily roots; per-credential revocation on Polygon is more forgiving since it's not the trust root.</div>
+      <div class="outcome"><strong>No data loss.</strong> The daily Merkle root re-anchors on the next confirmed block. We treat a root as final after 32 blocks (~6 minutes). Until then, the previous day's root is still authoritative — there's never a window of unverifiable credentials.</div>
     </div>
     <div class="f-row">
       <div class="scenario">…a US OEM demands a permissioned chain for their internal use.</div>
@@ -906,6 +1034,55 @@
     </ul>
   </div>
 
+  <div class="section-eyebrow">Open Source</div>
+  <h2>The code is public. The business is not.</h2>
+
+  <p>
+    Our code is genuinely open source. That sounds backwards — <em>"if anyone can run it, what are you selling?"</em> — but it's the same model that built Red Hat ($34B sale to IBM), MongoDB, GitLab, Sentry, and Supabase. Open source is the trust contract; the business is the operation.
+  </p>
+
+  <div class="os-split">
+    <div class="os-col open">
+      <div class="tag">Open Source</div>
+      <h4>Anyone can read, fork, and re-host</h4>
+      <ul>
+        <li>The credential schemas (AS6174-aligned JSON shapes)</li>
+        <li>The verifier page (so any buyer can self-host their own)</li>
+        <li>The issuance and signing protocols</li>
+        <li>The on-chain anchor format</li>
+        <li>Reference implementations of the supplier portal</li>
+      </ul>
+    </div>
+    <div class="os-col closed">
+      <div class="tag">Proprietary — what we sell</div>
+      <h4>Can't be cloned from our source code</h4>
+      <ul>
+        <li>The <strong>supplier identity registry</strong> — KYC, on-site verification, the live database of who is a verified supplier</li>
+        <li>The <strong>hosted operational service</strong> — running the portal, the issuer, the gas wallet, key management</li>
+        <li>The <strong>lab spot-check program</strong> — contracts with SGS, Element, RJ Lee</li>
+        <li>External registry integrations (Nadcap, FAA SUP, OASIS)</li>
+        <li>Customer relationships, onboarding, support — Michael flying to Wuxi</li>
+        <li>The <strong>TrueHeat brand</strong> — buyer-side recognition built over years</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="os-why">
+    <h4>Why open source is required, not optional</h4>
+    <ol>
+      <li><strong>It's how we earn the neutrality claim.</strong> A closed-source verifier means buyers have to trust us we're not lying. Open source means anyone — including Boeing's CISO — can read the code and re-verify any credential independently against public Ethereum. We can't be the trust broker if we're a black box.</li>
+      <li><strong>It's how the credentials survive us.</strong> If TrueHeat shuts down in 2031, every credential we ever issued is still verifiable because the verification code is public and runnable by anyone. Closed source = trust expires when the company does.</li>
+      <li><strong>It's how we win the audit conversation.</strong> Boeing's CMMC / C-SCRM auditors won't approve sending QA staff to a black-box verifier. Open source is the price of admission to enterprise aerospace.</li>
+    </ol>
+  </div>
+
+  <p class="os-analogy">
+    <strong>Linux</strong> is open source — <strong>Red Hat</strong> sold for $34B.<br>
+    <strong>PostgreSQL</strong> is open source — <strong>Supabase</strong> and Crunchy are billion-dollar businesses.<br>
+    <strong>Sentry</strong>'s error-tracking is open source — the company is valued at >$3B.<br>
+    The code is the easy part. <em>Becoming the trusted operator is the hard part.</em>
+  </p>
+
   <div class="section-eyebrow">Status</div>
   <h2>Where we are right now</h2>
 
@@ -938,6 +1115,72 @@
   <p style="margin-top: 28px; color: var(--slate); font-style: italic; text-align: center;">
     Those two questions, answered yes by enough people, are the entire business.
   </p>
+
+  <div class="section-eyebrow">Glossary</div>
+  <h2>Terms used on this page</h2>
+
+  <div class="glossary">
+    <div class="gloss-item">
+      <div class="term">HSM</div>
+      <div class="full">Hardware Security Module</div>
+      <div class="def">A physical device — usually a server appliance or USB key — that stores cryptographic keys and performs signing operations inside the device. The key never leaves. Used by every bank's signing infrastructure and the iPhone's Secure Enclave. Each supplier owns their own HSM; we never hold a supplier's key.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">DID</div>
+      <div class="full">Decentralized Identifier (W3C standard)</div>
+      <div class="def">A globally unique identifier (e.g. <code style="font-family:'SF Mono',monospace;font-size:11px;">did:ethr:0x73c8a...</code>) tied to a cryptographic key, not to a username/password on a central server. Used by Microsoft Entra Verified ID, the EU eIDAS 2.0 wallet, and US DHS digital credentials.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">Verifiable Credential</div>
+      <div class="full">W3C VC standard</div>
+      <div class="def">A digitally signed claim about something (a person, a part, a shipment). The standard the EU and US already use for digital ID. We use it for material provenance instead of just identity.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">Merkle root</div>
+      <div class="full">Cryptographic batch fingerprint</div>
+      <div class="def">A single 32-byte hash that summarizes a large set of items in a way that you can later prove any one item was in the set, without needing the others. Lets us anchor thousands of credentials with one on-chain write per day.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">AS6174</div>
+      <div class="full">SAE Aerospace standard</div>
+      <div class="def">"Counterfeit Materiel — Assuring Acquisition of Authentic and Conforming Materiel." The standard that obligates raw-material traceability "from raw material to final product." Our credential schema is aligned to its data requirements.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">MTR</div>
+      <div class="full">Mill Test Report</div>
+      <div class="def">The certificate a metals producer issues with each heat — chemistry, mechanical properties, heat treatment, mill of origin. The document most often forged in supply-chain counterfeit cases.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">COC</div>
+      <div class="full">Certificate of Conformance</div>
+      <div class="def">A supplier's signed statement that a shipment meets the agreed spec. Goes with the MTR. Trivially forgeable on letterhead. The Spirit/Boeing 2024 incident centered on forged COCs.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">8130-3 tag</div>
+      <div class="full">FAA airworthiness approval</div>
+      <div class="def">The FAA form authorizing a part for installation on a certified aircraft. AOG Technics forged ~60,000 of these. Mutually recognized by CAAC under the FAA-CAAC IPA bilateral.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">Nadcap</div>
+      <div class="full">National Aerospace &amp; Defense Contractors Accreditation Program</div>
+      <div class="def">Industry-managed accreditation for special processes (heat treat, NDT, materials testing, welding, etc.). We validate Nadcap status on issuance for sub-tier suppliers like heat-treat shops.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">EAR · ECCN 1C002</div>
+      <div class="full">US Export Administration Regulations</div>
+      <div class="def">The classification code for nickel-base superalloys including Inconel 718. Controlled for national-security reasons. Forces us to be careful about which "technical data" can be seen by which person in which country.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">PIPL · DSL · CSL</div>
+      <div class="full">China's data law triad</div>
+      <div class="def">Personal Information Protection Law, Data Security Law, Cybersecurity Law — plus the 2024 CAC Provisions on cross-border data flows that relaxed outbound transfer for non-personal, non-"important" commercial data. Why our L1 stays in China.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="term">L1 · L2 · L3 · L4</div>
+      <div class="full">Our storage layers</div>
+      <div class="def">L1 = raw mill data in China. L2 = queryable signed credential metadata in Hong Kong. L3 = redacted PDFs in Hong Kong. L4 = cryptographic anchors on public Ethereum. Each lives in the jurisdiction that's legally and practically right for it.</div>
+    </div>
+  </div>
 
 </div>
 
