@@ -524,7 +524,7 @@
     <div class="content">
 
       <div class="page-title">Issue Mill Test Report Credential</div>
-      <div class="page-sub">Heat-level signed credential for one Inconel 718 melt. Will be linked to any downstream billet/forging credentials.</div>
+      <div class="page-sub">Cast-level signed credential for one Inconel 625 bar lot. Downstream forgers link to it automatically — the cast number becomes a live reference, not a re-typed field.</div>
 
       <div class="split">
 
@@ -540,29 +540,29 @@
                 <div class="field">
                   <label>Material</label>
                   <select>
-                    <option>Inconel 718 (AMS 5662)</option>
+                    <option>Inconel 625 (AMS 5666K · UNS N06625)</option>
                   </select>
                 </div>
                 <div class="field">
-                  <label>Heat ID</label>
-                  <input class="mono" type="text" value="LD-2026-0847">
+                  <label>Cast / Heat No.</label>
+                  <input class="mono" type="text" value="LD-BLH0421">
                 </div>
                 <div class="field">
-                  <label>Batch weight (kg)</label>
-                  <input class="mono" type="text" value="5,000">
+                  <label>Bar size · lot weight</label>
+                  <input class="mono" type="text" value="Ø200mm · 2,358 kg">
                 </div>
                 <div class="field">
                   <label>Melt date</label>
-                  <input type="text" value="2026-04-21">
+                  <input type="text" value="2026-03-21">
                 </div>
                 <div class="field">
-                  <label>Melt furnace</label>
-                  <input type="text" value="VIM-3 + VAR-2">
+                  <label>Melt method</label>
+                  <input type="text" value="VIM + ESR">
                 </div>
                 <div class="field">
                   <label>Customer PO</label>
-                  <input class="mono" type="text" value="4500128741">
-                  <div class="field-link">PO linked · GE9X program</div>
+                  <input class="mono" type="text" value="4501125844">
+                  <div class="field-link">PO linked · forging-quality round</div>
                 </div>
               </div>
             </div>
@@ -583,43 +583,43 @@
               <div class="chem-row">
                 <div class="elem">Ni</div>
                 <div></div>
-                <div><input value="53.1"></div>
-                <div class="spec">50–55</div>
+                <div><input value="61.6"></div>
+                <div class="spec">balance</div>
               </div>
               <div class="chem-row">
                 <div class="elem">Cr</div>
                 <div></div>
-                <div><input value="18.7"></div>
-                <div class="spec">17–21</div>
-              </div>
-              <div class="chem-row">
-                <div class="elem">Fe</div>
-                <div></div>
-                <div><input value="17.4"></div>
-                <div class="spec">balance</div>
-              </div>
-              <div class="chem-row">
-                <div class="elem">Nb</div>
-                <div></div>
-                <div><input value="5.2"></div>
-                <div class="spec">4.75–5.5</div>
+                <div><input value="22.1"></div>
+                <div class="spec">20.0–23.0</div>
               </div>
               <div class="chem-row">
                 <div class="elem">Mo</div>
                 <div></div>
-                <div><input value="3.1"></div>
-                <div class="spec">2.8–3.3</div>
+                <div><input value="8.71"></div>
+                <div class="spec">8.0–10.0</div>
               </div>
               <div class="chem-row">
-                <div class="elem">Ti</div>
+                <div class="elem">Nb</div>
                 <div></div>
-                <div><input value="1.0"></div>
-                <div class="spec">0.65–1.15</div>
+                <div><input value="3.46"></div>
+                <div class="spec">3.15–4.15</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Fe</div>
+                <div></div>
+                <div><input value="3.61"></div>
+                <div class="spec">≤ 5.0</div>
+              </div>
+              <div class="chem-row">
+                <div class="elem">Co</div>
+                <div></div>
+                <div><input value="0.10"></div>
+                <div class="spec">≤ 1.0</div>
               </div>
               <div class="chem-row" style="border-top:2px solid var(--ice);font-weight:700;padding-top:10px;">
                 <div></div>
                 <div></div>
-                <div class="pass" style="text-align:center;">✓ All within AMS 5662</div>
+                <div class="pass" style="text-align:center;">✓ All within AMS 5666K</div>
                 <div></div>
               </div>
             </div>
@@ -634,23 +634,23 @@
               <div class="field-grid cols-2">
                 <div class="field">
                   <label>Ultimate Tensile (MPa)</label>
-                  <input class="mono" value="1,389">
-                  <div class="field-link">≥ 1,276 spec</div>
+                  <input class="mono" value="912">
+                  <div class="field-link">≥ 827 spec</div>
                 </div>
                 <div class="field">
-                  <label>0.2% Yield (MPa)</label>
-                  <input class="mono" value="1,158">
-                  <div class="field-link">≥ 1,034 spec</div>
+                  <label>0.2% Proof Stress (MPa)</label>
+                  <input class="mono" value="455">
+                  <div class="field-link">≥ 414 spec</div>
                 </div>
                 <div class="field">
-                  <label>Elongation (%)</label>
-                  <input class="mono" value="18.2">
-                  <div class="field-link">≥ 12 spec</div>
+                  <label>Elongation 4D (%)</label>
+                  <input class="mono" value="45.1">
+                  <div class="field-link">≥ 30 spec</div>
                 </div>
                 <div class="field">
-                  <label>Hardness (HRC)</label>
-                  <input class="mono" value="42">
-                  <div class="field-link">36–46 spec</div>
+                  <label>Hardness (HBW)</label>
+                  <input class="mono" value="227">
+                  <div class="field-link">≤ 287 spec</div>
                 </div>
               </div>
             </div>
@@ -676,7 +676,7 @@
                 </div>
                 <div class="field">
                   <label>Test report attach</label>
-                  <input type="text" value="📎 spec-report-0847.pdf">
+                  <input type="text" value="📎 spec-report-BLH0421.pdf">
                 </div>
               </div>
             </div>
@@ -701,23 +701,23 @@
             <div class="pdf-title">MILL TEST REPORT</div>
             <div class="pdf-org">Longda Precision Materials Co., Ltd. · Wuxi, China</div>
 
-            <div class="pdf-row"><div class="l">Heat ID</div><div class="v">LD-2026-0847</div></div>
-            <div class="pdf-row"><div class="l">Material</div><div class="v">Inconel 718 (AMS 5662)</div></div>
-            <div class="pdf-row"><div class="l">Batch</div><div class="v">5,000 kg · 2026-04-21</div></div>
-            <div class="pdf-row"><div class="l">Customer PO</div><div class="v">4500128741</div></div>
+            <div class="pdf-row"><div class="l">Cast No.</div><div class="v">LD-BLH0421</div></div>
+            <div class="pdf-row"><div class="l">Material</div><div class="v">Inconel 625 (AMS 5666K)</div></div>
+            <div class="pdf-row"><div class="l">Lot</div><div class="v">Ø200mm · 2,358 kg</div></div>
+            <div class="pdf-row"><div class="l">Customer PO</div><div class="v">4501125844</div></div>
 
             <table class="pdf-table">
-              <tr><th>Ni</th><th>Cr</th><th>Fe</th><th>Nb</th><th>Mo</th><th>Ti</th></tr>
-              <tr><td>53.1</td><td>18.7</td><td>17.4</td><td>5.2</td><td>3.1</td><td>1.0</td></tr>
+              <tr><th>Ni</th><th>Cr</th><th>Mo</th><th>Nb</th><th>Fe</th><th>Co</th></tr>
+              <tr><td>61.6</td><td>22.1</td><td>8.71</td><td>3.46</td><td>3.61</td><td>0.10</td></tr>
             </table>
 
-            <div style="margin-top:8px;font-size:9px;color:var(--slate);">UTS 1,389 MPa · YS 1,158 MPa · Elong 18.2% · HRC 42 — all within spec.</div>
+            <div style="margin-top:8px;font-size:9px;color:var(--slate);">UTS 912 MPa · Proof 455 MPa · Elong 45.1% · 227 HBW — all within spec.</div>
 
             <div class="chop">
               <div class="chop-stamp">LONGDA<br>QA<br>2026</div>
               <div class="qr"></div>
             </div>
-            <div style="font-size:8px;color:var(--slate);margin-top:6px;text-align:right;font-family:'SF Mono',monospace;">verify.trueheat.io/cert/LD-2026-0847</div>
+            <div style="font-size:8px;color:var(--slate);margin-top:6px;text-align:right;font-family:'SF Mono',monospace;">verify.trueheat.io/cert/LD-BLH0421</div>
           </div>
           <div class="pinfo">
             <strong>What the buyer sees</strong><br>
@@ -733,36 +733,36 @@
           <a href="#">View all 247 →</a>
         </div>
         <div class="recent-row">
-          <div class="id">LD-2026-0846</div>
-          <div class="buyer">Spirit AeroSystems · Wichita</div>
+          <div class="id">LD-BLH0421</div>
+          <div class="buyer">Future Forge · links to this cast</div>
           <div class="when">2 hours ago</div>
           <div class="views">14 <span class="lbl">scans</span></div>
           <div class="status"><span class="badge badge-green">Verified</span></div>
         </div>
         <div class="recent-row">
-          <div class="id">LD-2026-0845</div>
-          <div class="buyer">Future Forge (downstream)</div>
+          <div class="id">LD-BLH0419</div>
+          <div class="buyer">Spirit AeroSystems · Wichita</div>
           <div class="when">Yesterday</div>
           <div class="views">3 <span class="lbl">scans</span></div>
           <div class="status"><span class="badge badge-green">Verified</span></div>
         </div>
         <div class="recent-row">
-          <div class="id">LD-2026-0844</div>
+          <div class="id">LD-BLH0417</div>
           <div class="buyer">RTX · Pratt &amp; Whitney</div>
           <div class="when">Yesterday</div>
           <div class="views">22 <span class="lbl">scans</span></div>
           <div class="status"><span class="badge badge-green">Verified</span></div>
         </div>
         <div class="recent-row">
-          <div class="id">LD-2026-0843</div>
+          <div class="id">LD-BLH0416</div>
           <div class="buyer">Honeywell · Phoenix</div>
           <div class="when">Apr 24</div>
           <div class="views">8 <span class="lbl">scans</span></div>
           <div class="status"><span class="badge badge-amber">Pending lab</span></div>
         </div>
         <div class="recent-row">
-          <div class="id">LD-2026-0842</div>
-          <div class="buyer">Future Forge (downstream)</div>
+          <div class="id">LD-BLH0414</div>
+          <div class="buyer">Future Forge · links to this cast</div>
           <div class="when">Apr 23</div>
           <div class="views">5 <span class="lbl">scans</span></div>
           <div class="status"><span class="badge badge-green">Verified</span></div>

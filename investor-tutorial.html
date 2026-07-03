@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrueHeat in 5 Minutes — for investors</title>
+<style>
+  :root {
+    --navy: #0A1F44;
+    --navy-soft: #13284C;
+    --cream: #F5EFE6;
+    --copper: #C84B31;
+    --copper-soft: #FCE8E0;
+    --gold: #D4A24C;
+    --slate: #4A5568;
+    --ice: #D8DEE9;
+    --ice-soft: #EEF1F5;
+    --forest: #2C5F2D;
+    --rust: #8B2E15;
+    --bg: #F7F4EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--navy); line-height: 1.6; font-size: 17px;
+  }
+  .top-bar {
+    background: var(--navy); color: var(--cream); padding: 12px 24px; font-size: 13px;
+    display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--copper);
+  }
+  .top-bar .brand { font-weight: 700; letter-spacing: 4px; }
+  .top-bar .brand span { color: var(--gold); }
+  .top-bar .back { color: var(--ice); text-decoration: none; font-size: 12px; }
+  .top-bar .back:hover { color: var(--gold); }
+  .top-bar .back::before { content: "← "; }
+
+  .hero {
+    background: var(--navy); color: var(--cream); padding: 64px 24px 52px; position: relative; overflow: hidden;
+  }
+  .hero::before, .hero::after { content: ""; position: absolute; top: 0; bottom: 0; width: 4px; }
+  .hero::before { left: 0; background: var(--copper); }
+  .hero::after { right: 0; background: var(--gold); }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .hero .eyebrow { color: var(--gold); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+  .hero h1 { font-family: "Trebuchet MS", sans-serif; font-size: 40px; font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
+  .hero .promise { color: var(--ice); font-size: 18px; }
+  .hero .promise strong { color: var(--gold); }
+
+  .section { padding: 44px 24px; }
+  .section:nth-child(even) { background: white; }
+  .step-num {
+    display: inline-block; background: var(--copper); color: white; font-family: "Trebuchet MS", sans-serif;
+    font-weight: 700; font-size: 14px; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; margin-bottom: 12px;
+  }
+  h2 { font-family: "Trebuchet MS", sans-serif; font-size: 28px; font-weight: 700; margin-bottom: 14px; line-height: 1.25; }
+  h2 .plain { display: block; font-size: 15px; color: var(--copper); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  p { margin-bottom: 14px; }
+  p strong { color: var(--navy); }
+  .lead { font-size: 19px; }
+
+  /* One-sentence hero panel */
+  .one-liner {
+    background: var(--copper-soft); border-left: 5px solid var(--copper); padding: 22px 26px; border-radius: 8px;
+    font-size: 20px; line-height: 1.5; margin: 8px 0 4px;
+  }
+  .one-liner strong { color: var(--copper); }
+
+  /* Problem stat cards */
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 18px 0; }
+  .stat { background: white; border-radius: 10px; padding: 22px 24px; border-top: 4px solid var(--rust); box-shadow: 0 1px 3px rgba(10,31,68,0.08); }
+  .section:nth-child(even) .stat { background: var(--bg); }
+  .stat .big { font-family: "Trebuchet MS", sans-serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1; }
+  .stat .cap { color: var(--rust); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin: 8px 0 6px; }
+  .stat .desc { font-size: 14px; color: var(--slate); }
+
+  /* Browser frame for screenshots */
+  .browser {
+    border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(10,31,68,0.18); margin: 18px 0 10px;
+    border: 1px solid var(--ice);
+  }
+  .browser .chrome {
+    background: #E7E2D8; padding: 10px 14px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #D5CFC2;
+  }
+  .browser .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .browser .dot.r { background: #ED6A5E; } .browser .dot.y { background: #F4BF4F; } .browser .dot.g { background: #61C554; }
+  .browser .addr {
+    flex: 1; margin-left: 10px; background: white; border-radius: 6px; padding: 5px 12px; font-size: 12px;
+    color: var(--slate); font-family: "SF Mono", Menlo, monospace; text-align: center;
+  }
+  .browser img { display: block; width: 100%; }
+  .caption { font-size: 13px; color: var(--slate); font-style: italic; text-align: center; margin-bottom: 8px; }
+
+  /* Callout chips under screenshots */
+  .callouts { display: grid; gap: 10px; margin: 14px 0; }
+  .callout { display: flex; gap: 12px; align-items: flex-start; background: white; border-radius: 8px; padding: 12px 16px; box-shadow: 0 1px 3px rgba(10,31,68,0.06); }
+  .section:nth-child(even) .callout { background: var(--bg); }
+  .callout .pin {
+    flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--copper); color: white;
+    font-weight: 700; font-size: 13px; text-align: center; line-height: 26px;
+  }
+  .callout .txt { font-size: 15px; }
+  .callout .txt strong { color: var(--navy); }
+
+  /* The "magic trick" — before/after */
+  .magic { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+  .magic .col { border-radius: 10px; padding: 20px 22px; }
+  .magic .before { background: #FFF4F0; border: 1px solid var(--copper-soft); }
+  .magic .after { background: #EFF6ED; border: 1px solid #CDE3C8; }
+  .magic .col h4 { font-family: "Trebuchet MS", sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+  .magic .before h4 { color: var(--rust); }
+  .magic .after h4 { color: var(--forest); }
+  .magic .col p { font-size: 15px; margin-bottom: 8px; }
+  .magic code { background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; color: var(--copper); font-weight: 700; }
+
+  /* Live demo CTA */
+  .cta {
+    background: var(--navy); color: var(--cream); border-radius: 12px; padding: 32px; text-align: center; margin: 8px 0;
+  }
+  .cta h3 { font-family: "Trebuchet MS", sans-serif; color: var(--gold); font-size: 24px; margin-bottom: 8px; }
+  .cta p { color: var(--ice); margin-bottom: 20px; }
+  .cta .btn {
+    display: inline-block; background: var(--copper); color: white; text-decoration: none; padding: 14px 28px;
+    border-radius: 8px; font-weight: 700; font-size: 16px; letter-spacing: 0.5px;
+  }
+  .cta .btn:hover { background: #B03E26; }
+  .cta .btn.ghost { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-left: 10px; }
+  .cta .hint { font-size: 13px; color: var(--slate); margin-top: 14px; margin-bottom: 0; }
+
+  /* Business model split */
+  .biz { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+  .biz .col { background: white; border-radius: 10px; padding: 20px 24px; box-shadow: 0 1px 3px rgba(10,31,68,0.08); border-top: 4px solid; }
+  .section:nth-child(even) .biz .col { background: var(--bg); }
+  .biz .free { border-top-color: var(--forest); }
+  .biz .paid { border-top-color: var(--copper); }
+  .biz .col h4 { font-family: "Trebuchet MS", sans-serif; font-size: 16px; margin-bottom: 10px; }
+  .biz .col ul { list-style: none; padding: 0; }
+  .biz .col li { padding: 5px 0 5px 22px; position: relative; font-size: 14px; }
+  .biz .free li::before { content: "✓"; position: absolute; left: 0; color: var(--forest); font-weight: 700; }
+  .biz .paid li::before { content: "$"; position: absolute; left: 0; color: var(--copper); font-weight: 700; }
+
+  .punch { font-size: 20px; text-align: center; font-style: italic; color: var(--navy); margin: 20px 0 4px; }
+  .punch strong { color: var(--copper); font-style: normal; }
+
+  /* Status tiles */
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0; }
+  .tile { background: white; border-radius: 10px; padding: 18px; text-align: center; box-shadow: 0 1px 3px rgba(10,31,68,0.08); }
+  .section:nth-child(even) .tile { background: var(--bg); }
+  .tile .n { font-family: "Trebuchet MS", sans-serif; font-size: 30px; font-weight: 700; color: var(--copper); }
+  .tile .l { font-size: 13px; color: var(--slate); margin-top: 4px; }
+
+  .footer { background: var(--navy); color: var(--ice); padding: 40px 24px; text-align: center; }
+  .footer .name { color: var(--cream); font-weight: 700; font-size: 15px; }
+  .footer .email { color: var(--gold); text-decoration: none; font-family: "SF Mono", Menlo, monospace; display: block; margin: 8px 0 14px; }
+  .footer .small { color: var(--slate); font-style: italic; font-size: 12px; }
+  .footer a.more { color: var(--gold); text-decoration: none; font-size: 13px; }
+
+  @media (max-width: 680px) {
+    .hero h1 { font-size: 30px; }
+    .stats, .magic, .biz, .tiles { grid-template-columns: 1fr; }
+    .cta .btn.ghost { margin-left: 0; margin-top: 10px; display: inline-block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="brand">TRUE<span>HEAT</span></div>
+  <a href="./" class="back">All demos</a>
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">For investors · 5-minute read · no jargon</div>
+    <h1>What TrueHeat does, in plain English</h1>
+    <p class="promise">You don't need to know anything about aerospace or blockchain. By the end of this page you'll understand the problem, see the product working in <strong>real screenshots</strong>, and know why people pay for it.</p>
+  </div>
+</div>
+
+<!-- 1. ONE LINER -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">1</div>
+    <h2><span class="plain">The whole idea</span>One sentence</h2>
+    <div class="one-liner">
+      Chinese factories sell billions of dollars of jet-engine metal to Boeing, Airbus, and their suppliers. The paperwork proving that metal is real is a <strong>PDF anyone can fake</strong>. TrueHeat makes that paperwork <strong>impossible to fake</strong> — and the factory pays us to do it.
+    </div>
+  </div>
+</div>
+
+<!-- 2. PROBLEM -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">2</div>
+    <h2><span class="plain">Why it matters</span>Fake metal certificates have reached real airplanes</h2>
+    <p class="lead">This isn't hypothetical. Two recent cases made global headlines:</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="big">$53M</div>
+        <div class="cap">AOG Technics · 2024</div>
+        <div class="desc">A distributor sold 60,000 jet-engine parts with <strong>forged airworthiness certificates</strong>. 180+ engines affected across American, Delta, United, Southwest. The founder was jailed.</div>
+      </div>
+      <div class="stat">
+        <div class="big">787 · A220</div>
+        <div class="cap">Boeing / Airbus · 2024</div>
+        <div class="desc">A Chinese supplier <strong>forged certificates</strong> claiming a fake mill of origin. Counterfeit titanium reached the primary structure of passenger jets. The FAA opened an investigation.</div>
+      </div>
+    </div>
+    <p>Every big Western aircraft maker has since put their Chinese suppliers under a microscope. <strong>Honest Chinese factories — who make most of the world's aerospace metal — now have a trust problem they can't fix with paper.</strong> That's the opening.</p>
+  </div>
+</div>
+
+<!-- 3. WHAT WE BUILT (supplier) -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">3</div>
+    <h2><span class="plain">The product · side 1</span>The factory fills in the form they already use</h2>
+    <p>Nothing changes in the factory's day. Their quality manager types the same test numbers they type today — then clicks one button. A tamper-proof, digitally signed certificate is created, and a normal-looking PDF comes out with a QR code added.</p>
+    <div class="browser">
+      <div class="chrome"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="addr">portal.trueheat.io / issue</span></div>
+      <img src="img/supplier-portal.png" alt="Supplier issuing portal — Longda issues an Inconel 625 credential">
+    </div>
+    <div class="caption">Real screenshot of our demo — the factory's issuing screen. The panel on the right is the PDF it produces.</div>
+    <div class="callouts">
+      <div class="callout"><div class="pin">A</div><div class="txt"><strong>Same numbers as today.</strong> Chemistry and strength — exactly what their lab already measures.</div></div>
+      <div class="callout"><div class="pin">B</div><div class="txt"><strong>The PDF looks familiar.</strong> Same letterhead and stamp they've always used — we just add a QR code.</div></div>
+      <div class="callout"><div class="pin">C</div><div class="txt"><strong>The key stays with the factory.</strong> "Stored in HSM" means only they can sign as themselves — even we can't fake their certificates.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. WHAT THE BUYER SEES (moneyshot) -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">4</div>
+    <h2><span class="plain">The product · side 2</span>The customer scans a QR code and trusts it in 8 seconds</h2>
+    <p>When the metal arrives at the customer's dock, an inspector points their phone at the QR code. In about eight seconds they see the <strong>entire life story of that metal</strong> — every company that touched it, every test, all cryptographically signed. No app. No login. Free.</p>
+    <div class="browser">
+      <div class="chrome"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="addr">verify.trueheat.io / cert / FF-2026-D2941</span></div>
+      <img src="img/buyer-verified.png" alt="Buyer verification page — verified credential with 5-party chain of custody">
+    </div>
+    <div class="caption">Real screenshot of our demo — what the customer sees after scanning. (The dark bar at the very top is just a demo switch — ignore it.)</div>
+    <div class="callouts">
+      <div class="callout"><div class="pin">A</div><div class="txt"><strong>Green check = verified.</strong> The one thing the inspector actually needs to know, in one second.</div></div>
+      <div class="callout"><div class="pin">B</div><div class="txt"><strong>Five companies, each signed.</strong> The metal mill, the forge, the heat-treat shop, the test lab, the final inspector — every hand that touched it.</div></div>
+      <div class="callout"><div class="pin">C</div><div class="txt"><strong>The 🔗 "matched" links.</strong> This is the magic — explained next. It's the number that used to be typed by hand, now checking itself.</div></div>
+      <div class="callout"><div class="pin">D</div><div class="txt"><strong>Anchored on Ethereum.</strong> A public, tamper-proof timestamp. Even if TrueHeat disappeared, this certificate stays verifiable forever.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. THE MAGIC TRICK -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">5</div>
+    <h2><span class="plain">The "aha"</span>The magic trick: a number that checks itself</h2>
+    <p>Here's the thing we learned from looking at real aerospace paperwork. A single melt of metal gets a batch number — say <code>BLH0421</code>. As that metal moves from the mill, to the forge, to the customer, <strong>a human being literally re-types that same number onto each company's separate PDF.</strong> That hand-typed number is the only thing linking the documents together.</p>
+    <div class="magic">
+      <div class="col before">
+        <h4>Today · paper</h4>
+        <p>A worker copies <code>BLH0421</code> from the mill's cert onto the forge's cert onto the customer's cert.</p>
+        <p>If someone fakes one document and types a real-looking number, <strong>nobody notices for years</strong> — until an airplane part fails.</p>
+      </div>
+      <div class="col after">
+        <h4>With TrueHeat</h4>
+        <p>That number becomes a <strong>live link</strong>. The forge's credential automatically reaches back and checks the mill's credential.</p>
+        <p>If the link doesn't match a real, signed record, it <strong>fails instantly</strong> — right there on the screen the inspector is holding.</p>
+      </div>
+    </div>
+    <p class="punch">We didn't invent the chain of custody. <strong>We just made the paperclip un-fakeable.</strong></p>
+  </div>
+</div>
+
+<!-- 6. CATCHING A FAKE -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">6</div>
+    <h2><span class="plain">The payoff</span>When someone fakes it, the screen turns red</h2>
+    <p>If a certificate is altered after signing, the page tells the inspector <strong>exactly what's wrong</strong> — which number was changed, and by how much — before the metal ever enters production.</p>
+    <div class="browser">
+      <div class="chrome"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="addr">verify.trueheat.io / cert / FF-2026-D2941</span></div>
+      <img src="img/buyer-mismatch-top.png" alt="Buyer page showing a caught forgery — paper does not match signed credential">
+    </div>
+    <div class="caption">Real screenshot — the same page catching a forged cert. It names the exact altered field (strength changed from 910 to 1,010).</div>
+    <p>There are three ways it fails loudly: the paper was <strong>edited after signing</strong> (above), the QR is a <strong>fake pointing to nothing</strong>, or a sub-supplier's <strong>certification had expired</strong>. You can click through all of them in the live demo.</p>
+  </div>
+</div>
+
+<!-- 7. TRY IT -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">7</div>
+    <h2><span class="plain">See for yourself</span>Try the live demo — it takes 30 seconds</h2>
+    <div class="cta">
+      <h3>▶ Open the buyer's screen</h3>
+      <p>Scroll to the bottom and click <strong>"Compare to Paper."</strong> Watch it catch a forgery in real time.</p>
+      <a class="btn" href="buyer-verify.html">Open the live demo</a>
+      <a class="btn ghost" href="supplier-portal.html">See the factory's screen</a>
+      <p class="hint">Everything is a working mockup with synthetic data modeled on real aerospace certificates. Nothing to install.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 8. BUSINESS -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">8</div>
+    <h2><span class="plain">The business</span>Why it makes money — and why it's defensible</h2>
+    <p><strong>The factory pays.</strong> Not the customer. The factory is the one who needs to prove it's trustworthy to win and keep Western orders — so it subscribes. The customer verifies for free, forever, which is what makes the whole thing spread.</p>
+    <p>Our software is open source — which sounds backwards until you see the split:</p>
+    <div class="biz">
+      <div class="col free">
+        <h4>Free &amp; open</h4>
+        <ul>
+          <li>The code that checks a certificate</li>
+          <li>The certificate format</li>
+          <li>The customer's verification page</li>
+        </ul>
+      </div>
+      <div class="col paid">
+        <h4>What we sell</h4>
+        <ul>
+          <li>Being the trusted registry of who's real</li>
+          <li>Running the service the factories rely on</li>
+          <li>The independent lab spot-checks</li>
+          <li>The brand customers learn to trust</li>
+        </ul>
+      </div>
+    </div>
+    <p class="punch">The code is free. <strong>Being the trusted referee is the business.</strong></p>
+    <p style="font-size:15px;color:var(--slate);">Same model as Red Hat (sold for $34B), MongoDB, and Sentry. Open code builds trust; the hosted, branded, verified service is what people pay for.</p>
+  </div>
+</div>
+
+<!-- 9. STATUS / ASK -->
+<div class="section">
+  <div class="wrap">
+    <div class="step-num">9</div>
+    <h2><span class="plain">Where we are</span>Early, deliberate, and de-risked</h2>
+    <div class="tiles">
+      <div class="tile"><div class="n">3</div><div class="l">co-founders, equal owners — engineering, China commercial, aerospace supply-chain</div></div>
+      <div class="tile"><div class="n">2</div><div class="l">friendly pilot factories ready to test (Inconel &amp; forgings)</div></div>
+      <div class="tile"><div class="n">$0</div><div class="l">outside capital raised — validating demand first</div></div>
+    </div>
+    <p>We're spending 90 days and a small amount of our own money to answer one question: <strong>will Western buyers actually demand this, and will factories pay for it?</strong> We talk to 15 of each before we build in earnest.</p>
+    <p><strong>The ask:</strong> if you know a quality or supply-chain leader at a Western aerospace company, a 30-minute introduction is worth more to us than money right now. And if this space interests you, we'd love to keep you close as we hit milestones.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="name">Patrick Hollis</div>
+  <a class="email" href="mailto:phollis@gmail.com">phollis@gmail.com</a>
+  <a class="more" href="summary.html">Want the technical version? Read the full summary →</a>
+  <div class="small" style="margin-top:14px;">TrueHeat · Confidential · 2026 · Screenshots are of our working demo, synthetic data modeled on real aerospace certificates</div>
+</div>
+
+</body>
+</html>
