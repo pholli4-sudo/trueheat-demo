@@ -1053,6 +1053,59 @@
     </ul>
   </div>
 
+  <div class="section-eyebrow">Threat Model</div>
+  <h2>What we stop, what we detect, what we don't claim</h2>
+
+  <p>
+    "Impossible to fake" is not a claim we make. A credential binds the <em>data</em>, the <em>signer</em>, and the <em>chain links</em> — it cannot, by itself, bind the atoms in the box. Precision matters in front of a quality organization, so here is the honest map, attack by attack:
+  </p>
+
+  <table class="trace-table">
+    <thead>
+      <tr>
+        <th>Attack</th>
+        <th>What happens with TrueHeat</th>
+        <th style="width:150px;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Third party forges a cert</strong> (the AOG Technics pattern)</td>
+        <td>The QR resolves to nothing, or to a credential signed by someone else. Fails in seconds at the dock.</td>
+        <td><span style="background:#E0F0DC;color:#2C5F2D;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">STOPPED</span></td>
+      </tr>
+      <tr>
+        <td><strong>False mill of origin</strong> (the Baoji titanium pattern)</td>
+        <td>Issuer identity is cryptographic, not letterhead. An impostor cannot sign as Baoji — the page shows "unknown issuer."</td>
+        <td><span style="background:#E0F0DC;color:#2C5F2D;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">STOPPED</span></td>
+      </tr>
+      <tr>
+        <td><strong>Editing the PDF after signing</strong></td>
+        <td>Hash comparison names the exact altered field ("Tensile: paper says 1,010, credential says 910").</td>
+        <td><span style="background:#E0F0DC;color:#2C5F2D;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">STOPPED</span></td>
+      </tr>
+      <tr>
+        <td><strong>A verified supplier signs false data</strong></td>
+        <td>We sign what they enter — but every claim is non-repudiably theirs, and random independent coupon tests compare real material against signed data. One failed audit revokes the badge.</td>
+        <td><span style="background:#FFF3D6;color:#8B6914;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">DETECTED &amp; DETERRED</span></td>
+      </tr>
+      <tr>
+        <td><strong>Physical substitution</strong> — real credential, different metal shipped under it</td>
+        <td>Buyer-side XRF/PMI check at receiving compared against the credential (and recorded on the chain); sampled lab audits. Year 2 closes it fully: laser-etched serials and per-lot XRF "fingerprints" stored in the credential bind the specific piece to its record.</td>
+        <td><span style="background:#FFF3D6;color:#8B6914;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">DETECTED → CLOSING</span></td>
+      </tr>
+      <tr>
+        <td><strong>Stolen signing key</strong></td>
+        <td>Keys live in the supplier's HSM (never leave the device); revocation registry invalidates forward use; anchored timestamps bound the exposure window.</td>
+        <td><span style="background:#DCE9F1;color:#1C7293;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;letter-spacing:1px;">MITIGATED</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Note that the two headline incidents — AOG Technics and the Baoji case — are the first two rows: <strong>fully stopped by the credential alone.</strong> That's why documentation fraud is the wedge. Rows 4–5 are why the pilot co-funds independent coupon testing, and why every credential carries an <code style="background:var(--copper-soft);padding:1px 6px;border-radius:3px;font-family:'SF Mono',monospace;font-size:13px;color:var(--copper);">assurance</code> field — <strong>self-attested</strong> vs <strong>lab-verified</strong>. The system works without sampling; the badge just says so honestly, and the buyer can decide what each tier is worth.
+  </p>
+
   <div class="section-eyebrow">Open Source</div>
   <h2>The code is public. The business is not.</h2>
 
