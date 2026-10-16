@@ -4,482 +4,168 @@
 <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>verify.fairskynetwork.com · EF-2026-D2941</title>
+<title>verify.fairskynetwork.com</title>
 <style>
   :root {
-    --navy: #0A1F44;
-    --navy-soft: #13284C;
-    --cream: #F5EFE6;
-    --copper: #C84B31;
-    --copper-soft: #FCE8E0;
-    --gold: #D4A24C;
-    --slate: #4A5568;
-    --ice: #D8DEE9;
-    --ice-soft: #EEF1F5;
-    --forest: #2C5F2D;
-    --rust: #8B2E15;
-    --white: #FFFFFF;
+    --navy: #0A1F44; --navy-soft: #13284C; --cream: #F5EFE6; --copper: #C84B31; --copper-soft: #FCE8E0;
+    --gold: #D4A24C; --slate: #4A5568; --ice: #D8DEE9; --ice-soft: #EEF1F5; --forest: #2C5F2D; --rust: #8B2E15;
+    --teal: #1C7293; --teal-soft: #DCE9F1; --amber: #B8860B; --amber-soft: #FFF3D6; --white: #FFFFFF;
     --shadow: 0 2px 8px rgba(10,31,68,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--cream);
-    color: var(--navy);
-    line-height: 1.5;
-    padding-bottom: 40px;
-  }
-  .top-bar {
-    background: var(--navy); color: var(--cream);
-    padding: 10px 24px; font-size: 13px;
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 3px solid var(--copper);
-  }
-  .top-bar .brand { font-weight: 700; letter-spacing: 4px; }
-  .top-bar .brand span { color: var(--gold); }
-  .top-bar .url { font-family: "SF Mono", Menlo, monospace; color: var(--ice); font-size: 11px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--cream); color: var(--navy); line-height: 1.5; padding-bottom: 40px; }
+  .top-bar { background: var(--navy); color: var(--cream); padding: 10px 24px; font-size: 13px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--copper); gap: 10px; flex-wrap: wrap; }
+  .top-bar .url { font-family: "SF Mono", Menlo, monospace; color: var(--ice); font-size: 11px; word-break: break-all; }
   .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
-  .verdict-card {
-    background: white; margin-top: 24px; border-radius: 12px;
-    box-shadow: var(--shadow); border-left: 8px solid var(--forest); overflow: hidden;
-  }
-  .verdict-header {
-    padding: 24px 28px; display: flex; align-items: center; gap: 16px;
-    border-bottom: 1px solid var(--ice); background: linear-gradient(to right, #F0F7EE, white);
-  }
-  .verdict-check {
-    width: 56px; height: 56px; background: var(--forest); color: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; flex-shrink: 0;
-  }
+  .verdict-card { background: white; margin-top: 24px; border-radius: 12px; box-shadow: var(--shadow); border-left: 8px solid var(--forest); overflow: hidden; }
+  .verdict-header { padding: 24px 28px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--ice); background: linear-gradient(to right, #F0F7EE, white); }
+  .verdict-check { width: 56px; height: 56px; background: var(--forest); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; flex-shrink: 0; }
   .verdict-title { font-size: 24px; font-weight: 700; color: var(--navy); }
   .verdict-sub { color: var(--slate); font-size: 14px; margin-top: 2px; }
-  .row {
-    display: grid; grid-template-columns: 200px 1fr; padding: 14px 28px;
-    border-bottom: 1px solid #F0EAE0; font-size: 14px; align-items: baseline;
-  }
+  .row { display: grid; grid-template-columns: 200px 1fr; padding: 14px 28px; border-bottom: 1px solid #F0EAE0; font-size: 14px; align-items: baseline; }
   .row:last-child { border-bottom: none; }
   .row .k { color: var(--slate); text-transform: uppercase; font-size: 11px; letter-spacing: 1.5px; font-weight: 600; }
   .row .v { color: var(--navy); }
-  .row .v.mono { font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
-  .badge {
-    display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px;
-    font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-  }
+  .row .v.mono { font-family: "SF Mono", Menlo, monospace; font-size: 12px; word-break: break-all; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
   .badge-green { background: #E0F0DC; color: var(--forest); }
-  .badge-amber { background: #FFF3D6; color: #8B6914; }
-  .badge-copper { background: #FCE8E0; color: var(--copper); }
-  .badge-blue { background: #DCE9F1; color: #1C7293; }
+  .badge-amber { background: var(--amber-soft); color: #8B6914; }
+  .badge-copper { background: var(--copper-soft); color: var(--copper); }
+  .badge-blue { background: var(--teal-soft); color: var(--teal); }
+  .badge-red { background: #F8E0E0; color: var(--rust); }
 
-  .section-title {
-    margin-top: 28px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 3px;
-    font-size: 11px; font-weight: 700; color: var(--copper);
-  }
+  .verdict-card.s-mismatch, .verdict-card.s-lapsed { border-left-color: var(--amber); }
+  .verdict-card.s-mismatch .verdict-header, .verdict-card.s-lapsed .verdict-header { background: linear-gradient(to right, #FFF7E0, white); }
+  .verdict-card.s-mismatch .verdict-check, .verdict-card.s-lapsed .verdict-check { background: var(--amber); font-size: 36px; }
+  .verdict-card.s-unknown, .verdict-card.s-tampered { border-left-color: var(--rust); }
+  .verdict-card.s-unknown .verdict-header, .verdict-card.s-tampered .verdict-header { background: linear-gradient(to right, #FFE4DC, white); }
+  .verdict-card.s-unknown .verdict-check, .verdict-card.s-tampered .verdict-check { background: var(--rust); font-size: 36px; }
+  .verdict-card.s-corrected { border-left-color: var(--teal); }
+  .verdict-card.s-corrected .verdict-header { background: linear-gradient(to right, #E6F0F5, white); }
+  .verdict-card.s-corrected .verdict-check { background: var(--teal); font-size: 30px; }
+  .t-amber { color: #8B6914; } .t-rust { color: var(--rust); } .t-teal { color: var(--teal); }
+
+  .fraud-alert { background: var(--rust); color: white; border-radius: 8px; padding: 18px 24px; margin-top: 20px; display: flex; gap: 16px; align-items: start; }
+  .fraud-alert.warn { background: var(--amber); }
+  .fraud-alert.info { background: var(--teal); }
+  .fraud-alert .icon { font-size: 30px; flex-shrink: 0; line-height: 1; }
+  .fraud-alert .body { font-size: 14px; }
+  .fraud-alert .body h3 { margin-bottom: 4px; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
+  .fraud-alert .body code { background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
+  .diff { margin-top: 10px; background: rgba(255,255,255,.14); border-radius: 6px; padding: 10px 14px; font-family: "SF Mono", Menlo, monospace; font-size: 13px; }
+
+  .section-title { margin-top: 28px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 3px; font-size: 11px; font-weight: 700; color: var(--copper); display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
   .section-note { color: var(--slate); font-size: 13px; margin-bottom: 12px; }
+  .toggle { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: var(--slate); text-transform: none; letter-spacing: 0; font-weight: 600; cursor: pointer; }
+  .toggle input { accent-color: var(--copper); width: 16px; height: 16px; }
 
-  /* Chain of custody — now shows multiple SIGNED PARTIES */
   .chain { background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 8px 0; }
-  .chain-step {
-    display: grid; grid-template-columns: 44px 1fr 190px; padding: 16px 24px 16px 20px; gap: 14px;
-    border-bottom: 1px solid #F0EAE0; align-items: start; position: relative;
-  }
+  .chain-step { display: grid; grid-template-columns: 44px 1fr 190px; padding: 16px 24px 16px 20px; gap: 14px; border-bottom: 1px solid #F0EAE0; align-items: start; }
   .chain-step:last-child { border-bottom: none; }
-  .chain-step .num {
-    width: 34px; height: 34px; border-radius: 50%; background: var(--copper); color: white;
-    font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 2px;
-  }
-  .chain-step .party {
-    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
-    color: #1C7293; margin-bottom: 3px;
-  }
+  .chain-step.ghost { opacity: .55; }
+  .chain-step.degraded { background: #FFFBF0; }
+  .chain-step .num { width: 34px; height: 34px; border-radius: 50%; background: var(--copper); color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 2px; }
+  .chain-step.ghost .num { background: var(--ice); color: var(--slate); }
+  .chain-step .party { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--teal); margin-bottom: 3px; }
   .chain-step .step-title { font-weight: 700; color: var(--navy); font-size: 14px; }
   .chain-step .step-sub { color: var(--slate); font-size: 12px; margin-top: 4px; line-height: 1.5; }
-  .chain-step .xref {
-    display: inline-block; margin-top: 6px; font-size: 11px; font-family: "SF Mono", Menlo, monospace;
-    background: var(--copper-soft); color: var(--copper); padding: 2px 7px; border-radius: 4px;
-  }
-  .chain-step .xref::before { content: "🔗 "; font-family: inherit; }
+  .chain-step .xref { display: inline-block; margin-top: 6px; font-size: 11px; font-family: "SF Mono", Menlo, monospace; background: var(--copper-soft); color: var(--copper); padding: 2px 7px; border-radius: 4px; }
+  .chain-step .xref::before { content: "🔗 "; }
   .chain-step .step-meta { text-align: right; font-size: 12px; color: var(--slate); font-family: "SF Mono", Menlo, monospace; }
   .chain-step .signed { color: var(--forest); font-weight: 600; }
+  .chain-step .attested { color: #8B6914; font-weight: 600; }
+  .chain-step .pending { color: var(--slate); font-weight: 600; }
 
-  .chemistry, .mech { background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 20px 28px; }
+  .chemistry, .mech, .panel { background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 20px 28px; }
   .chem-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--ice); border-radius: 6px; overflow: hidden; }
   .chem-cell { background: white; padding: 12px 6px; text-align: center; }
   .chem-cell .elem { font-weight: 700; color: var(--navy); font-size: 14px; }
   .chem-cell .pct { font-size: 12px; color: var(--slate); font-family: "SF Mono", Menlo, monospace; margin-top: 2px; }
   .chem-cell.spec { background: #FAF6F0; }
   .chem-cell.spec .elem { color: var(--slate); font-weight: 500; font-size: 11px; }
-
-  .mech-row {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 80px; padding: 10px 0;
-    border-bottom: 1px solid #F0EAE0; font-size: 14px; align-items: center;
-  }
+  .mech-row { display: grid; grid-template-columns: 2fr 1fr 1fr 80px; padding: 10px 0; border-bottom: 1px solid #F0EAE0; font-size: 14px; align-items: center; }
   .mech-row:last-child { border-bottom: none; }
   .mech-row .label { color: var(--navy); font-weight: 600; }
   .mech-row .value { color: var(--navy); font-family: "SF Mono", Menlo, monospace; }
   .mech-row .req { color: var(--slate); font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
   .mech-row .pass { color: var(--forest); font-weight: 700; text-align: right; }
+  .mech-row .fail { color: var(--rust); font-weight: 700; text-align: right; }
+  .mech-row .changed { background: var(--teal-soft); border-radius: 4px; padding: 0 6px; }
 
-  .compare {
-    background: var(--navy); color: var(--cream); margin-top: 28px; border-radius: 12px;
-    padding: 20px 28px; display: flex; align-items: center; justify-content: space-between;
-  }
+  .compare { background: var(--navy); color: var(--cream); margin-top: 28px; border-radius: 12px; padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .compare .desc { font-size: 14px; }
   .compare .desc strong { color: var(--gold); }
-  .compare button {
-    background: var(--copper); color: white; border: none; padding: 10px 20px; border-radius: 6px;
-    font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; font-family: inherit;
-  }
-  .compare button:hover { background: #B03E26; }
-  .compare button:disabled { background: #8a3320; cursor: wait; }
+  .compare .form { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .compare input { padding: 9px 12px; border-radius: 6px; border: 1px solid var(--ice); font-family: "SF Mono", Menlo, monospace; font-size: 13px; width: 120px; }
+  .btn { background: var(--copper); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; font-family: inherit; }
+  .btn:hover { background: #B03E26; }
+  .btn:disabled { background: #8a3320; cursor: wait; }
+  .btn.ghost { background: transparent; border: 1px solid var(--gold); color: var(--gold); }
+  .btn.ghost:hover { background: rgba(212,162,76,.15); }
 
-  .anchor-block {
-    background: white; border-radius: 12px; box-shadow: var(--shadow); padding: 16px 28px; margin-top: 28px;
-    font-size: 12px; color: var(--slate); font-family: "SF Mono", Menlo, monospace; border-left: 4px solid var(--gold);
-  }
-  .anchor-block .label {
-    display: inline-block; width: 130px; color: var(--copper); font-weight: 700;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 10px;
-  }
+  .public { margin-top: 28px; border-left: 4px solid var(--gold); }
+  .public h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--copper); margin-bottom: 10px; }
+  .public .kv { display: grid; grid-template-columns: 150px 1fr; gap: 6px 12px; font-size: 12px; font-family: "SF Mono", Menlo, monospace; color: var(--slate); }
+  .public .kv .k { color: var(--copper); font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, sans-serif; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+  .public .kv .v { word-break: break-all; color: var(--navy); }
+  .public details { margin-top: 12px; font-size: 13px; color: var(--slate); }
+  .public summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+  .public ol { padding-left: 20px; margin-top: 8px; display: grid; gap: 6px; }
+  .public code { font-family: "SF Mono", Menlo, monospace; background: var(--ice-soft); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .public .spoof { margin-top: 12px; background: var(--amber-soft); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #6B4F0A; }
+  .public .spoof strong { color: #4A3607; }
 
   .footer { margin-top: 32px; text-align: center; color: var(--slate); font-size: 12px; font-style: italic; }
   .footer .mock { color: var(--copper); font-weight: 700; font-style: normal; text-transform: uppercase; letter-spacing: 2px; font-size: 10px; }
 
-  /* State toggle bar */
-  .state-bar {
-    background: #2a1a05; color: var(--cream); padding: 10px 24px; border-bottom: 2px solid var(--gold);
-    display: flex; gap: 8px; align-items: center; font-size: 12px; flex-wrap: wrap;
-  }
+  .state-bar { background: #2a1a05; color: var(--cream); padding: 10px 24px; border-bottom: 2px solid var(--gold); display: flex; gap: 8px; align-items: center; font-size: 12px; flex-wrap: wrap; }
   .state-bar .lbl { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 10px; margin-right: 8px; font-weight: 700; }
-  .state-bar a { color: var(--cream); text-decoration: none; padding: 6px 12px; border-radius: 4px; background: rgba(255,255,255,0.08); font-weight: 600; }
-  .state-bar a:hover { background: rgba(255,255,255,0.15); }
+  .state-bar a, .state-bar button { color: var(--cream); text-decoration: none; padding: 6px 12px; border-radius: 4px; background: rgba(255,255,255,0.08); font-weight: 600; border: none; font-family: inherit; font-size: 12px; cursor: pointer; }
+  .state-bar a:hover, .state-bar button:hover { background: rgba(255,255,255,0.15); }
   .state-bar a.active { background: var(--copper); color: white; }
   .state-bar .demo { margin-left: auto; color: var(--gold); font-style: italic; font-size: 11px; }
+  .state-bar.live { background: #0E2B1C; border-bottom-color: #6CC08B; }
+  .state-bar.live .lbl { color: #9FD9BC; }
 
-  .verdict-card.state-mismatch { border-left-color: #B8860B; }
-  .verdict-card.state-mismatch .verdict-header { background: linear-gradient(to right, #FFF7E0, white); }
-  .verdict-card.state-mismatch .verdict-check { background: #B8860B; font-size: 36px; }
-  .verdict-card.state-unknown { border-left-color: var(--rust); }
-  .verdict-card.state-unknown .verdict-header { background: linear-gradient(to right, #FFE4DC, white); }
-  .verdict-card.state-unknown .verdict-check { background: var(--rust); color: white; font-size: 36px; }
-  .verdict-card.state-lapsed { border-left-color: #B8860B; }
-  .verdict-card.state-lapsed .verdict-header { background: linear-gradient(to right, #FFF7E0, white); }
-  .verdict-card.state-lapsed .verdict-check { background: #B8860B; font-size: 36px; }
-
-  .fraud-alert {
-    background: var(--rust); color: white; border-radius: 8px; padding: 18px 24px; margin-top: 20px;
-    display: flex; gap: 16px; align-items: start;
-  }
-  .fraud-alert.warn { background: #B8860B; }
-  .fraud-alert .icon { font-size: 30px; flex-shrink: 0; line-height: 1; }
-  .fraud-alert .body { font-size: 14px; }
-  .fraud-alert .body h3 { margin-bottom: 4px; font-size: 16px; text-transform: uppercase; letter-spacing: 2px; }
-  .fraud-alert .body code { background: rgba(0,0,0,0.25); padding: 1px 6px; border-radius: 3px; font-family: "SF Mono", Menlo, monospace; font-size: 12px; }
-
-  body[data-state="verified"] .only-mismatch,
-  body[data-state="verified"] .only-unknown,
-  body[data-state="verified"] .only-lapsed { display: none !important; }
-  body[data-state="mismatch"] .only-verified,
-  body[data-state="mismatch"] .only-unknown,
-  body[data-state="mismatch"] .only-lapsed { display: none !important; }
-  body[data-state="unknown"] .only-verified,
-  body[data-state="unknown"] .only-mismatch,
-  body[data-state="unknown"] .only-lapsed,
-  body[data-state="unknown"] .chain,
-  body[data-state="unknown"] .chemistry,
-  body[data-state="unknown"] .mech,
-  body[data-state="unknown"] .compare,
-  body[data-state="unknown"] .anchor-block,
-  body[data-state="unknown"] .section-title,
-  body[data-state="unknown"] .section-note { display: none !important; }
-  body[data-state="lapsed"] .only-verified,
-  body[data-state="lapsed"] .only-mismatch,
-  body[data-state="lapsed"] .only-unknown { display: none !important; }
-  body[data-state="lapsed"] .chain-step.htstep .badge { background: #F8E0E0; color: var(--rust); }
-
-  .scan-overlay {
-    position: fixed; inset: 0; background: rgba(10, 31, 68, 0.92);
-    display: flex; align-items: center; justify-content: center; z-index: 9999;
-    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
-  }
+  .scan-overlay { position: fixed; inset: 0; background: rgba(10, 31, 68, 0.92); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; padding: 20px; }
   .scan-overlay.on { opacity: 1; pointer-events: auto; }
-  .scan-box {
-    background: white; border-radius: 12px; padding: 36px 44px; text-align: center; max-width: 440px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-top: 4px solid var(--copper);
-  }
-  .scan-spinner {
-    width: 44px; height: 44px; border: 4px solid var(--ice); border-top-color: var(--copper);
-    border-radius: 50%; margin: 0 auto 18px; animation: spin 0.9s linear infinite;
-  }
+  .scan-box { background: white; border-radius: 12px; padding: 36px 44px; text-align: center; max-width: 440px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-top: 4px solid var(--copper); }
+  .scan-spinner { width: 44px; height: 44px; border: 4px solid var(--ice); border-top-color: var(--copper); border-radius: 50%; margin: 0 auto 18px; animation: spin 0.9s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .scan-title { font-weight: 700; color: var(--navy); font-size: 16px; margin-bottom: 6px; }
   .scan-step { color: var(--slate); font-size: 13px; min-height: 18px; font-family: "SF Mono", Menlo, monospace; }
-  .reset-link {
-    display: inline-block; margin-top: 14px; font-size: 12px; color: var(--copper);
-    text-decoration: underline; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 8px;
-  }
+  .reset-link { display: inline-block; margin-top: 14px; font-size: 12px; color: white; text-decoration: underline; background: none; border: none; cursor: pointer; font-family: inherit; padding: 4px 0; }
 
-  /* Fair Sky quarter-sun lockup (brand pass 2026-10-16) */
   .brand{display:inline-flex;align-items:center;gap:.45em;letter-spacing:-0.02em !important;font-weight:800 !important;text-transform:none !important;}
   .brand .qsun{height:1.02em;width:1.02em;display:block;flex:none;}
   .brand .fs{color:inherit !important;letter-spacing:-0.02em;}
-  .brand .net{font-weight:600;letter-spacing:.42em;font-size:.52em;color:#D4A24C;margin-left:.55em;transform:translateY(.08em);}
+
+  @media (max-width: 640px) {
+    .container { padding: 0 14px; }
+    .row { grid-template-columns: 1fr; gap: 2px; padding: 12px 18px; }
+    .verdict-header { padding: 18px; }
+    .verdict-title { font-size: 20px; }
+    .chain-step { grid-template-columns: 34px 1fr; padding: 14px 16px; }
+    .chain-step .num { width: 28px; height: 28px; font-size: 12px; }
+    .chain-step .step-meta { grid-column: 2; text-align: left; margin-top: 4px; }
+    .chem-grid { grid-template-columns: repeat(3, 1fr); }
+    .chemistry, .mech, .panel { padding: 16px 18px; }
+    .mech-row { grid-template-columns: 1.4fr 1fr 1fr 60px; font-size: 13px; }
+    .public .kv { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
-<body data-state="verified">
+<body>
 
-<!-- MOCKUP-ONLY state toggle. Remove for production. -->
-<div class="state-bar">
-  <span class="lbl">DEMO STATE</span>
-  <a href="?state=verified" data-state-link="verified" class="active">✓ Verified</a>
-  <a href="?state=mismatch" data-state-link="mismatch">⚠ Paper Mismatch</a>
-  <a href="?state=unknown" data-state-link="unknown">✗ Unknown Issuer</a>
-  <a href="?state=lapsed" data-state-link="lapsed">⚠ Sub-tier Lapsed</a>
-  <span class="demo">Click to see what the inspector sees in each scenario</span>
-</div>
+<div class="state-bar" id="state-bar"></div>
 
 <div class="top-bar">
   <div class="brand"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg><span class="fs">FairSky</span></div>
-  <div class="url">verify.fairskynetwork.com / cert / EF-2026-D2941</div>
+  <div class="url" id="url-line">verify.fairskynetwork.com / cert / …</div>
 </div>
 
-<div class="container">
-
-  <!-- VERIFIED -->
-  <div class="verdict-card only-verified">
-    <div class="verdict-header">
-      <div class="verdict-check">✓</div>
-      <div>
-        <div class="verdict-title">Verified Credential</div>
-        <div class="verdict-sub">Eastern Forge Works composite forging credential · 5 signed parties · all cross-references matched</div>
-      </div>
-    </div>
-    <div class="verdict-body">
-      <div class="row">
-        <div class="k">Product</div>
-        <div class="v"><strong>Inconel 625 Flange Forging</strong> · Drawing 745-1502-3 · Ø200 × 144 mm · 19 pcs</div>
-      </div>
-      <div class="row">
-        <div class="k">Issued by</div>
-        <div class="v"><strong>Eastern Forge Works Co., Ltd.</strong>&nbsp;<span class="badge badge-green">Verified Supplier · AS9100</span></div>
-      </div>
-      <div class="row">
-        <div class="k">For customer</div>
-        <div class="v">[Tier-1 · Connecticut] · PO LYG0305CG20230677</div>
-      </div>
-      <div class="row">
-        <div class="k">Specification</div>
-        <div class="v">AMS 5666K · UNS N06625 · AMS-STD-2154 Rev E (ultrasonic)</div>
-      </div>
-      <div class="row">
-        <div class="k">Credential ID</div>
-        <div class="v mono">EF-2026-D2941 &nbsp;·&nbsp; anchored 2026-04-25</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MISMATCH -->
-  <div class="verdict-card state-mismatch only-mismatch">
-    <div class="verdict-header">
-      <div class="verdict-check">⚠</div>
-      <div>
-        <div class="verdict-title" style="color:#8B6914;">Paper does NOT match the signed credential</div>
-        <div class="verdict-sub">The QR points to a real, signed credential — but the PDF you scanned was altered after signing.</div>
-      </div>
-    </div>
-    <div class="verdict-body">
-      <div class="row"><div class="k">Credential ID</div><div class="v mono">EF-2026-D2941 — exists ✓</div></div>
-      <div class="row"><div class="k">Signed by</div><div class="v">Eastern Forge Works Co., Ltd. — registered supplier ✓</div></div>
-      <div class="row"><div class="k">Mismatch found</div>
-        <div class="v" style="color:#8B6914;font-weight:600;">Field <code style="background:#FFF3D6;padding:1px 5px;border-radius:3px;font-family:'SF Mono',monospace;">Tensile</code> on paper = <strong>1,010 MPa</strong> · on signed credential = <strong>910 MPa</strong></div>
-      </div>
-      <div class="row"><div class="k">Hash check</div>
-        <div class="v mono" style="color:var(--rust);">paper SHA-256 <strong>0x9f2c…</strong> ≠ credential SHA-256 <strong>0x4a7b…</strong></div>
-      </div>
-    </div>
-    <div class="fraud-alert warn">
-      <div class="icon">⚠</div>
-      <div class="body">
-        <h3>What to do</h3>
-        Trust the credential, not the paper. If the printed cert shows a property the signed record doesn't, the PDF was edited after Eastern Forge Works signed it. Escalate to supplier quality; do not release the material.
-        <button class="reset-link" onclick="window.location.href='?state=verified'">← Reset demo to clean credential</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- UNKNOWN -->
-  <div class="verdict-card state-unknown only-unknown">
-    <div class="verdict-header">
-      <div class="verdict-check">✗</div>
-      <div>
-        <div class="verdict-title" style="color:var(--rust);">No credential found for this QR</div>
-        <div class="verdict-sub">The QR code points to a credential ID that does not exist in the registry.</div>
-      </div>
-    </div>
-    <div class="verdict-body">
-      <div class="row"><div class="k">Scanned ID</div><div class="v mono">EF-2026-D2941</div></div>
-      <div class="row"><div class="k">Search result</div><div class="v" style="color:var(--rust);font-weight:600;">No matching credential. No signature anchored on Ethereum.</div></div>
-      <div class="row"><div class="k">Possible causes</div>
-        <div class="v"><ol style="padding-left:20px;margin:0;">
-          <li>The QR was photoshopped onto a counterfeit paper cert. Most common pattern.</li>
-          <li>The supplier issued the cert under a different ID. Ask them to re-send.</li>
-          <li>The supplier is not yet a registered Fair Sky Network issuer. Confirm directly.</li>
-        </ol></div>
-      </div>
-    </div>
-    <div class="fraud-alert">
-      <div class="icon">✗</div>
-      <div class="body">
-        <h3>Do not release the material</h3>
-        Treat as suspect until you verify with the supplier through a separate channel (phone, not email). If they confirm they did not issue this credential, file an FAA SUP report (AC 21-29D) and notify your counterfeit-prevention lead.
-      </div>
-    </div>
-  </div>
-
-  <!-- LAPSED -->
-  <div class="verdict-card state-lapsed only-lapsed">
-    <div class="verdict-header">
-      <div class="verdict-check">⚠</div>
-      <div>
-        <div class="verdict-title" style="color:#8B6914;">Verified — but sub-tier accreditation lapsed</div>
-        <div class="verdict-sub">The credential is authentic. One sub-tier processor's accreditation had expired at the time of work.</div>
-      </div>
-    </div>
-    <div class="verdict-body">
-      <div class="row"><div class="k">Credential</div><div class="v"><strong>Inconel 625 Flange Forging</strong> · EF-2026-D2941</div></div>
-      <div class="row"><div class="k">Lapsed sub-tier</div>
-        <div class="v" style="color:#8B6914;font-weight:600;">Jiangsu Precision Heat Treatment — Nadcap MTL #1234 expired <strong>2026-03-15</strong> (heat treat performed 2026-04-24)</div>
-      </div>
-      <div class="row"><div class="k">Other chain links</div><div class="v">Melt, bar, forge, NDT lab, final — all signed by valid issuers ✓</div></div>
-    </div>
-    <div class="fraud-alert warn">
-      <div class="icon">⚠</div>
-      <div class="body">
-        <h3>Decision required</h3>
-        The material may still be in spec — the cycle data is recorded and inspectable. The question is whether your engineering and supplier-quality groups accept material processed at a shop whose Nadcap accreditation had lapsed. Check your receiving spec.
-      </div>
-    </div>
-  </div>
-
-  <!-- CHAIN OF CUSTODY -->
-  <div class="section-title">Chain of Custody · 5 signed parties</div>
-  <div class="section-note">Each step is signed by the party who performed it. The <span style="color:var(--copper);font-weight:600;">🔗 links</span> are the heat and cert numbers that used to be re-typed by hand across separate PDFs — now matched automatically.</div>
-
-  <div class="chain">
-
-    <div class="chain-step">
-      <div class="num">1</div>
-      <div>
-        <div class="party">Melt &amp; bar mill</div>
-        <div class="step-title">Precision Alloy Mill — Inconel 625 bar</div>
-        <div class="step-sub">Ø200 mm hot-finished forging-quality round · VIM + ESR melt · Cast PA-XK5912 · grain size ASTM 9.0 · per AMS 5666 / UNS N06625</div>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-03-21<br>Cast PA-XK5912</div>
-    </div>
-
-    <div class="chain-step">
-      <div class="num">2</div>
-      <div>
-        <div class="party">Forge · incoming</div>
-        <div class="step-title">Eastern Forge Works — bar received &amp; cut</div>
-        <div class="step-sub">Incoming inspection, positive material ID, cut to slug. Linked to the parent bar credential.</div>
-        <span class="xref">parent cast = PA-XK5912 ✓ matched</span>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-04-20<br>Op. Wei Liu</div>
-    </div>
-
-    <div class="chain-step">
-      <div class="num">3</div>
-      <div>
-        <div class="party">Forge · press</div>
-        <div class="step-title">Eastern Forge Works — flange forged</div>
-        <div class="step-sub">Near-net flange forged, drawing 745-1502-3. Ingot sections 1C2719-1/-2 … 1C2728-1/-2.</div>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-04-22<br>Op. Chen Bao</div>
-    </div>
-
-    <div class="chain-step htstep">
-      <div class="num">4</div>
-      <div>
-        <div class="party">Sub-tier · heat treat</div>
-        <div class="step-title">Jiangsu Precision Heat Treatment</div>
-        <div class="step-sub">Annealed per AMS 5666K. &nbsp;<span class="badge badge-green">Nadcap MTL #1234 · current</span><br>Heat-treat lot HT-98111.</div>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-04-24<br>Op. Sun Hai</div>
-    </div>
-
-    <div class="chain-step">
-      <div class="num">5</div>
-      <div>
-        <div class="party">Independent lab · Nadcap</div>
-        <div class="step-title">RTI Testing (Shanghai) — NDT &amp; metallurgical</div>
-        <div class="step-sub">Tensile ASTM E8, macro ASTM E340, micro ASTM E407/E112 (grain ASTM 7.5), Brinell ASTM E10, ultrasonic AMS-STD-2154. Nadcap accredited, CNAS L13036.</div>
-        <span class="xref">test report FF-2024W318 ✓ matched</span>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-04-25<br>Report FF-2024W318</div>
-    </div>
-
-    <div class="chain-step">
-      <div class="num">6</div>
-      <div>
-        <div class="party">Final · certificate of conformance</div>
-        <div class="step-title">Eastern Forge Works QA — composite credential issued</div>
-        <div class="step-sub">All prior steps verified and linked. Dimensional + visual acceptable. Hardness HB 230–246.</div>
-      </div>
-      <div class="step-meta"><span class="signed">✓ signed</span><br>2026-04-25<br>Sun Mei (QA Mgr)</div>
-    </div>
-
-  </div>
-
-  <!-- CHEMISTRY -->
-  <div class="section-title">Inconel 625 Chemistry — parent cast PA-XK5912</div>
-  <div class="chemistry">
-    <div class="chem-grid">
-      <div class="chem-cell"><div class="elem">Ni</div><div class="pct">61.6%</div></div>
-      <div class="chem-cell"><div class="elem">Cr</div><div class="pct">22.1%</div></div>
-      <div class="chem-cell"><div class="elem">Mo</div><div class="pct">8.71%</div></div>
-      <div class="chem-cell"><div class="elem">Nb</div><div class="pct">3.46%</div></div>
-      <div class="chem-cell"><div class="elem">Fe</div><div class="pct">3.61%</div></div>
-      <div class="chem-cell"><div class="elem">Co</div><div class="pct">0.10%</div></div>
-      <div class="chem-cell spec"><div class="elem">bal</div><div class="pct">spec</div></div>
-      <div class="chem-cell spec"><div class="elem">20–23</div><div class="pct">spec</div></div>
-      <div class="chem-cell spec"><div class="elem">8–10</div><div class="pct">spec</div></div>
-      <div class="chem-cell spec"><div class="elem">3.15–4.15</div><div class="pct">spec</div></div>
-      <div class="chem-cell spec"><div class="elem">≤5.0</div><div class="pct">spec</div></div>
-      <div class="chem-cell spec"><div class="elem">≤1.0</div><div class="pct">spec</div></div>
-    </div>
-  </div>
-
-  <!-- MECHANICALS -->
-  <div class="section-title">Mechanical Properties — post heat-treat, per RTI test FF-2024W318</div>
-  <div class="mech">
-    <div class="mech-row"><div class="label">Ultimate Tensile Strength</div><div class="value">910 MPa</div><div class="req">min 827</div><div class="pass">PASS</div></div>
-    <div class="mech-row"><div class="label">0.2% Yield Strength</div><div class="value">447 MPa</div><div class="req">min 414</div><div class="pass">PASS</div></div>
-    <div class="mech-row"><div class="label">Elongation (4D)</div><div class="value">56%</div><div class="req">min 30</div><div class="pass">PASS</div></div>
-    <div class="mech-row"><div class="label">Brinell Hardness</div><div class="value">223 HBW</div><div class="req">≤ 287</div><div class="pass">PASS</div></div>
-    <div class="mech-row"><div class="label">Grain size (ASTM E112)</div><div class="value">7.5</div><div class="req">≥ 5</div><div class="pass">PASS</div></div>
-  </div>
-
-  <!-- COMPARE -->
-  <div class="compare">
-    <div class="desc"><strong>Holding the paper cert?</strong><br>Compare its hash to the credential to confirm the PDF wasn't edited.</div>
-    <button id="compare-btn" type="button">Compare to Paper</button>
-  </div>
-
-  <!-- ANCHOR -->
-  <div class="anchor-block">
-    <div><span class="label">Anchored on</span>Ethereum Mainnet · Block 22,931,847 · 2026-04-25 17:00 HKT</div>
-    <div><span class="label">Merkle root</span>0x4a7b9c1e2f6a8b4d3c5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c</div>
-    <div><span class="label">Signing key</span>did:ethr:0x73c8a…f291 · Eastern Forge Works Co., Ltd.</div>
-    <div><span class="label">Schema</span>SAE AS6174 · v1.2 · W3C Verifiable Credential</div>
-  </div>
-
-  <div class="footer">
-    <div class="mock">Mockup · synthetic identifiers · modeled on real aerospace certificates</div>
-    <br>verify.fairskynetwork.com · Free for buyers · Always
-  </div>
-
-</div>
+<div class="container" id="app"></div>
 
 <div class="scan-overlay" id="scan-overlay">
   <div class="scan-box">
@@ -489,39 +175,278 @@
   </div>
 </div>
 
+<script src="demo-crypto.js"></script>
 <script>
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var state = params.get('state') || 'verified';
-    var valid = ['verified', 'mismatch', 'unknown', 'lapsed'];
-    if (valid.indexOf(state) === -1) state = 'verified';
-    document.body.setAttribute('data-state', state);
-    var links = document.querySelectorAll('.state-bar a[data-state-link]');
-    for (var i = 0; i < links.length; i++) {
-      links[i].classList.toggle('active', links[i].getAttribute('data-state-link') === state);
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  // ---------- the guided (synthetic) forging credential ----------
+  var DEMO = {
+    id: 'EF-2026-D2941', issuerDid: 'did:fsn:eastern-forge-works',
+    product: 'Inconel 625 Flange Forging', drawing: '745-1502-3', dims: 'Ø200 × 144 mm · 19 pcs',
+    customer: 'Tier-1 · Connecticut', po: 'PO 20230677', spec: 'AMS 5666K · UNS N06625 · AMS-STD-2154 Rev E (ultrasonic)',
+    anchoredOn: '2026-04-25', cast: 'PA-XK5912', labReport: 'RT-2024W318',
+    chem: [['Ni', '61.6%', 'bal'], ['Cr', '22.1%', '20–23'], ['Mo', '8.71%', '8–10'], ['Nb', '3.46%', '3.15–4.15'], ['Fe', '3.61%', '≤5.0'], ['Co', '0.10%', '≤1.0']],
+    mech: [['Ultimate Tensile Strength', '910 MPa', 'min 827'], ['0.2% Yield Strength', '447 MPa', 'min 414'], ['Elongation (4D)', '56%', 'min 30'], ['Brinell Hardness', '223 HBW', '≤ 287'], ['Grain size (ASTM E112)', '7.5', '≥ 5']]
+  };
+  var DEMO_STATES = [['verified', '✓ Verified'], ['mismatch', '⚠ Paper Mismatch'], ['unknown', '✗ Unknown Issuer'], ['lapsed', '⚠ Sub-tier Lapsed'], ['corrected', '↻ Corrected']];
+
+  var state = { mode: 'demo', s: 'verified', degraded: false, payload: null, valid: false, hash: '', root: '', mismatch: null };
+
+  // ---------- rendering ----------
+  function stateBar() {
+    var bar = $('state-bar');
+    if (state.mode === 'live') {
+      bar.className = 'state-bar live';
+      bar.innerHTML = '<span class="lbl">Live credential · signed in a browser</span>' +
+        '<button type="button" id="b-tamper">✎ Tamper with this record</button>' +
+        '<button type="button" id="b-paper">⇄ Compare to paper</button>' +
+        '<a href="buyer-verify.html">← Guided demo</a>' +
+        '<span class="demo">Everything checked here is real math, in your browser</span>';
+      $('b-tamper').addEventListener('click', tamper);
+      $('b-paper').addEventListener('click', function () { var el = $('paper-input'); if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.focus(); } });
+    } else {
+      bar.className = 'state-bar';
+      bar.innerHTML = '<span class="lbl">Demo state</span>' + DEMO_STATES.map(function (p) {
+        return '<a href="?state=' + p[0] + '" class="' + (state.s === p[0] ? 'active' : '') + '">' + p[1] + '</a>';
+      }).join('') + '<span class="demo">Click to see what the inspector sees · or <a href="supplier-portal.html" style="background:none;padding:0;color:var(--gold);text-decoration:underline">issue your own</a></span>';
     }
-  })();
+  }
 
-  (function () {
-    var btn = document.getElementById('compare-btn');
-    if (!btn) return;
-    var overlay = document.getElementById('scan-overlay');
-    var step = document.getElementById('scan-step');
-    var sequence = [
-      { at: 0,    msg: 'Reading PDF…' },
-      { at: 400,  msg: 'Extracting chemistry and mechanicals (OCR)…' },
-      { at: 850,  msg: 'Computing SHA-256 of normalized fields…' },
-      { at: 1200, msg: 'Comparing to signed credential payload…' },
-      { at: 1600, msg: 'Mismatch detected — field Tensile differs by 100 MPa.' }
-    ];
-    btn.addEventListener('click', function () {
-      btn.disabled = true; btn.textContent = 'Comparing…';
-      overlay.classList.add('on');
-      sequence.forEach(function (s) { setTimeout(function () { step.textContent = s.msg; }, s.at); });
-      setTimeout(function () { window.location.href = '?state=mismatch'; }, 2100);
-    });
-  })();
+  function verdictDemo() {
+    var s = state.s, h = '';
+    if (s === 'verified') h = card('', '✓', 'Verified Credential', 'Eastern Forge Works composite forging credential · 5 signed parties · all cross-references matched', rowsVerified());
+    if (s === 'mismatch') h = card('s-mismatch', '⚠', '<span class="t-amber">Paper does NOT match the signed credential</span>', 'The QR points to a real, signed credential — but the PDF you scanned was altered after signing.',
+      row('Credential ID', '<span class="mono">EF-2026-D2941 — exists ✓</span>') + row('Signed by', 'Eastern Forge Works Co., Ltd. — registered supplier ✓') +
+      row('Mismatch found', '<span class="t-amber" style="font-weight:600">Field <code>Tensile</code> on paper = <strong>1,010 MPa</strong> · on signed credential = <strong>910 MPa</strong></span>') +
+      row('Hash check', '<span class="mono t-rust">paper SHA-256 <strong>0x9f2c…</strong> ≠ credential SHA-256 <strong>0x4a7b…</strong></span>'),
+      alert('warn', '⚠', 'What to do', 'Trust the credential, not the paper. If the printed cert shows a property the signed record doesn\'t, the PDF was edited after Eastern Forge Works signed it. Escalate to supplier quality; do not release the material.<br><button class="reset-link" onclick="location.href=\'?state=verified\'">← Reset demo to clean credential</button>'));
+    if (s === 'unknown') h = card('s-unknown', '✗', '<span class="t-rust">No credential found for this QR</span>', 'The QR code points to a credential ID that does not exist in the registry.',
+      row('Scanned ID', '<span class="mono">EF-2026-D2941</span>') + row('Search result', '<span class="t-rust" style="font-weight:600">No matching credential. No signature anchored on the public ledger.</span>') +
+      row('Possible causes', '<ol style="padding-left:20px;margin:0"><li>The QR was photoshopped onto a counterfeit paper cert. Most common pattern.</li><li>The supplier issued the cert under a different ID. Ask them to re-send.</li><li>The supplier is not yet a registered Fair Sky Network issuer. Confirm directly.</li></ol>'),
+      alert('', '✗', 'Do not release the material', 'Treat as suspect until you verify with the supplier through a separate channel (phone, not email). If they confirm they did not issue this credential, file an FAA SUP report (AC 21-29D) and notify your counterfeit-prevention lead.'));
+    if (s === 'lapsed') h = card('s-lapsed', '⚠', '<span class="t-amber">Verified — but sub-tier accreditation lapsed</span>', 'The credential is authentic. One sub-tier processor\'s accreditation had expired at the time of work.',
+      row('Credential', '<strong>Inconel 625 Flange Forging</strong> · EF-2026-D2941') + row('Lapsed sub-tier', '<span class="t-amber" style="font-weight:600">Jiangsu Precision Heat Treatment — Nadcap MTL #1234 expired <strong>2026-03-15</strong> (heat treat performed 2026-04-24)</span>') + row('Other chain links', 'Melt, bar, forge, NDT lab, final — all signed by valid issuers ✓'),
+      alert('warn', '⚠', 'Decision required', 'The material may still be in spec — the cycle data is recorded and inspectable. The question is whether your engineering and supplier-quality groups accept material processed at a shop whose Nadcap accreditation had lapsed. Check your receiving spec.'));
+    if (s === 'corrected') h = card('s-corrected', '↻', '<span class="t-teal">Verified — version 2 (corrected)</span>', 'Authentic and current. The issuer superseded version 1 with a signed correction; the history is below, not hidden.',
+      rowsVerified() + row('Correction', '<span class="t-teal" style="font-weight:600">v1 → v2 · <code>Ultimate tensile</code> 901 → 910 MPa · reason: transcription error · re-signed Sun Mei (QA Mgr) · 2026-04-26</span>') + row('Version 1', '<span class="mono">still verifies · status: superseded · hash 0x2e81… remains in the 2026-04-25 public fingerprint</span>'),
+      alert('info', '↻', 'Why you see the history', 'Signed records are never edited — they are superseded. A paper certificate gets white-out; this gets an audit trail. If a printout still shows the old value, it is simply an earlier version: the QR resolves the credential ID, so it lands here, on the current version, with the diff in plain sight.'));
+    return h;
+  }
+  function rowsVerified() {
+    return row('Product', '<strong>' + DEMO.product + '</strong> · Drawing ' + DEMO.drawing + ' · ' + DEMO.dims) +
+      row('Issued by', '<strong>Eastern Forge Works Co., Ltd.</strong>&nbsp;<span class="badge badge-green">Verified Supplier · AS9100</span>') +
+      row('For customer', '[' + DEMO.customer + '] · ' + DEMO.po) + row('Specification', DEMO.spec) +
+      row('Credential ID', '<span class="mono">EF-2026-D2941 &nbsp;·&nbsp; anchored ' + DEMO.anchoredOn + '</span>');
+  }
+  function card(cls, mark, title, sub, rows, after) {
+    return '<div class="verdict-card ' + cls + '"><div class="verdict-header"><div class="verdict-check">' + mark + '</div><div><div class="verdict-title">' + title + '</div><div class="verdict-sub">' + sub + '</div></div></div><div class="verdict-body">' + rows + '</div>' + (after || '') + '</div>';
+  }
+  function row(k, v) { return '<div class="row"><div class="k">' + k + '</div><div class="v">' + v + '</div></div>'; }
+  function alert(cls, icon, h3, body) { return '<div class="fraud-alert ' + cls + '"><div class="icon">' + icon + '</div><div class="body"><h3>' + h3 + '</h3>' + body + '</div></div>'; }
+
+  function chainDemo() {
+    var lapsed = state.s === 'lapsed', deg = state.degraded;
+    var htBadge = lapsed ? '<span class="badge badge-red">Nadcap MTL #1234 · expired 2026-03-15</span>' : '<span class="badge badge-green">Nadcap MTL #1234 · current</span>';
+    var labStep = deg
+      ? step(5, 'Independent lab · not onboarded', 'RTI Testing (Shanghai) — report attached by Eastern Forge Works', 'Lab report ' + DEMO.labReport + ' attached as PDF; hashed and timestamped at attach time; attested by Sun Mei (QA Mgr). Accreditation checked automatically from public records: <span class="badge badge-green">Nadcap · CNAS L13036 · current</span>', '<span class="xref">report ' + DEMO.labReport + ' · hash 0x7d1e… attached</span>', '<span class="attested">⚠ attested</span><br>2026-04-25<br><span class="badge badge-amber">attested by issuer</span>', 'degraded')
+      : step(5, 'Independent lab · Nadcap', 'RTI Testing (Shanghai) — NDT &amp; metallurgical', 'Tensile ASTM E8, macro ASTM E340, micro ASTM E407/E112 (grain ASTM 7.5), Brinell ASTM E10, ultrasonic AMS-STD-2154. Nadcap accredited, CNAS L13036.', '<span class="xref">test report ' + DEMO.labReport + ' ✓ matched</span>', '<span class="signed">✓ signed</span><br>2026-04-25<br>Report ' + DEMO.labReport);
+    return '<div class="section-title"><span>Chain of custody · ' + (deg ? '4 signed parties + 1 attested' : '5 signed parties') + '</span>' +
+      '<label class="toggle"><input type="checkbox" id="deg-toggle"' + (deg ? ' checked' : '') + '> Degraded mode: the lab didn\'t sign</label></div>' +
+      '<div class="section-note">Each step is signed by the party who performed it. The <span style="color:var(--copper);font-weight:600">🔗 links</span> are the heat and cert numbers that used to be re-typed by hand across separate PDFs — now matched automatically.' +
+      (deg ? ' <strong>Degraded mode:</strong> one party didn\'t join. The chain never gets weaker than paper — the attached report is tamper-evident from the moment it was attached, and attributable to the named person who attached it. What changes: the lab row shows a lower assurance tier.' : '') + '</div>' +
+      '<div class="chain">' +
+      step(1, 'Melt &amp; bar mill', 'Precision Alloy Mill — Inconel 625 bar', 'Ø200 mm hot-finished forging-quality round · VIM + ESR melt · Cast ' + DEMO.cast + ' · grain size ASTM 9.0 · per AMS 5666 / UNS N06625', '', '<span class="signed">✓ signed</span><br>2026-03-21<br>Cast ' + DEMO.cast) +
+      step(2, 'Forge · incoming', 'Eastern Forge Works — bar received &amp; cut', 'Incoming inspection, positive material ID, cut to slug. Linked to the parent bar credential.', '<span class="xref">parent cast = ' + DEMO.cast + ' ✓ matched</span>', '<span class="signed">✓ signed</span><br>2026-04-20<br>Op. Wei Liu') +
+      step(3, 'Forge · press', 'Eastern Forge Works — flange forged', 'Near-net flange forged, drawing 745-1502-3. Ingot sections 1C2719-1/-2 … 1C2728-1/-2.', '', '<span class="signed">✓ signed</span><br>2026-04-22<br>Op. Chen Bao') +
+      step(4, 'Sub-tier · heat treat', 'Jiangsu Precision Heat Treatment', 'Annealed per AMS 5666K. &nbsp;' + htBadge + '<br>Heat-treat lot HT-98111.', '', '<span class="signed">✓ signed</span><br>2026-04-24<br>Op. Sun Hai') +
+      labStep +
+      step(6, 'Final · certificate of conformance', 'Eastern Forge Works QA — composite credential issued', 'All prior steps verified and linked. Dimensional + visual acceptable. Hardness HB 230–246.', '', '<span class="signed">✓ signed</span><br>2026-04-25<br>Sun Mei (QA Mgr)') +
+      '</div>';
+  }
+  function step(n, party, title, sub, xref, meta, cls) {
+    return '<div class="chain-step ' + (cls || '') + '"><div class="num">' + n + '</div><div><div class="party">' + party + '</div><div class="step-title">' + title + '</div><div class="step-sub">' + sub + '</div>' + xref + '</div><div class="step-meta">' + meta + '</div></div>';
+  }
+
+  function chemDemo() {
+    return '<div class="section-title"><span>Inconel 625 chemistry — parent cast ' + DEMO.cast + '</span></div><div class="chemistry"><div class="chem-grid">' +
+      DEMO.chem.map(function (c) { return '<div class="chem-cell"><div class="elem">' + c[0] + '</div><div class="pct">' + c[1] + '</div></div>'; }).join('') +
+      DEMO.chem.map(function (c) { return '<div class="chem-cell spec"><div class="elem">' + c[2] + '</div><div class="pct">spec</div></div>'; }).join('') + '</div></div>';
+  }
+  function mechDemo() {
+    var corrected = state.s === 'corrected';
+    return '<div class="section-title"><span>Mechanical properties — post heat-treat, per RTI test ' + DEMO.labReport + '</span></div><div class="mech">' +
+      DEMO.mech.map(function (m, i) {
+        var val = (corrected && i === 0) ? '<span class="changed">' + m[1] + '</span> <span style="font-size:11px;color:var(--teal)">(v1: 901)</span>' : m[1];
+        return '<div class="mech-row"><div class="label">' + m[0] + '</div><div class="value">' + val + '</div><div class="req">' + m[2] + '</div><div class="pass">PASS</div></div>';
+      }).join('') + '</div>';
+  }
+  function compareDemo() {
+    return '<div class="compare"><div class="desc"><strong>Holding the paper cert?</strong><br>Compare its hash to the credential to confirm the PDF wasn\'t edited.</div><button class="btn" id="compare-btn" type="button">Compare to Paper</button></div>';
+  }
+
+  // ---------- live credential rendering ----------
+  function verdictLive() {
+    var c = state.payload.c, reg = FSN.REGISTRY[c.issuer && c.issuer.did];
+    var idRow = row('Credential ID', '<span class="mono">' + esc(c.id) + ' · version ' + esc(c.version) + '</span>');
+    if (!reg) return card('s-unknown', '✗', '<span class="t-rust">Unknown issuer</span>', 'This record claims an issuer that is not in the public registry.', idRow + row('Claimed issuer', esc(c.issuer && c.issuer.name)) + row('Registry lookup', '<span class="t-rust" style="font-weight:600">No public key on file for ' + esc(c.issuer && c.issuer.did) + '</span>'),
+      alert('', '✗', 'Do not release the material', 'A record from an unregistered issuer carries no assurance. Confirm with the supplier through a separate channel.'));
+    if (!state.valid) return card('s-tampered', '✗', '<span class="t-rust">Signature invalid — this record was altered after signing</span>', 'The contents of this record do not match the signature ' + esc(reg.name) + ' produced. Something changed after the mill signed it.',
+      idRow + row('Claimed issuer', esc(reg.name) + ' — registered ✓') + row('Signature check', '<span class="t-rust mono" style="font-weight:600">ECDSA P-256 verify → FALSE</span>') + row('Record hash', '<span class="mono">' + state.hash.slice(0, 32) + '…</span>') + row('Shown values', 'Tensile <strong>' + esc(c.mech.uts) + ' MPa</strong> · Ni ' + esc(c.chem.Ni) + '% · Cr ' + esc(c.chem.Cr) + '% — <em>none of these can be trusted</em>'),
+      alert('', '✗', 'Edited paperwork — caught', 'This is fraud one from the gauntlet. Whoever changed the number could not re-sign it, because the mill\'s key never left the mill. The record is worthless; treat the material as suspect.' + (state.genuine ? '<br><button class="reset-link" id="untamper">← Restore the genuine record</button>' : '')));
+    if (state.mismatch) return card('s-mismatch', '⚠', '<span class="t-amber">Paper does NOT match the signed credential</span>', 'The signed record is authentic — but the value on your paper is different.',
+      idRow + row('Signed by', esc(reg.name) + ' · ' + esc(c.signer.name) + ' — registered ✓') + row('Mismatch found', '<span class="t-amber" style="font-weight:600">Field <code>Ultimate tensile</code> on paper = <strong>' + esc(state.mismatch.paper) + ' MPa</strong> · on signed credential = <strong>' + esc(state.mismatch.signed) + ' MPa</strong></span>'),
+      alert('warn', '⚠', 'Trust the record, not the paper', 'The PDF was edited after signing, or a different lot\'s paperwork was attached. Escalate to supplier quality; do not release.<br><button class="reset-link" id="unpaper">← Clear</button>'));
+    var corrected = !!c.supersedes;
+    var rows = row('Material', '<strong>' + esc(c.material) + '</strong>') + row('Cast / heat', '<span class="mono">' + esc(c.cast) + '</span> · ' + esc(c.lot) + ' · melt ' + esc(c.meltDate) + ' (' + esc(c.meltMethod) + ')') +
+      row('Issued by', '<strong>' + esc(reg.name) + '</strong>&nbsp;<span class="badge badge-green">Registered issuer · ' + reg.accreditation + '</span>') +
+      row('Signed by', esc(c.signer.name) + ' · ' + esc(c.signer.role) + ' · ' + esc((c.issuedAt || '').replace('T', ' ').slice(0, 16)) + ' UTC') + row('Customer PO', '<span class="mono">' + esc(c.po) + '</span>') + idRow;
+    if (corrected) {
+      var d = c.supersedes.diff[0];
+      var FL = { 'mech.uts': 'Ultimate tensile', 'mech.proof': '0.2% proof stress', 'mech.elong': 'Elongation', 'mech.hbw': 'Hardness', 'chem.Ni': 'Ni %', 'chem.Cr': 'Cr %', 'chem.Mo': 'Mo %', 'chem.Nb': 'Nb %', 'chem.Fe': 'Fe %', 'chem.Co': 'Co %', lot: 'Lot', po: 'Customer PO', meltDate: 'Melt date' };
+      rows += row('Correction', '<span class="t-teal" style="font-weight:600">v' + esc(c.supersedes.version) + ' → v' + esc(c.version) + ' · <code>' + esc(FL[d.field] || d.field) + '</code> ' + esc(d.from) + ' → ' + esc(d.to) + ' · reason: ' + esc(c.supersedes.reason) + ' · re-signed ' + esc(c.signer.name) + '</span>') +
+        row('Version ' + esc(c.supersedes.version), '<span class="mono">' + (state.prevValid ? 'still verifies ✓' : 'signature not included') + ' · status: superseded · hash ' + esc(c.supersedes.hash.slice(0, 16)) + '…</span>');
+      return card('s-corrected', '↻', '<span class="t-teal">Verified — version ' + esc(c.version) + ' (corrected)</span>', 'Signature valid. The issuer superseded an earlier version with a signed correction; the history is shown, not hidden.', rows,
+        alert('info', '↻', 'Supersede, never edit', 'A signed record is never modified. The issuer signed a new version that points at the old one with a field diff and a reason code. If a printout shows the old value, it\'s an earlier version — the QR lands here, on the current one.'));
+    }
+    return card('', '✓', 'Verified Credential', esc(reg.name) + ' mill test report · signature valid · issuer registered', rows);
+  }
+  function chainLive() {
+    var c = state.payload.c;
+    return '<div class="section-title"><span>Chain of custody · 1 signed party so far</span></div>' +
+      '<div class="section-note">This is a cast-level credential. When a forge issues its forging credential, its <em>parent cast</em> field will link here and the chain grows — no re-typing.</div><div class="chain">' +
+      step(1, 'Melt &amp; bar mill', esc(c.issuer.name) + ' — ' + esc(c.material.split(' (')[0]) + ' bar', esc(c.lot) + ' · ' + esc(c.meltMethod) + ' melt · Cast ' + esc(c.cast) + ' · instrument ' + esc(c.instrument), '', '<span class="signed">✓ signed</span><br>' + esc(c.meltDate) + '<br>' + esc(c.signer.name)) +
+      step(2, 'Forge · incoming', 'Downstream forging credential', 'Not yet issued. Its parent-cast field will resolve to <span class="mono">' + esc(c.cast) + '</span> and re-check this seal at that moment.', '<span class="xref">parent cast = ' + esc(c.cast) + ' · awaiting link</span>', '<span class="pending">· pending</span>', 'ghost') +
+      '</div>';
+  }
+  function chemLive() {
+    var ch = state.payload.c.chem, spec = { Ni: 'bal', Cr: '20–23', Mo: '8–10', Nb: '3.15–4.15', Fe: '≤5.0', Co: '≤1.0' };
+    var keys = ['Ni', 'Cr', 'Mo', 'Nb', 'Fe', 'Co'];
+    return '<div class="section-title"><span>Chemistry — cast ' + esc(state.payload.c.cast) + '</span></div><div class="chemistry"><div class="chem-grid">' +
+      keys.map(function (k) { return '<div class="chem-cell"><div class="elem">' + k + '</div><div class="pct">' + esc(ch[k]) + '%</div></div>'; }).join('') +
+      keys.map(function (k) { return '<div class="chem-cell spec"><div class="elem">' + spec[k] + '</div><div class="pct">spec</div></div>'; }).join('') + '</div></div>';
+  }
+  function mechLive() {
+    var m = state.payload.c.mech, c = state.payload.c;
+    var changed = c.supersedes ? c.supersedes.diff[0].field : '';
+    function r(label, key, val, unit, req, ok) {
+      var v = (changed === 'mech.' + key) ? '<span class="changed">' + esc(val) + unit + '</span> <span style="font-size:11px;color:var(--teal)">(v' + c.supersedes.version + ': ' + esc(c.supersedes.diff[0].from) + ')</span>' : esc(val) + unit;
+      return '<div class="mech-row"><div class="label">' + label + '</div><div class="value">' + v + '</div><div class="req">' + req + '</div><div class="' + (ok ? 'pass">PASS' : 'fail">FAIL') + '</div></div>';
+    }
+    return '<div class="section-title"><span>Mechanical properties — post heat-treat coupon</span></div><div class="mech">' +
+      r('Ultimate Tensile Strength', 'uts', m.uts, ' MPa', 'min 827', +m.uts >= 827) + r('0.2% Proof Stress', 'proof', m.proof, ' MPa', 'min 414', +m.proof >= 414) +
+      r('Elongation (4D)', 'elong', m.elong, '%', 'min 30', +m.elong >= 30) + r('Brinell Hardness', 'hbw', m.hbw, ' HBW', '≤ 287', +m.hbw <= 287) + '</div>';
+  }
+  function compareLive() {
+    return '<div class="compare"><div class="desc"><strong>Holding the paper cert?</strong><br>Type the tensile value printed on it. The verifier compares it, field by field, to what was signed.</div>' +
+      '<div class="form"><input id="paper-input" inputmode="decimal" placeholder="UTS on paper"><button class="btn" id="paper-btn" type="button">Compare</button></div></div>';
+  }
+
+  function publicRecord() {
+    var live = state.mode === 'live';
+    var hash = live ? state.hash : '4a7b9c1e2f6a8b4d3c5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c';
+    var root = live ? state.root : '0x4a7b9c1e2f6a8b4d3c5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c';
+    var issuer = live ? (FSN.REGISTRY[state.payload.c.issuer.did] || {}).name || 'unregistered' : 'Eastern Forge Works Co., Ltd.';
+    return '<div class="panel public"><h3>Verify against the public record</h3>' +
+      '<div class="kv">' +
+      '<div class="k">Record hash</div><div class="v">0x' + esc(hash) + '</div>' +
+      '<div class="k">Day root</div><div class="v">' + esc(root) + (live ? ' <span class="badge badge-amber">simulated</span>' : '') + '</div>' +
+      '<div class="k">Anchored</div><div class="v">' + (live ? 'Demo — in production: Ethereum mainnet, one transaction per day, sent from Hong Kong' : 'Ethereum Mainnet · Block 22,931,847 · 2026-04-25 17:00 HKT') + '</div>' +
+      '<div class="k">Issuer key</div><div class="v">' + esc(issuer) + ' · published registry · ECDSA P-256</div>' +
+      '<div class="k">Schema</div><div class="v">SAE AS6174-aligned · JWS over canonical JSON · W3C VC-compatible</div>' +
+      '</div>' +
+      '<details><summary>How to check this yourself, without trusting this page</summary><ol>' +
+      '<li>Take the record exactly as signed — the JSON inside the QR — and <strong>canonicalize</strong> it (sorted keys, no whitespace).</li>' +
+      '<li><strong>SHA-256</strong> it. You should get the record hash above. Any changed digit anywhere changes the whole hash.</li>' +
+      '<li>Verify the signature against the issuer\'s <strong>published public key</strong> (the registry is public; the verification code is open source).</li>' +
+      '<li>Confirm the hash is in the day\'s Merkle tree whose root sits on the <strong>public ledger</strong> — from any node, not from us.</li>' +
+      '</ol><p style="margin-top:8px">If this company disappeared tomorrow, steps 1–4 still work. That is the point.</p></details>' +
+      '<div class="spoof"><strong>Not at verify.fairskynetwork.com?</strong> Then you may be on a lookalike page. A lookalike can draw a green checkmark; it cannot make a forged record\'s hash match the public root or carry a signature from a registered key. Bookmark the real domain and check the hash — never trust where a printed QR sends you.</div></div>';
+  }
+
+  function footer() {
+    return '<div class="footer"><div class="mock">' + (state.mode === 'live' ? 'Interactive demo · real signatures · demo key · simulated anchor' : 'Guided demo · synthetic identifiers · modeled on real aerospace certificates') + '</div><br>verify.fairskynetwork.com · Free for buyers · Always</div>';
+  }
+
+  // ---------- compose ----------
+  function render() {
+    stateBar();
+    var app = $('app'), html = '';
+    if (state.mode === 'live') {
+      var c = state.payload.c;
+      $('url-line').textContent = 'verify.fairskynetwork.com / cert / ' + c.id;
+      document.title = 'verify.fairskynetwork.com · ' + c.id;
+      html = verdictLive();
+      var reg = FSN.REGISTRY[c.issuer && c.issuer.did];
+      if (reg && state.valid) html += chainLive() + chemLive() + mechLive() + compareLive();
+      html += publicRecord() + footer();
+    } else {
+      $('url-line').textContent = 'verify.fairskynetwork.com / cert / ' + DEMO.id;
+      document.title = 'verify.fairskynetwork.com · ' + DEMO.id;
+      html = verdictDemo();
+      if (state.s !== 'unknown') html += chainDemo() + chemDemo() + mechDemo() + compareDemo() + publicRecord();
+      html += footer();
+    }
+    app.innerHTML = html;
+    wire();
+  }
+
+  function wire() {
+    var t = $('deg-toggle'); if (t) t.addEventListener('change', function () { state.degraded = this.checked; render(); });
+    var cb = $('compare-btn'); if (cb) cb.addEventListener('click', scriptedCompare);
+    var pb = $('paper-btn'); if (pb) pb.addEventListener('click', paperCompare);
+    var pi = $('paper-input'); if (pi) pi.addEventListener('keydown', function (e) { if (e.key === 'Enter') paperCompare(); });
+    var un = $('untamper'); if (un) un.addEventListener('click', function () { location.hash = '#c=' + FSN.encodePayload(state.genuine); });
+    var up = $('unpaper'); if (up) up.addEventListener('click', function () { state.mismatch = null; render(); });
+  }
+
+  function scriptedCompare() {
+    var btn = $('compare-btn'); btn.disabled = true; btn.textContent = 'Comparing…';
+    var overlay = $('scan-overlay'), stepEl = $('scan-step');
+    overlay.classList.add('on');
+    [[0, 'Reading PDF…'], [400, 'Extracting chemistry and mechanicals (OCR)…'], [850, 'Computing SHA-256 of normalized fields…'], [1200, 'Comparing to signed credential payload…'], [1600, 'Mismatch detected — field Tensile differs by 100 MPa.']]
+      .forEach(function (s) { setTimeout(function () { stepEl.textContent = s[1]; }, s[0]); });
+    setTimeout(function () { location.href = '?state=mismatch'; }, 2100);
+  }
+  function paperCompare() {
+    var v = ($('paper-input').value || '').trim(); if (!v) return;
+    var signed = state.payload.c.mech.uts;
+    if (String(+v) === String(+signed)) { state.mismatch = null; render(); var pi = $('paper-input'); pi.value = v; pi.style.borderColor = '#6CC08B'; pi.placeholder = 'matches ✓'; setTimeout(function () { pi.value = ''; }, 1200); return; }
+    state.mismatch = { paper: v, signed: signed }; render(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function tamper() {
+    var p = JSON.parse(JSON.stringify(state.payload));
+    p.c.mech.uts = String((+p.c.mech.uts || 900) + 100); // the forger's edit — no re-sign possible without the mill's key
+    delete p.p;
+    location.hash = '#c=' + FSN.encodePayload(p);
+  }
+
+  // ---------- boot ----------
+  function boot() {
+    var payload = FSN.readPayloadFromHash();
+    if (payload && payload.c && payload.s) {
+      state.mode = 'live'; state.payload = payload; state.mismatch = null;
+      var reg = FSN.REGISTRY[payload.c.issuer && payload.c.issuer.did];
+      Promise.all([
+        FSN.verify(payload.c, payload.s, reg && reg.pub),
+        FSN.credentialHash(payload.c),
+        payload.p ? FSN.verify(payload.p.c, payload.p.s, reg && reg.pub) : Promise.resolve(false)
+      ]).then(function (r) {
+        state.valid = r[0]; state.hash = r[1]; state.prevValid = r[2];
+        if (state.valid) state.genuine = payload;
+        return FSN.dayRoot(r[1]);
+      }).then(function (root) { state.root = root; render(); });
+    } else {
+      state.mode = 'demo';
+      var s = new URLSearchParams(location.search).get('state') || 'verified';
+      state.s = DEMO_STATES.some(function (p) { return p[0] === s; }) ? s : 'verified';
+      render();
+    }
+  }
+  window.addEventListener('hashchange', boot);
+  boot();
+})();
 </script>
-
 </body>
 </html>
