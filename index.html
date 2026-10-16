@@ -142,6 +142,12 @@
     .brand { font-size: 32px; letter-spacing: 6px; }
     .grid { grid-template-columns: 1fr; }
   }
+
+  /* Fair Sky quarter-sun lockup (brand pass 2026-10-16) */
+  .brand{display:inline-flex;align-items:center;gap:.45em;letter-spacing:-0.02em !important;font-weight:800 !important;text-transform:none !important;}
+  .brand .qsun{height:1.02em;width:1.02em;display:block;flex:none;}
+  .brand .fs{color:inherit !important;letter-spacing:-0.02em;}
+  .brand .net{font-weight:600;letter-spacing:.42em;font-size:.52em;color:#D4A24C;margin-left:.55em;transform:translateY(.08em);}
 </style>
 </head>
 <body>
@@ -151,8 +157,8 @@
 
 <div class="container">
 
-  <div class="brand">FAIR<span>SKY</span> NETWORK</div>
-  <div class="tagline">Verifiable provenance for aerospace raw material</div>
+  <div class="brand"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg><span class="fs">FairSky</span><span class="net">NETWORK</span></div>
+  <div class="tagline">Prove authenticity. Verify in seconds.</div>
 
   <div class="lede">
     A guided tour, two live product mockups, and a written summary. <strong>If you're new to this — start with the 5-minute investor tutorial.</strong> It explains the whole thing in plain English with real screenshots of the demo.
