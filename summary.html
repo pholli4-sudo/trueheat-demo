@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What is Fair Sky Network? — Summary</title>
@@ -828,7 +829,7 @@
   </p>
 
   <p>
-    A single melt of Inconel gets a batch number — say <code style="background:var(--copper-soft);padding:2px 7px;border-radius:3px;font-family:'SF Mono',monospace;font-size:14px;color:var(--copper);">BLH0421</code>. That metal travels from a UK mill, through a Singapore trader, to a Chinese forge, into a finished part for a jet engine. At <em>each</em> handoff, a person <strong>re-types that same number onto a separate company's PDF</strong>, and re-types cross-references like "raw material cert 444488" and "test report 2024W318" by hand. That hand-copied number is the <em>only</em> thing linking four companies' documents into a chain.
+    A single melt of Inconel gets a batch number — say <code style="background:var(--copper-soft);padding:2px 7px;border-radius:3px;font-family:'SF Mono',monospace;font-size:14px;color:var(--copper);">XK5912</code>. That metal travels from a UK mill, through a Singapore trader, to a Chinese forge, into a finished part for a jet engine. At <em>each</em> handoff, a person <strong>re-types that same number onto a separate company's PDF</strong>, and re-types cross-references like "raw material cert 444488" and "test report 2024W318" by hand. That hand-copied number is the <em>only</em> thing linking four companies' documents into a chain.
   </p>
 
   <div class="arch-intro" style="background: var(--copper-soft); border-left-color: var(--copper);">
@@ -843,14 +844,14 @@
   <h2>One shipment, end to end</h2>
 
   <p>
-    Follow a single batch of Inconel 718 from Longda Precision Materials in Wuxi to Spirit Aerosystems in Wichita.
+    Follow a single batch of Inconel 718 from Precision Alloy Mill in Jiangsu to a US Tier-1 aerostructures buyer.
   </p>
 
   <ol class="steps">
-    <li><strong>At Longda</strong>, Mrs. Liu's lab tech runs chemistry on a fresh heat (LD-2026-0847). Instead of typing the result into Excel and printing a paper cert, the tech enters the same numbers into the Fair Sky Network portal and clicks <em>Issue</em>.</li>
-    <li><strong>The portal signs the data</strong> with Longda's cryptographic key (stored in Longda's office, not ours). It generates a PDF that looks just like the old paper one — with a QR code added.</li>
+    <li><strong>At the pilot mill</strong>, Mrs. Liu's lab tech runs chemistry on a fresh heat (LD-2026-0847). Instead of typing the result into Excel and printing a paper cert, the tech enters the same numbers into the Fair Sky Network portal and clicks <em>Issue</em>.</li>
+    <li><strong>The portal signs the data</strong> with the mill's cryptographic key (stored in the mill's office, not ours). It generates a PDF that looks just like the old paper one — with a QR code added.</li>
     <li><strong>Once a day</strong>, our service in Hong Kong batches every credential issued that day into a single cryptographic fingerprint and publishes it on the public Ethereum blockchain. This costs us $5–20 in network fees. Nothing identifiable goes on the chain.</li>
-    <li><strong>The shipment leaves Wuxi</strong> with the PDF emailed to Spirit and a printed copy stapled to the dock receipt — the same workflow Mrs. Liu has used for years.</li>
+    <li><strong>The shipment leaves Jiangsu</strong> with the PDF emailed to the buyer and a printed copy stapled to the dock receipt — the same workflow Mrs. Liu has used for years.</li>
     <li><strong>Six weeks later in Wichita</strong>, receiving inspector Greg pulls the box, sees the QR on the printed cert, and scans it. In one second his phone shows: ✓ Verified, the supplier identity, the exact chemistry he is holding, and the Ethereum block where it was anchored.</li>
     <li><strong>If the cert had been forged</strong> — somebody edited the PDF, somebody photoshopped a fake QR onto a counterfeit, somebody made up a fake supplier — the page turns red and tells Greg exactly what's wrong. He rejects the material at the dock, not after it gets bolted to an airplane.</li>
   </ol>
@@ -909,7 +910,7 @@
   <div class="section-eyebrow" style="margin-top:36px;">Follow one number</div>
   <h2>Tracing "Ni = 53.1%" through the system</h2>
 
-  <p>Wang Jing, a lab tech at Longda, runs chemistry on heat <strong>LD-2026-0847</strong>. The first number she types is <code style="background:var(--copper-soft);padding:2px 7px;border-radius:3px;font-family:'SF Mono',monospace;font-size:14px;color:var(--copper);">Ni = 53.1%</code>. Here is everywhere that number ends up.</p>
+  <p>Wang Jing, a lab tech at the pilot mill, runs chemistry on heat <strong>LD-2026-0847</strong>. The first number she types is <code style="background:var(--copper-soft);padding:2px 7px;border-radius:3px;font-family:'SF Mono',monospace;font-size:14px;color:var(--copper);">Ni = 53.1%</code>. Here is everywhere that number ends up.</p>
 
   <table class="trace-table">
     <thead>
@@ -932,7 +933,7 @@
       </tr>
       <tr>
         <td><span class="step-n">3</span></td>
-        <td>Server asks Longda's HSM (in their own server room) to sign the credential. The signature is just bytes — not data.</td>
+        <td>Server asks the mill's HSM (in their own server room) to sign the credential. The signature is just bytes — not data.</td>
         <td><span class="pill cn">China (HSM)</span></td>
       </tr>
       <tr>
@@ -952,12 +953,12 @@
       </tr>
       <tr>
         <td><span class="step-n">7</span></td>
-        <td>Greg at Spirit scans the QR. His phone hits the verifier page, which queries L2 (metadata + signed value <code>53.1</code>), fetches the redacted PDF from L3, and verifies the anchor on L4.</td>
+        <td>Greg at the buyer scans the QR. His phone hits the verifier page, which queries L2 (metadata + signed value <code>53.1</code>), fetches the redacted PDF from L3, and verifies the anchor on L4.</td>
         <td><span class="pill hk">HK L2+L3</span> + <span class="pill pub">L4</span></td>
       </tr>
       <tr>
         <td><span class="step-n">8</span></td>
-        <td>If Greg wants the full original (unredacted) PDF, he requests it from Longda directly. We do not push raw PRC data across the border by default.</td>
+        <td>If Greg wants the full original (unredacted) PDF, he requests it from the pilot mill directly. We do not push raw PRC data across the border by default.</td>
         <td><span class="pill cn">stays L1</span></td>
       </tr>
     </tbody>
@@ -1013,7 +1014,7 @@
     <h4>If this happens…</h4>
     <div class="f-row">
       <div class="scenario">…every PRC server is seized tomorrow.</div>
-      <div class="outcome"><strong>The buyer chain of trust survives.</strong> All previously issued credentials remain verifiable from L2 + L4. Only new issuance from Longda stops until they rebuild.</div>
+      <div class="outcome"><strong>The buyer chain of trust survives.</strong> All previously issued credentials remain verifiable from L2 + L4. Only new issuance from the pilot mill stops until they rebuild.</div>
     </div>
     <div class="f-row">
       <div class="scenario">…China bans all cross-border anchoring overnight.</div>
@@ -1139,7 +1140,7 @@
         <li>The <strong>hosted operational service</strong> — running the portal, the issuer, the gas wallet, key management</li>
         <li>The <strong>lab spot-check program</strong> — contracts with SGS, Element, RJ Lee</li>
         <li>External registry integrations (Nadcap, FAA SUP, OASIS)</li>
-        <li>Customer relationships, onboarding, support — Michael flying to Wuxi</li>
+        <li>Customer relationships, onboarding, support — Michael flying to Jiangsu</li>
         <li>The <strong>Fair Sky Network brand</strong> — buyer-side recognition built over years</li>
       </ul>
     </div>
@@ -1168,7 +1169,7 @@
     <h3>Pilot pitch · April 2026</h3>
     <ul>
       <li><strong>Three co-founders, equal owners.</strong> Chan (US, frequent China travel, aerospace engineer). Michael (Shanghai, MBA, commercial). Patrick (US, aerospace supply-chain executive). Hong Kong Limited in formation.</li>
-      <li><strong>Two friendly pilot suppliers.</strong> Longda Precision Materials (Inconel) and Future Forge (forgings) have agreed to share data and operational access for a free Year-1 pilot.</li>
+      <li><strong>Two friendly pilot suppliers.</strong> Precision Alloy Mill (Inconel) and Eastern Forge Works (forgings) have agreed to share data and operational access for a free Year-1 pilot.</li>
       <li><strong>Validation phase, 90 days in.</strong> 15 buyer interviews + 15 supplier interviews. Hard go/no-go at the end of Month 3.</li>
       <li><strong>Year-1 budget: $50–70k, self-funded.</strong> No outside capital this year. If validation lands, MVP through Months 4–9, first paid supplier by Month 15.</li>
     </ul>
