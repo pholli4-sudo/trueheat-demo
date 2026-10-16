@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What is TrueHeat? — Summary</title>
+<title>What is Fair Sky Network? — Summary</title>
 <style>
   :root {
     --navy: #0A1F44;
@@ -755,12 +755,12 @@
 <body>
 
 <div class="top-bar">
-  <div class="brand">TRUE<span>HEAT</span></div>
+  <div class="brand">FAIR<span>SKY</span></div>
   <a href="./" class="back">Back to mocks</a>
 </div>
 
 <div class="hero">
-  <h1>What is TrueHeat?</h1>
+  <h1>What is Fair Sky Network?</h1>
   <div class="lede">
     Verifiable provenance for aerospace raw material — so a Western buyer can trust a Chinese supplier's certificate in eight seconds, not hope it's real.
   </div>
@@ -770,7 +770,7 @@
 <div class="article">
 
   <p class="lede">
-    TrueHeat lets a Chinese aerospace supplier prove the authenticity of their mill test reports to a Western buyer — by replacing (or augmenting) the easy-to-forge paper PDF with a cryptographically signed digital credential the buyer can verify in eight seconds with their phone.
+    Fair Sky Network lets a Chinese aerospace supplier prove the authenticity of their mill test reports to a Western buyer — by replacing (or augmenting) the easy-to-forge paper PDF with a cryptographically signed digital credential the buyer can verify in eight seconds with their phone.
   </p>
 
   <div class="section-eyebrow">The Problem</div>
@@ -830,7 +830,7 @@
   </div>
 
   <p>
-    Two more things those real documents taught us. First, <strong>the pattern is global, not just China</strong> — we saw the identical structure with a Russian mill → Mexican forge → US buyer, and a UK mill → Chinese forge → Chinese engine maker. The trust-join problem is universal; TrueHeat is a horizontal product that starts with the China-to-West lane because that's where the pain is sharpest today. Second, <strong>independent Nadcap-accredited test labs already sign the critical steps</strong> — so the multi-party, independently-attested model isn't something we have to impose. It already exists on paper. We just make it verifiable.
+    Two more things those real documents taught us. First, <strong>the pattern is global, not just China</strong> — we saw the identical structure with a Russian mill → Mexican forge → US buyer, and a UK mill → Chinese forge → Chinese engine maker. The trust-join problem is universal; Fair Sky Network is a horizontal product that starts with the China-to-West lane because that's where the pain is sharpest today. Second, <strong>independent Nadcap-accredited test labs already sign the critical steps</strong> — so the multi-party, independently-attested model isn't something we have to impose. It already exists on paper. We just make it verifiable.
   </p>
 
   <div class="section-eyebrow">How It Works</div>
@@ -841,7 +841,7 @@
   </p>
 
   <ol class="steps">
-    <li><strong>At Longda</strong>, Mrs. Liu's lab tech runs chemistry on a fresh heat (LD-2026-0847). Instead of typing the result into Excel and printing a paper cert, the tech enters the same numbers into the TrueHeat portal and clicks <em>Issue</em>.</li>
+    <li><strong>At Longda</strong>, Mrs. Liu's lab tech runs chemistry on a fresh heat (LD-2026-0847). Instead of typing the result into Excel and printing a paper cert, the tech enters the same numbers into the Fair Sky Network portal and clicks <em>Issue</em>.</li>
     <li><strong>The portal signs the data</strong> with Longda's cryptographic key (stored in Longda's office, not ours). It generates a PDF that looks just like the old paper one — with a QR code added.</li>
     <li><strong>Once a day</strong>, our service in Hong Kong batches every credential issued that day into a single cryptographic fingerprint and publishes it on the public Ethereum blockchain. This costs us $5–20 in network fees. Nothing identifiable goes on the chain.</li>
     <li><strong>The shipment leaves Wuxi</strong> with the PDF emailed to Spirit and a printed copy stapled to the dock receipt — the same workflow Mrs. Liu has used for years.</li>
@@ -916,7 +916,7 @@
     <tbody>
       <tr>
         <td><span class="step-n">1</span></td>
-        <td>Wang Jing types <code>53.1</code> into the TrueHeat portal in her browser. Browser sends it to our PRC-side server.</td>
+        <td>Wang Jing types <code>53.1</code> into the Fair Sky Network portal in her browser. Browser sends it to our PRC-side server.</td>
         <td><span class="pill cn">China L1</span></td>
       </tr>
       <tr>
@@ -970,7 +970,7 @@
     </div>
     <div class="b-row stays">
       <div class="label">Stays in China</div>
-      <div class="body">The original unredacted PDF with letterhead and stamp. Customer pricing. Customer PO. Internal lab notes. Anything the supplier doesn't want visible to non-customers. <code>verify.trueheat.io</code> never reads from L1.</div>
+      <div class="body">The original unredacted PDF with letterhead and stamp. Customer pricing. Customer PO. Internal lab notes. Anything the supplier doesn't want visible to non-customers. <code>verify.fairskynetwork.com</code> never reads from L1.</div>
     </div>
   </div>
 
@@ -1014,7 +1014,7 @@
       <div class="outcome"><strong>The Hong Kong service keeps anchoring.</strong> Suppliers keep signing locally with HSM keys. Their signed credentials cross the border as data attachments — same legal posture as emailing a signed PDF today.</div>
     </div>
     <div class="f-row">
-      <div class="scenario">…TrueHeat the company shuts down.</div>
+      <div class="scenario">…Fair Sky Network the company shuts down.</div>
       <div class="outcome"><strong>Every credential ever issued remains verifiable forever.</strong> The signatures are valid, the anchors are on public Ethereum, the supplier keys are in supplier HSMs. The verifier page would need to be re-hosted by anyone — code is open source — but trust does not die with us.</div>
     </div>
     <div class="f-row">
@@ -1048,7 +1048,7 @@
     <ul>
       <li><strong>Not a chain-of-custody logistics company.</strong> We don't touch the metal. We don't ship anything. We don't move atoms.</li>
       <li><strong>Not a testing lab.</strong> We co-fund independent labs to spot-check suppliers in our pilot, but we're not the ones running the chemistry tests.</li>
-      <li><strong>Not a cryptocurrency.</strong> No token, no ICO, no "TrueHeat coin." Ethereum is just the neutral substrate we anchor signatures to — plumbing, not product.</li>
+      <li><strong>Not a cryptocurrency.</strong> No token, no ICO, no "Fair Sky Network coin." Ethereum is just the neutral substrate we anchor signatures to — plumbing, not product.</li>
       <li><strong>Not an OEM tool.</strong> We're a neutral utility any OEM, prime, or Tier-1 can recognize. Explicitly not building Boeing's or Airbus's in-house system for them.</li>
     </ul>
   </div>
@@ -1064,7 +1064,7 @@
     <thead>
       <tr>
         <th>Attack</th>
-        <th>What happens with TrueHeat</th>
+        <th>What happens with Fair Sky Network</th>
         <th style="width:150px;">Status</th>
       </tr>
     </thead>
@@ -1134,7 +1134,7 @@
         <li>The <strong>lab spot-check program</strong> — contracts with SGS, Element, RJ Lee</li>
         <li>External registry integrations (Nadcap, FAA SUP, OASIS)</li>
         <li>Customer relationships, onboarding, support — Michael flying to Wuxi</li>
-        <li>The <strong>TrueHeat brand</strong> — buyer-side recognition built over years</li>
+        <li>The <strong>Fair Sky Network brand</strong> — buyer-side recognition built over years</li>
       </ul>
     </div>
   </div>
@@ -1143,7 +1143,7 @@
     <h4>Why open source is required, not optional</h4>
     <ol>
       <li><strong>It's how we earn the neutrality claim.</strong> A closed-source verifier means buyers have to trust us we're not lying. Open source means anyone — including Boeing's CISO — can read the code and re-verify any credential independently against public Ethereum. We can't be the trust broker if we're a black box.</li>
-      <li><strong>It's how the credentials survive us.</strong> If TrueHeat shuts down in 2031, every credential we ever issued is still verifiable because the verification code is public and runnable by anyone. Closed source = trust expires when the company does.</li>
+      <li><strong>It's how the credentials survive us.</strong> If Fair Sky Network shuts down in 2031, every credential we ever issued is still verifiable because the verification code is public and runnable by anyone. Closed source = trust expires when the company does.</li>
       <li><strong>It's how we win the audit conversation.</strong> Boeing's CMMC / C-SCRM auditors won't approve sending QA staff to a black-box verifier. Open source is the price of admission to enterprise aerospace.</li>
     </ol>
   </div>
@@ -1175,12 +1175,12 @@
     <a class="test-card" href="buyer-verify.html">
       <div class="audience">If you are a Western OEM</div>
       <div class="ask">Would you trust this credential more than a stapled PDF?</div>
-      <div class="url">verify.trueheat.io/cert/…</div>
+      <div class="url">verify.fairskynetwork.com/cert/…</div>
     </a>
     <a class="test-card" href="supplier-portal.html">
       <div class="audience">If you are a Chinese supplier</div>
       <div class="ask">Would your QA team use this without retraining?</div>
-      <div class="url">portal.trueheat.io/issue</div>
+      <div class="url">portal.fairskynetwork.com/issue</div>
     </a>
   </div>
 
@@ -1259,7 +1259,7 @@
 <div class="footer">
   <div class="name">Patrick Hollis</div>
   <a class="email" href="mailto:phollis@gmail.com">phollis@gmail.com</a>
-  <div class="small">Pilot launch target: Q3 2026 · TrueHeat (Hong Kong Limited, in formation)</div>
+  <div class="small">Pilot launch target: Q3 2026 · Fair Sky Network (Hong Kong Limited, in formation)</div>
 </div>
 
 </body>
