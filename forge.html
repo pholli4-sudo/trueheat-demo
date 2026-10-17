@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="pilot.css"><title>Fair Sky · Forge</title></head><body>
+<div class="top"><a class="brand" href="pilot.html"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg>FairSky<span class="net">PILOT</span></a><div class="sub" data-i="brand.sub"></div><div class="lang"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh">中文</button></div></div>
+<div class="wrap">
+  <h1 data-i="role.forge"></h1>
+  <p class="lede" data-i="lede.forge"></p>
+  <div class="issued" id="issued"><div class="t" data-i="issued"></div><div class="qrbox"><div class="qr" id="qr"></div><div><div class="hint mono" id="issued-meta"></div><div class="row"><button class="btn sm" type="button" id="print-btn" data-i="print"></button><button class="btn sm ghost" type="button" id="enlarge-btn" data-i="enlarge"></button><button class="btn sm ghost" type="button" id="copy-btn" data-i="copy"></button><a class="btn sm ghost" id="open-btn" href="#" target="_blank" rel="noopener" data-i="open"></a><button class="btn sm ghost" type="button" id="reset-btn" data-i="reset"></button></div></div></div></div>
+  <div class="card"><h2 data-i="parent"></h2><div id="parent-status" class="parent-none" data-i="parent.none"></div><div style="height:10px"></div><div class="scanbox"><video id="cam" muted playsinline></video><button class="btn" type="button" id="cam-btn">📷 <span data-i="scan"></span></button><div class="field"><label data-i="paste"></label><div class="row" style="margin:0"><input id="paste" class="mono" style="flex:1" placeholder="https://…/verify.html#c=…"><button class="btn sm" type="button" id="paste-btn">→</button></div></div><div class="field"><label data-i="upload"></label><input type="file" id="file" accept="image/*"></div></div></div>
+  <form id="f" onsubmit="return false">
+  <div class="card"><h2 data-i="v.issuer"></h2><div class="grid2">
+    <div class="field"><label data-i="company"></label><input id="company" value="Eastern Forge Works Co., Ltd."></div>
+    <div class="field"><label data-i="signer"></label><input id="signer" value="Sun Mei"></div>
+  </div></div>
+  <div class="card"><h2 data-i="v.forge"></h2><div class="grid2">
+    <div class="field"><label data-i="certno"></label><input id="certno" class="mono"></div>
+    <div class="field"><label data-i="drawing"></label><input id="drawing" class="mono" value="745-1502-3"></div>
+    <div class="field"><label data-i="desc"></label><input id="desc" value="Inconel 625 flange forging, Ø200 × 144 mm"></div>
+    <div class="field"><label data-i="pieces"></label><input id="pieces" class="mono" inputmode="numeric" value="19"></div>
+    <div class="field"><label data-i="htLot"></label><input id="htLot" class="mono" value="HT-98111"></div>
+    <div class="field"><label data-i="htShop"></label><input id="htShop" value="Jiangsu Precision Heat Treatment"></div>
+    <div class="field"><label data-i="labNo"></label><input id="labNo" class="mono" value="RT-2024W318"></div>
+    <div class="field"><label data-i="lab"></label><input id="lab" value="Independent Test Lab (Nadcap)"></div>
+    <div class="field"><label data-i="customer"></label><input id="customer" value="Tier-1 · Connecticut"></div>
+    <div class="field"><label data-i="po"></label><input id="po" class="mono" value="20230677"></div>
+  </div></div>
+  <button class="btn" type="button" id="issue-btn" data-i="issue" disabled></button><div class="hint" id="need-parent" data-i="parent.need" style="margin-top:8px"></div>
+  </form>
+</div>
+<div class="cert" id="cert"></div>
+<div class="modal" id="qr-modal"><div class="box"><div id="qr-big"></div><button class="btn ghost" type="button" id="qr-close" data-i="close" style="margin-top:12px"></button></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script><script src="pilot.js"></script><script>document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){FSNP.setLang(b.getAttribute("data-lang"));});});FSNP.applyLang();</script>
+<script>FSNP.define({'issued':{en:'Signed. Next: the receiving dock scans this QR — print it on the certificate, or send the verify link with the shipment.',zh:'已签名。下一步：收货方扫描此二维码 — 打印在证书上，或随货发送验证链接。'}});FSNP.applyLang();</script>
+<script>
+(function(){
+  var g=function(id){return document.getElementById(id);}; var P=FSNP; var parent=null, parentHash=null, current=null, url=null;
+  var d=new Date(); g('certno').value='EF-'+d.toISOString().slice(0,10).replace(/-/g,'')+'-'+String(d.getTime()%10000).padStart(4,'0');
+  ['company','signer'].forEach(function(k){var v=P.get('fsn.forge.'+k,null); if(v) g(k).value=v; g(k).addEventListener('change',function(){P.set('fsn.forge.'+k,g(k).value);});});
+  function v(id){return g(id).value.trim();}
+  P.wireScanner({cam:'cam',camBtn:'cam-btn',paste:'paste',pasteBtn:'paste-btn',file:'file'},function(text){
+    var enc=P.payloadFromText(text); if(!enc){ g('parent-status').className='parent-bad'; g('parent-status').textContent=P.t('parent.bad'); return; }
+    P.decodePayload(enc).then(function(p){ return P.verifyPayload(p).then(function(r){
+      if(r.ok && r.cred.type==='MaterialLotCredential'){ parent=p; parentHash=r.hash; g('issue-btn').disabled=false; g('need-parent').style.display='none'; g('parent-status').className='parent-ok'; g('parent-status').innerHTML='✓ '+P.t('parent.ok')+'<br><b>'+P.esc(r.cred.issuer.name)+'</b> · '+P.t('heat')+' <span class="mono">'+P.esc(r.cred.heat)+'</span> · '+P.esc(r.cred.material)+' · '+P.esc(r.cred.lotWeight)+' · '+P.esc(r.cred.signer && r.cred.signer.name)+' '+P.esc(String(r.cred.issuedAt||'').slice(0,10)); }
+      else { parent=null; g('issue-btn').disabled=true; g('need-parent').style.display=''; g('parent-status').className='parent-bad'; g('parent-status').textContent=P.t(r.ok ? 'parent.wrongtype' : 'parent.bad'); }
+    });});
+  });
+  g('issue-btn').addEventListener('click',function(){
+    var b=this; if(!parent){ alert(P.t('parent.none')); g('parent-status').scrollIntoView({behavior:'smooth'}); return; }
+    b.disabled=true; b.textContent=P.t('signing');
+    var c={id:v('certno'),type:'ForgingCredential',schema:'fsn-pilot/v1',version:1,issuer:{did:P.KEYS.forge.did,name:v('company')},signer:{name:v('signer'),role:'QA'},
+      parent:{id:parent.c.id,hash:parentHash},product:{drawing:v('drawing'),description:v('desc'),pieces:v('pieces')},heatTreat:{lot:v('htLot'),shop:v('htShop')},labReport:{id:v('labNo'),lab:v('lab')},customer:v('customer'),po:v('po'),issuedAt:new Date().toISOString()};
+    var hash;
+    P.sign(c,'forge').then(function(s){current={c:c,s:s,parent:{c:parent.c,s:parent.s}}; return P.credHash(c);}).then(function(h){hash=h; return P.encodePayload(current);}).then(function(enc){
+      url=P.verifyUrl(enc);
+      g('issued').classList.add('on'); g('issued-meta').textContent=c.id+' · v1 · '+c.signer.name+' · parent '+c.parent.id+' · sha256 '+hash.slice(0,12)+'… · '+enc.length+' chars';
+      P.renderQR(g('qr'),url,150); P.renderQR(g('qr-big'),url,340); g('open-btn').href=url;
+      g('cert').innerHTML='<div class="demo">PILOT DEMO · SIGNED WITH A DEMO KEY · NOT A REAL CERTIFICATE · 试点演示 · 非正式证书</div><h3>CERTIFICATE OF CONFORMANCE · '+P.esc(c.issuer.name)+'</h3><div class="org">'+P.esc(c.id)+' · signed '+P.esc(c.issuedAt.slice(0,10))+' · '+P.esc(c.signer.name)+'</div>'+
+        '<table><tr><th>Product</th><td>'+P.esc(c.product.description)+'</td><th>Drawing</th><td>'+P.esc(c.product.drawing)+'</td></tr><tr><th>Pieces</th><td>'+P.esc(c.product.pieces)+'</td><th>Customer / PO</th><td>'+P.esc(c.customer)+' · '+P.esc(c.po)+'</td></tr>'+
+        '<tr><th>Parent cast</th><td>'+P.esc(c.parent.id)+' ('+P.esc(parent.c.issuer.name)+')</td><th>Material</th><td>'+P.esc(parent.c.material)+'</td></tr><tr><th>Heat treat</th><td>'+P.esc(c.heatTreat.lot)+' · '+P.esc(c.heatTreat.shop)+'</td><th>Lab report</th><td>'+P.esc(c.labReport.id)+' · '+P.esc(c.labReport.lab)+'</td></tr></table>'+
+        '<div class="foot"><div>Verify: scan the QR — it carries this certificate and the mill certificate it links to.</div><div class="qr" id="cert-qr"></div></div>';
+      P.renderQR(g('cert-qr'),url,250);
+      g('issued').scrollIntoView({behavior:'smooth',block:'start'});
+    }).catch(function(e){alert('Signing failed: '+e);}).then(function(){b.disabled=false;b.textContent=P.t('issue');});
+  });
+  g('print-btn').addEventListener('click',function(){window.print();});
+  g('copy-btn').addEventListener('click',function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){b.textContent=P.t('copied');setTimeout(function(){b.textContent=P.t('copy');},1500);}).catch(function(){prompt('Copy:',url);});});
+  g('reset-btn').addEventListener('click',function(){g('issued').classList.remove('on'); current=null; window.scrollTo({top:0,behavior:'smooth'});});
+  g('qr').addEventListener('click',function(){if(current)g('qr-modal').classList.add('on');}); g('enlarge-btn').addEventListener('click',function(){if(current)g('qr-modal').classList.add('on');}); g('qr-close').addEventListener('click',function(){g('qr-modal').classList.remove('on');});
+})();
+</script>
+</body></html>

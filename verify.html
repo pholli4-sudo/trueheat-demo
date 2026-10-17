@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="pilot.css"><title>Fair Sky · Verify</title></head><body>
+<div class="top"><a class="brand" href="pilot.html"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg>FairSky<span class="net">PILOT</span></a><div class="sub" data-i="brand.sub"></div><div class="lang"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh">中文</button></div></div>
+<div class="wrap">
+  <h1 data-i="role.verify"></h1>
+  <div id="scanner" class="card"><h2 data-i="scan"></h2><div class="scanbox"><video id="cam" muted playsinline></video><button class="btn" type="button" id="cam-btn">📷 <span data-i="scan"></span></button><div class="field"><label data-i="paste"></label><div class="row" style="margin:0"><input id="paste" class="mono" style="flex:1" placeholder="https://…/verify.html#c=…"><button class="btn sm" type="button" id="paste-btn">→</button></div></div><div class="field"><label data-i="upload"></label><input type="file" id="file" accept="image/*"></div></div></div>
+  <div id="result"></div>
+  <p class="hint" style="margin-top:14px"><a href="verify.html" id="again" style="display:none" data-i="again"></a></p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script><script src="pilot.js"></script><script>document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){FSNP.setLang(b.getAttribute("data-lang"));});});FSNP.applyLang();</script>
+<script>FSNP.define({'scan':{en:'Scan a Fair Sky QR',zh:'扫描 Fair Sky 二维码'}});FSNP.applyLang();</script>
+<script>
+(function(){
+  var g=function(id){return document.getElementById(id);}; var P=FSNP;
+  function run(){
+    var enc=P.readHash(); if(!enc){ g('scanner').style.display=''; g('result').innerHTML=''; g('again').style.display='none'; return; }
+    g('scanner').style.display='none'; g('again').style.display='';
+    P.decodePayload(enc).then(function(p){ if(!p){ g('result').innerHTML='<div class="verdict bad"><div class="mark">✗</div><div><div class="vt">'+P.t('v.unknown')+'</div><div class="vs">'+P.t('err.payload')+'</div></div></div>'; return; }
+      return P.verifyPayload(p).then(function(r){ g('result').innerHTML=P.renderAll(r,{xrf:true}); }); });
+  }
+  P.wireScanner({cam:'cam',camBtn:'cam-btn',paste:'paste',pasteBtn:'paste-btn',file:'file'},function(text){ var enc=P.payloadFromText(text); if(enc) location.hash='#c='+enc; else alert(P.t('err.notfsn')); });
+  window.addEventListener('hashchange',run); document.addEventListener('fsn:lang',run); run();
+})();
+</script>
+</body></html>

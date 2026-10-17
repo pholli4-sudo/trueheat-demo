@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="pilot.css"><title>Fair Sky · Pilot demo</title></head><body>
+<div class="top"><a class="brand" href="pilot.html"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg>FairSky<span class="net">PILOT</span></a><div class="sub" data-i="brand.sub"></div><div class="lang"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh">中文</button></div></div>
+<div class="wrap">
+  <h1>Fair Sky Network · <span data-i="brand.sub"></span></h1>
+  <p class="lede" id="lede"></p>
+  <div class="roles">
+    <a href="mill.html"><span data-i="role.mill"></span><small>mill.html</small></a>
+    <a href="forge.html"><span data-i="role.forge"></span><small>forge.html</small></a>
+    <a href="receive.html" style="border-left-color:var(--forest)"><span data-i="role.receive"></span><small>receive.html</small></a>
+    <a href="verify.html" style="border-left-color:var(--gold)"><span data-i="role.verify"></span><small>verify.html</small></a>
+  </div>
+  <p class="hint" style="margin-top:18px"><a href="index.html">Pitch site →</a></p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script><script src="pilot.js"></script><script>document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){FSNP.setLang(b.getAttribute("data-lang"));});});FSNP.applyLang();</script>
+<script>FSNP.define({'lede':{en:'Four screens, one chain: the mill signs a certificate, the forge links its certificate to it, the receiving dock scans and decides. Everything is signed for real in your browser; the keys are demo keys.',zh:'四个页面，一条证书链：材料厂签发证书，锻造厂将自己的证书与之关联，收货方扫描并做出判定。所有签名在您的浏览器中真实生成；密钥为演示密钥。'}});document.getElementById('lede').textContent=FSNP.t('lede');document.addEventListener('fsn:lang',function(){document.getElementById('lede').textContent=FSNP.t('lede');});</script>
+</body></html>

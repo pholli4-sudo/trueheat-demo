@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="pilot.css"><title>Fair Sky · Receiving</title></head><body>
+<div class="top"><a class="brand" href="pilot.html"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg>FairSky<span class="net">PILOT</span></a><div class="sub" data-i="brand.sub"></div><div class="lang"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh">中文</button></div></div>
+<div class="wrap">
+  <h1 data-i="r.title"></h1>
+  <p class="lede" data-i="lede.receive"></p>
+  <div class="card"><h2 data-i="r.step1"></h2><div class="scanbox"><video id="cam" muted playsinline></video><button class="btn" type="button" id="cam-btn">📷 <span data-i="scan"></span></button><div class="field"><label data-i="paste"></label><div class="row" style="margin:0"><input id="paste" class="mono" style="flex:1" placeholder="https://…/verify.html#c=…"><button class="btn sm" type="button" id="paste-btn">→</button></div></div><div class="field"><label data-i="upload"></label><input type="file" id="file" accept="image/*"></div></div></div>
+  <div id="step2" style="display:none">
+    <div class="sec" data-i="r.step2"></div>
+    <div id="dup" class="dup" style="display:none" data-i="r.dup"></div>
+    <div id="result"></div>
+    <div class="card" style="margin-top:16px"><h2 data-i="r.paper"></h2><div class="row" style="margin:0"><input id="paper" class="mono" inputmode="decimal" placeholder="MPa" style="flex:1;border:1px solid var(--ice);border-radius:8px;padding:11px 12px;font-size:16px"><button class="btn sm" type="button" id="paper-btn" data-i="r.compare"></button></div><div id="paper-out" class="hint" style="margin-top:8px"></div></div>
+    <div class="sec" data-i="r.step3"></div>
+    <div class="card"><div class="field" style="margin-bottom:12px"><label data-i="r.inspector"></label><input id="inspector" value=""></div>
+      <div class="decide"><button class="btn accept" type="button" data-d="accept" data-i="r.accept"></button><button class="btn hold" type="button" data-d="hold" data-i="r.hold"></button><button class="btn reject" type="button" data-d="reject" data-i="r.reject"></button></div>
+      <div id="decided" class="hint" style="margin-top:10px"></div></div>
+  </div>
+  <div class="card"><h2 data-i="r.log"></h2><div id="log"></div><div class="row"><button class="btn sm ghost" type="button" id="clear-btn" data-i="r.clear"></button></div></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script><script src="pilot.js"></script><script>document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){FSNP.setLang(b.getAttribute("data-lang"));});});FSNP.applyLang();</script>
+<script>FSNP.define({'scan':{en:'Scan the QR on the paperwork',zh:'扫描随货文件上的二维码'}});FSNP.applyLang();</script>
+<script>
+(function(){
+  var g=function(id){return document.getElementById(id);}; var P=FSNP; var cur=null;
+  var insp=P.get('fsn.recv.inspector',''); g('inspector').value=insp; g('inspector').addEventListener('change',function(){P.set('fsn.recv.inspector',g('inspector').value);});
+  function log(){return P.get('fsn.receiving',[]);}
+  function renderLog(){
+    var L=log(); if(!L.length){ g('log').innerHTML='<div class="hint">'+P.t('r.none')+'</div>'; return; }
+    g('log').innerHTML='<table class="log"><tr><th>ID</th><th>'+P.t('v.issuer')+'</th><th>'+P.t('r.inspector')+'</th><th></th></tr>'+L.map(function(e){ var cls=e.decision==='accept'?'g':e.decision==='hold'?'a':'r'; return '<tr><td class="mono">'+P.esc(e.id)+'<br><span class="hint">'+P.esc(e.when)+'</span></td><td>'+P.esc(e.issuer)+'<br><span class="hint">'+(e.ok?'✓ '+P.t('v.signed'):'✗ '+P.t('v.invalid'))+'</span></td><td>'+P.esc(e.inspector)+'</td><td><span class="badge '+cls+'">'+P.t('r.'+e.decision)+'</span></td></tr>'; }).join('')+'</table>';
+  }
+  P.wireScanner({cam:'cam',camBtn:'cam-btn',paste:'paste',pasteBtn:'paste-btn',file:'file'},function(text){
+    var enc=P.payloadFromText(text); if(!enc){ alert(P.t('err.notfsn')); return; }
+    P.decodePayload(enc).then(function(p){ if(!p){alert(P.t('err.payload'));return;} return P.verifyPayload(p).then(function(r){
+      cur=r; g('step2').style.display=''; g('result').innerHTML=P.renderAll(r,{xrf:true}); g('paper-out').textContent=''; g('decided').textContent='';
+      var seen=log().filter(function(e){return e.id===r.cred.id && e.decision==='accept';}); g('dup').style.display=seen.length?'':'none';
+      g('step2').scrollIntoView({behavior:'smooth',block:'start'});
+    });});
+  });
+  g('paper-btn').addEventListener('click',function(){ if(!cur) return; if(!cur.ok){ g('paper-out').innerHTML='<span style="color:var(--rust);font-weight:700">'+P.t(!cur.issuer?'v.unknown':(!cur.sigValid?'v.bad':(cur.link&&cur.link.missing?'v.link.missing':'v.link.bad')))+'</span>'; return; } var m=P.millOf(cur); var vv=(g('paper').value||'').trim(); if(!m||!vv) return;
+    var ok=String(+vv)===String(+m.mech.uts); g('paper-out').innerHTML=ok?'<span style="color:var(--forest);font-weight:700">'+P.esc(vv)+' MPa '+P.t('r.match')+'</span>':'<span style="color:var(--rust);font-weight:700">'+P.esc(vv)+' MPa '+P.t('r.mismatch')+' ('+P.esc(m.mech.uts)+' MPa)</span>'; });
+  document.querySelectorAll('[data-d]').forEach(function(b){ b.addEventListener('click',function(){ if(!cur) return;
+    var L=log(); L.unshift({id:cur.cred.id,hash:cur.hash,type:cur.cred.type,issuer:cur.cred.issuer.name,ok:cur.ok,problem:cur.issuer?(cur.sigValid?(cur.ok?'':'link'):'signature'):'unknown issuer',inspector:g('inspector').value||'—',decision:b.getAttribute('data-d'),when:new Date().toLocaleString()});
+    P.set('fsn.receiving',L.slice(0,50)); renderLog(); g('decided').textContent=P.t('r.logged')+' · '+P.t('r.'+b.getAttribute('data-d'))+' · '+cur.cred.id; }); });
+  g('clear-btn').addEventListener('click',function(){ P.set('fsn.receiving',[]); renderLog(); });
+  document.addEventListener('fsn:lang',function(){ renderLog(); if(cur) g('result').innerHTML=P.renderAll(cur,{xrf:true}); }); renderLog();
+})();
+</script>
+</body></html>

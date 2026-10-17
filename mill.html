@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="pilot.css"><title>Fair Sky · Mill</title></head><body>
+<div class="top"><a class="brand" href="pilot.html"><svg class="qsun" viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100 A100 100 0 0 1 100 0 L100 100 Z" fill="currentColor"/></svg>FairSky<span class="net">PILOT</span></a><div class="sub" data-i="brand.sub"></div><div class="lang"><button type="button" data-lang="en">EN</button><button type="button" data-lang="zh">中文</button></div></div>
+<div class="wrap">
+  <h1 data-i="role.mill"></h1>
+  <p class="lede" data-i="lede.mill"></p>
+  <div class="issued" id="issued"><div class="t" data-i="issued"></div><div class="qrbox"><div class="qr" id="qr"></div><div><div class="hint mono" id="issued-meta"></div><div class="row"><button class="btn sm" type="button" id="print-btn" data-i="print"></button><button class="btn sm ghost" type="button" id="enlarge-btn" data-i="enlarge"></button><button class="btn sm ghost" type="button" id="copy-btn" data-i="copy"></button><a class="btn sm ghost" id="open-btn" href="#" target="_blank" rel="noopener" data-i="open"></a><button class="btn sm ghost" type="button" id="reset-btn" data-i="reset"></button></div></div></div></div>
+  <form id="f" onsubmit="return false">
+  <div class="card"><h2 data-i="v.issuer"></h2><div class="grid2">
+    <div class="field"><label data-i="company"></label><input id="company" value="Precision Alloy Mill Co., Ltd."></div>
+    <div class="field"><label data-i="signer"></label><input id="signer" value="Wang Jing"></div>
+  </div></div>
+  <div class="card"><h2 data-i="v.mill"></h2><div class="grid2">
+    <div class="field"><label data-i="heat"></label><input id="heat" class="mono" value="PA-XK5912"></div>
+    <div class="field"><label data-i="material"></label><select id="material"><option>Inconel 625 (UNS N06625)</option><option>Inconel 718 (UNS N07718)</option><option>Ti-6Al-4V (UNS R56400)</option><option>17-4PH (UNS S17400)</option><option>Other</option></select></div>
+    <div class="field"><label data-i="spec"></label><input id="spec" value="AMS 5666K"></div>
+    <div class="field"><label data-i="form"></label><input id="form" value="Round bar Ø200 mm, hot finished"></div>
+    <div class="field"><label data-i="lotw"></label><input id="lotw" class="mono" value="2,358 kg"></div>
+    <div class="field"><label data-i="meltDate"></label><input id="meltDate" type="date"></div>
+    <div class="field"><label data-i="meltMethod"></label><input id="meltMethod" value="VIM + ESR"></div>
+    <div class="field"><label data-i="po"></label><input id="po" class="mono" value="4501125844"></div>
+  </div></div>
+  <div class="card"><h2 data-i="chem"></h2><div class="grid3">
+    <div class="field"><label>Ni</label><input id="c_Ni" class="mono" inputmode="decimal" value="61.6"></div>
+    <div class="field"><label>Cr</label><input id="c_Cr" class="mono" inputmode="decimal" value="22.1"></div>
+    <div class="field"><label>Mo</label><input id="c_Mo" class="mono" inputmode="decimal" value="8.71"></div>
+    <div class="field"><label>Nb</label><input id="c_Nb" class="mono" inputmode="decimal" value="3.46"></div>
+    <div class="field"><label>Fe</label><input id="c_Fe" class="mono" inputmode="decimal" value="3.61"></div>
+    <div class="field"><label>Co</label><input id="c_Co" class="mono" inputmode="decimal" value="0.10"></div>
+  </div></div>
+  <div class="card"><h2 data-i="mech"></h2><div class="grid2">
+    <div class="field"><label data-i="uts"></label><input id="m_uts" class="mono" inputmode="decimal" value="912"></div>
+    <div class="field"><label data-i="proof"></label><input id="m_proof" class="mono" inputmode="decimal" value="455"></div>
+    <div class="field"><label data-i="elong"></label><input id="m_elong" class="mono" inputmode="decimal" value="45.1"></div>
+    <div class="field"><label data-i="hbw"></label><input id="m_hbw" class="mono" inputmode="decimal" value="227"></div>
+  </div></div>
+  <button class="btn" type="button" id="issue-btn" data-i="issue"></button>
+  </form>
+</div>
+<div class="cert" id="cert"></div>
+<div class="modal" id="qr-modal"><div class="box"><div id="qr-big"></div><button class="btn ghost" type="button" id="qr-close" data-i="close" style="margin-top:12px"></button></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script><script src="pilot.js"></script><script>document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){FSNP.setLang(b.getAttribute("data-lang"));});});FSNP.applyLang();</script>
+<script>FSNP.define({'issued':{en:'Signed. Next: the forge scans this QR — print it on the certificate, or copy the verify link and send it.',zh:'已签名。下一步：锻造厂扫描此二维码 — 打印在证书上，或复制验证链接发送。'}});FSNP.applyLang();</script>
+<script>
+(function(){
+  var g=function(id){return document.getElementById(id);}; var P=FSNP; var current=null, url=null;
+  g('meltDate').value=new Date().toISOString().slice(0,10);
+  ['company','signer'].forEach(function(k){var v=P.get('fsn.mill.'+k,null); if(v) g(k).value=v; g(k).addEventListener('change',function(){P.set('fsn.mill.'+k,g(k).value);});});
+  function v(id){return g(id).value.trim();}
+  g('issue-btn').addEventListener('click',function(){
+    var b=this; if(!v('heat')){alert(P.t('heat')); return;} b.disabled=true; b.textContent=P.t('signing');
+    var c={id:v('heat'),type:'MaterialLotCredential',schema:'fsn-pilot/v1',version:1,issuer:{did:P.KEYS.mill.did,name:v('company')},signer:{name:v('signer'),role:'QA'},
+      heat:v('heat'),material:v('material'),spec:v('spec'),form:v('form'),lotWeight:v('lotw'),meltDate:v('meltDate'),meltMethod:v('meltMethod'),po:v('po'),
+      chem:{Ni:v('c_Ni'),Cr:v('c_Cr'),Mo:v('c_Mo'),Nb:v('c_Nb'),Fe:v('c_Fe'),Co:v('c_Co')},mech:{uts:v('m_uts'),proof:v('m_proof'),elong:v('m_elong'),hbw:v('m_hbw')},issuedAt:new Date().toISOString()};
+    var hash;
+    P.sign(c,'mill').then(function(s){current={c:c,s:s}; return P.credHash(c);}).then(function(h){hash=h; return P.encodePayload(current);}).then(function(enc){
+      url=P.verifyUrl(enc);
+      g('issued').classList.add('on'); g('issued-meta').textContent=c.id+' · v1 · '+c.signer.name+' · sha256 '+hash.slice(0,12)+'… · '+enc.length+' chars';
+      P.renderQR(g('qr'),url,150); P.renderQR(g('qr-big'),url,340); g('open-btn').href=url;
+      g('cert').innerHTML='<div class="demo">PILOT DEMO · SIGNED WITH A DEMO KEY · NOT A REAL CERTIFICATE · 试点演示 · 非正式证书</div><h3>MILL TEST CERTIFICATE · '+P.esc(c.issuer.name)+'</h3><div class="org">'+P.esc(c.spec)+' · signed '+P.esc(c.issuedAt.slice(0,10))+' · '+P.esc(c.signer.name)+'</div>'+
+        '<table><tr><th>Heat</th><td>'+P.esc(c.heat)+'</td><th>Material</th><td>'+P.esc(c.material)+'</td></tr><tr><th>Form</th><td>'+P.esc(c.form)+'</td><th>Lot</th><td>'+P.esc(c.lotWeight)+'</td></tr><tr><th>Melt</th><td>'+P.esc(c.meltMethod)+' · '+P.esc(c.meltDate)+'</td><th>PO</th><td>'+P.esc(c.po)+'</td></tr></table>'+
+        '<table><tr><th>Ni</th><th>Cr</th><th>Mo</th><th>Nb</th><th>Fe</th><th>Co</th></tr><tr><td>'+[c.chem.Ni,c.chem.Cr,c.chem.Mo,c.chem.Nb,c.chem.Fe,c.chem.Co].map(P.esc).join('</td><td>')+'</td></tr></table>'+
+        '<table><tr><th>UTS</th><td>'+P.esc(c.mech.uts)+' MPa</td><th>Rp0.2</th><td>'+P.esc(c.mech.proof)+' MPa</td><th>A</th><td>'+P.esc(c.mech.elong)+'%</td><th>HBW</th><td>'+P.esc(c.mech.hbw)+'</td></tr></table>'+
+        '<div class="foot"><div>Verify: scan the QR, or open<br><span style="font-family:monospace;font-size:9px;word-break:break-all">'+P.esc(url.slice(0,90))+'…</span></div><div class="qr" id="cert-qr"></div></div>';
+      P.renderQR(g('cert-qr'),url,250);
+      g('issued').scrollIntoView({behavior:'smooth',block:'start'});
+    }).catch(function(e){alert('Signing failed: '+e);}).then(function(){b.disabled=false;b.textContent=P.t('issue');});
+  });
+  g('print-btn').addEventListener('click',function(){window.print();});
+  g('copy-btn').addEventListener('click',function(){var b=this;(navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(function(){b.textContent=P.t('copied');setTimeout(function(){b.textContent=P.t('copy');},1500);}).catch(function(){prompt('Copy:',url);});});
+  g('reset-btn').addEventListener('click',function(){g('issued').classList.remove('on'); current=null; window.scrollTo({top:0,behavior:'smooth'});});
+  g('qr').addEventListener('click',function(){if(current)g('qr-modal').classList.add('on');}); g('enlarge-btn').addEventListener('click',function(){if(current)g('qr-modal').classList.add('on');}); g('qr-close').addEventListener('click',function(){g('qr-modal').classList.remove('on');});
+})();
+</script>
+</body></html>
